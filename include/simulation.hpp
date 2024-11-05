@@ -14,7 +14,7 @@ private:
 
 public:
     // Constructeur qui initialise l'environnement et le robot
-    Simulation(Robot* robot_, Environment* environment_);
+    Simulation();
 
     // Méthode pour initialiser la pose du robot
     void initializeRobotPose();

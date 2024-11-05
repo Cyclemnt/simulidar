@@ -18,6 +18,7 @@ set(SOURCES
     src/robot.cpp
     src/simulation.cpp
     src/map.cpp
+    src/lidar.cpp
 )
 
 set(HEADERS
@@ -26,6 +27,7 @@ set(HEADERS
     include/robot.hpp
     include/simulation.hpp
     include/map.hpp
+    include/lidar.hpp
 )
 
 add_executable( main ${SOURCES} ${HEADERS} )

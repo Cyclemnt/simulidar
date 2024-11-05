@@ -4,20 +4,7 @@
 
 int main() {
 
-    Environment* environment = new Environment(8, 10);
-    //environment->drawLineDDA(2, 4, 3, 5);
-    //environment->drawLineDDA(5, 1, 5, 2);
-    environment->generateRandomObstacles(4, 2);
-    environment->printGrid();
-
-    Robot* robot = new Robot();
-
-    Simulation sim(robot, environment);
-
-    Map* map = new Map();
-    map->printMap();
-    delete map;
-
+    Simulation sim;
 
     /*
     // Création du robot et de l'environnement
@@ -39,8 +26,6 @@ int main() {
     std::cout << "Odométrie à t1 : {"<< robot->getX() << ", " << robot->getY() << "}" << std::endl;
     */
     // Libération de la mémoire
-    delete robot;
-    delete environment;
 
     return 0;
 }
