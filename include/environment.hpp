@@ -7,6 +7,8 @@
 #include <cmath>
 #include <cstdlib> // pour rand() et srand()
 #include <ctime>   // pour time()
+#include<opencv2/opencv.hpp>
+
 
 using Types::CellState;
 using Types::Grid;
