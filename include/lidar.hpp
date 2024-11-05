@@ -3,22 +3,18 @@
 
 #include <vector>
 
-// Forward declarations
-class Robot;
-class Environment;
+// Forward declaration
+class Simulation;
 
 class Lidar
 {
 private:
-    const int range = 30;
-    const int rayCount = 360;
-    Robot* robot;              // Pointeur vers le robot
-    Environment* environment;  // Pointeur vers l'environnement
+    const int range = 30;      // Portée d'un rayon
+    const int rayCount = 360;  // Nombre de rayons
+    Simulation* simulation;    // Pointeur vers Simulation
 public:
     // Constructeur qui initialise le Lidar
-    Lidar();
-    // Méthode pour initialiser le capteur
-    void initialize(Robot* robot_, Environment* environment_);
+    Lidar(Simulation* simulation_);
     // Méthode pour lire un rayon particulier
     double read(int rayID) const;
     // Méthode pour lire tous les rayon

@@ -1,18 +1,17 @@
-#ifndef _ROBOT_HPP_
-#define _ROBOT_HPP_
+#ifndef ROBOT_HPP
+#define ROBOT_HPP
 
 #include "map.hpp"
 #include "lidar.hpp"
-#include <cmath>
 
 class Robot
 {
 private:
+    Map* map;           // Pointeur vers la carte du robot
+    Lidar* lidar;       // Pointeur vers le lidar
     double x, y;        // Position relative du robot
     double orientation; // Orientation relative du robot
     double diameter;    // Diamètre du robot (dm)
-    Map* map;           // Pointeur vers la carte du robot
-    Lidar* lidar;       // Pointeur vers le lidar
 public:
     // Constructeur par défaut
     Robot();
@@ -28,8 +27,11 @@ public:
     // Algorithme pour explorer efficacement
     void explore();
 
+    // Setters
+    void setLidar(Lidar* lidar_);
+    void setMap(Map* map_);
+
     // Getters
-    Lidar* getLidar() const;
     double getX() const;
     double getY() const;
     double getOrientation() const;
@@ -38,4 +40,4 @@ public:
     ~Robot();
 };
 
-#endif // _ROBOT_HPP_
+#endif // ROBOT_HPP
