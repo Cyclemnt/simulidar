@@ -112,6 +112,12 @@ void Environment::printGrid() const {
             }
         }
     }
+    // Agrandissement pour visualisation
+    cv::resize(CopieGrid, CopieGrid, cv::Size(width * 50, height * 50), 0, 0, cv::INTER_NEAREST);
+
+    // Afficher l'image
+    cv::imshow("Affichage de la grille", CopieGrid);
+    cv::waitKey(0);
 }
 
 // Getters
