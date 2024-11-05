@@ -89,24 +89,35 @@ bool Environment::isCellFree(int x, int y, double robotDiameter) const {
 
 // Fonction pour afficher la grille
 void Environment::printGrid() const {    
-
-    for (int y = height - 1; y >= 0; --y) {  // Parcourt les lignes de bas en haut
-        for (int x = 0; x < width; ++x) {    // Parcourt chaque colonne de gauche à droite
-            switch (grid[x][y])
-            {
-            case CellState::Wall:
-                std::cout << "█";
-                break;
-            case CellState::Free:
-                std::cout << " ";
-                break;
-
-            default:
-                break;
+    // Création de l'image OpenCV (CV_8UC3 pour une image couleur)
+    cv::Mat gridCopy(height, width, CV_8UC3);
+ 
+    // Remplissage de CopieGrid en fonction des valeurs de grid
+    for (int y = 0 ; y < height; y++) {
+        for (int x = 0; x < width; x++) {
+            cv::Vec3b& pixel = gridCopy.at<cv::Vec3b>(height - 1 - y, x);
+            switch (grid[x][y]) {
+                case CellState::Wall:
+                    pixel = cv::Vec3b(255, 0, 0);  // Bleu pour Wall
+                    break;
+                case CellState::Free:
+                    pixel = cv::Vec3b(255, 255, 255);  // Blanc pour les cases libres
+                    break;                    
+                case CellState::Unknown:
+                    pixel = cv::Vec3b(0, 0, 0);  // Noir pour les cases inconnues
+                    break;
+                default:
+                    pixel = cv::Vec3b(247, 0, 248);    // Rose pour les cases non définies 
+                    break;
             }
         }
-        std::cout << std::endl;
     }
+    // Agrandissement pour visualisation
+    cv::resize(gridCopy, gridCopy, cv::Size(width * 50, height * 50), 0, 0, cv::INTER_NEAREST);
+
+    // Afficher l'image
+    cv::imshow("Affichage de l'environnement", gridCopy);
+    cv::waitKey(0);
 }
 
 // Getters

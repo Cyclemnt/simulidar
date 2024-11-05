@@ -21,6 +21,8 @@ public:
     void move(double distance);
     // Fonction pour faire tourner le robot
     void rotate(double angle);
+    // Fonction pour mettre à jour sa carte
+    void updateMap(std::vector<double> lidarMeasures);
     // Algorithme pour explorer efficacement
     void explore();
 
