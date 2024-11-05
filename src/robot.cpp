@@ -3,6 +3,7 @@
 Robot::Robot()
     : x(0.0), y(0.0), orientation(0.0), diameter(1.0) {
     map = new Map();
+    lidar = new Lidar();
 }
 
 Robot::Robot(double diameter_)
@@ -28,6 +29,9 @@ void Robot::updateMap(std::vector<double> lidarMeasures) {
 void Robot::explore() {}
 
 // Getters
+Lidar* Robot::getLidar() const {
+    return lidar;
+}
 double Robot::getX() const {
     return x;
 }
@@ -43,4 +47,5 @@ double Robot::getDiameter() const {
 
 Robot::~Robot() {
     delete map;
+    delete lidar;
 }
