@@ -2,6 +2,7 @@
 #define _ROBOT_HPP_
 
 #include "map.hpp"
+#include "lidar.hpp"
 #include <cmath>
 
 class Robot
@@ -11,6 +12,7 @@ private:
     double orientation; // Orientation relative du robot
     double diameter;    // Diamètre du robot (dm)
     Map* map;           // Pointeur vers la carte du robot
+    Lidar* lidar;       // Pointeur vers le lidar
 public:
     // Constructeur par défaut
     Robot();

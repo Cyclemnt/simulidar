@@ -12,12 +12,7 @@ int main() {
 
     Robot* robot = new Robot();
 
-    Simulation sim(robot, environment);
-
-    Map* map = new Map();
-    map->printMap();
-    delete map;
-
+    Simulation sim(environment, robot);
 
     /*
     // Création du robot et de l'environnement
@@ -38,9 +33,6 @@ int main() {
 
     std::cout << "Odométrie à t1 : {"<< robot->getX() << ", " << robot->getY() << "}" << std::endl;
     */
-    // Libération de la mémoire
-    delete robot;
-    delete environment;
 
     return 0;
 }

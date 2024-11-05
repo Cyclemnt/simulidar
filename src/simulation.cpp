@@ -1,8 +1,14 @@
 #include "../include/simulation.hpp"
 
 // Constructeur : Initialise l'environnement et le robot
-Simulation::Simulation(Robot* robot_, Environment* environment_)
-    : robot(robot_), environment(environment_), xRobotStart(0.0), yRobotStart(0.0), orientationRobotStart(0.0) {
+Simulation::Simulation(Environment* environment_, Robot* robot_)
+    : environment(environment_), robot(robot_), xRobotStart(0.0), yRobotStart(0.0), orientationRobotStart(0.0) {
+}
+
+// Méthode pour initialiser toute la simulation
+void Simulation::initializeSimulation() {
+    // Peut-être une solution au problème de Lidar ??
+    // Aucune idée de comment faire
 }
 
 // Méthode pour initialiser la pose du robot dans l'environnement
@@ -24,6 +30,15 @@ void Simulation::run() {
 }
 
 // Getters
+Simulation* Simulation::getSim() {
+    return sim;
+}
+Robot* Simulation::getRobot() const {
+    return robot;
+}
+Environment* Simulation::getEnvironment() const {
+    return environment;
+}
 double Simulation::getXRobotStart() const {
     return xRobotStart;
 }
@@ -32,4 +47,9 @@ double Simulation::getYRobotStart() const {
 }
 double Simulation::getOrientationRobotStart() const {
     return orientationRobotStart;
+}
+
+Simulation::~Simulation() {
+    delete robot;
+    delete environment;
 }

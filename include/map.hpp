@@ -14,7 +14,7 @@ private:
     Grid robotMap;  // Occupancy grid
 public:
     // Constructeur qui initialise le carte du robot
-    Map(/* args */);
+    Map();
 
     // Méthode pour afficher la carte dans le terminal
     void printMap() const;
