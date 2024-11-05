@@ -98,13 +98,13 @@ void Environment::printGrid() const {
             cv::Vec3b& pixel = gridCopy.at<cv::Vec3b>(height - 1 - y, x);
             switch (grid[x][y]) {
                 case CellState::Wall:
-                    pixel = cv::Vec3b(255, 0, 0);      // Bleu pour les murs
+                    pixel = cv::Vec3b(255, 0, 0);  // Bleu pour Wall
                     break;
                 case CellState::Free:
                     pixel = cv::Vec3b(255, 255, 255);  // Blanc pour les cases libres
                     break;                    
                 case CellState::Unknown:
-                    pixel = cv::Vec3b(0, 0, 0);        // Noir pour les cases inconnues
+                    pixel = cv::Vec3b(0, 0, 0);  // Noir pour les cases inconnues
                     break;
                 default:
                     pixel = cv::Vec3b(247, 0, 248);    // Rose pour les cases non définies 
