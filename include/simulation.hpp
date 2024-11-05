@@ -1,16 +1,18 @@
-#ifndef _SIMULATION_HPP_
-#define _SIMULATION_HPP_
+#ifndef SIMULATION_HPP
+#define SIMULATION_HPP
 
 #include "environment.hpp"
 #include "robot.hpp"
-#include <cstdlib> // pour rand() et srand()
-#include <ctime>   // pour time()
+#include "lidar.hpp"
+#include "map.hpp"
 
 class Simulation {
 private:
-    Robot* robot;             // Pointeur vers le robot simulé
-    Environment* environment; // Pointeur vers l'environnement dans lequel évolue le robot
-    double xRobotStart, yRobotStart, orientationRobotStart; // Coordonnées absolues de départ du robot
+    Environment* environment;  // Pointeur vers l'environnement dans lequel évolue le robot
+    Map* map;                  // Pointeur vers la carte du robot
+    Robot* robot;              // Pointeur vers le robot simulé
+    Lidar* lidar;              // Pointeur vers le lidar simulé
+    double xRobotStart, yRobotStart, orientationRobotStart;  // Coordonnées absolues de départ du robot
 
 public:
     // Constructeur qui initialise l'environnement et le robot
@@ -22,9 +24,13 @@ public:
     void run();
 
     // Getters
+    Environment* getEnvironment() const;
+    Robot* getRobot() const;
     double getXRobotStart() const;
     double getYRobotStart() const;
     double getOrientationRobotStart() const;
+
+    ~Simulation();
 };
 
-#endif // _SIMULATION_HPP_
+#endif // SIMULATION_HPP

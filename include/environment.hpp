@@ -1,5 +1,5 @@
-#ifndef _ENVIRONMENT_HPP_
-#define _ENVIRONMENT_HPP_
+#ifndef ENVIRONMENT_HPP
+#define ENVIRONMENT_HPP
 
 #include "types.hpp"
 #include <iostream>
@@ -40,4 +40,4 @@ public:
     ~Environment();
 };
 
-#endif //_ENVIRONMENT_HPP_
+#endif //ENVIRONMENT_HPP
