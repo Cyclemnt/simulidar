@@ -1,8 +1,17 @@
 #include "../include/simulation.hpp"
 
 // Constructeur : Initialise l'environnement et le robot
-Simulation::Simulation(Robot* robot_, Environment* environment_)
-    : robot(robot_), environment(environment_), xRobotStart(0.0), yRobotStart(0.0), orientationRobotStart(0.0) {
+Simulation::Simulation()
+    : xRobotStart(0.0), yRobotStart(0.0), orientationRobotStart(0.0) {
+    Environment* environment = new Environment(8, 10);
+    //environment->drawLineDDA(2, 4, 3, 5);
+    //environment->drawLineDDA(5, 1, 5, 2);
+    environment->generateRandomObstacles(4, 2);
+    environment->printGrid();
+
+    Robot* robot = new Robot();
+
+    robot->getLidar()->initialize(robot, environment);  // Initialiser le Lidar après création du robot
 }
 
 // Méthode pour initialiser la pose du robot dans l'environnement
