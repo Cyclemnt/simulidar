@@ -1,7 +1,9 @@
 #include "../include/robot.hpp"
 
 Robot::Robot()
-    : x(0.0), y(0.0), orientation(0.0), diameter(1.0) {}
+    : x(0.0), y(0.0), orientation(0.0), diameter(1.0) {
+    map = new Map();
+}
 
 Robot::Robot(double diameter_)
     : x(0.0), y(0.0), orientation(0.0), diameter(diameter_) {}
@@ -15,6 +17,11 @@ void Robot::move(double distance) {
 // Fonction pour faire tourner le robot
 void Robot::rotate(double angle) {
     orientation = fmod((orientation + angle), (2 * M_PI));
+}
+
+// Fonction pour mettre à jour sa carte
+void Robot::updateMap(std::vector<double> lidarMeasures) {
+    
 }
 
 // Algorithme pour explorer efficacement
@@ -34,4 +41,6 @@ double Robot::getDiameter() const {
     return diameter;
 }
 
-Robot::~Robot() {}
+Robot::~Robot() {
+    delete map;
+}
