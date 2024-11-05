@@ -11,7 +11,7 @@ using Types::Grid;
 class Map
 {
 private:
-    Grid robotMap;
+    Grid robotMap;  // Occupancy grid
 public:
     // Constructeur qui initialise le carte du robot
     Map(/* args */);
