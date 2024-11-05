@@ -1,17 +1,19 @@
 #include "../include/simulation.hpp"
+#include <cstdlib> // pour rand() et srand()
+#include <ctime>   // pour time()
 
 // Constructeur : Initialise l'environnement et le robot
 Simulation::Simulation()
     : xRobotStart(0.0), yRobotStart(0.0), orientationRobotStart(0.0) {
-    Environment* environment = new Environment(8, 10);
-    //environment->drawLineDDA(2, 4, 3, 5);
-    //environment->drawLineDDA(5, 1, 5, 2);
+    environment = new Environment(8, 10);
     environment->generateRandomObstacles(4, 2);
-    environment->printGrid();
 
-    Robot* robot = new Robot();
+    map = new Map();
+    robot = new Robot();
+    lidar = new Lidar(this);  // Lidar reçoit un pointeur vers Simulation
 
-    robot->getLidar()->initialize(robot, environment);  // Initialiser le Lidar après création du robot
+    robot->setLidar(lidar);
+    robot->setMap(map);
 }
 
 // Méthode pour initialiser la pose du robot dans l'environnement
@@ -29,10 +31,17 @@ void Simulation::initializeRobotPose() {
 // Méthode pour démarrer la simulation
 void Simulation::run() {
     // Logique de simulation (boucle principale par exemple)
-    robot->move(5.0);  // Exemple de déplacement
+    initializeRobotPose();
+    environment->printGrid();
 }
 
 // Getters
+Environment* Simulation::getEnvironment() const {
+    return environment;
+}
+Robot* Simulation::getRobot() const {
+    return robot;
+}
 double Simulation::getXRobotStart() const {
     return xRobotStart;
 }
@@ -41,4 +50,11 @@ double Simulation::getYRobotStart() const {
 }
 double Simulation::getOrientationRobotStart() const {
     return orientationRobotStart;
+}
+
+Simulation::~Simulation() {
+    delete lidar;
+    delete robot;
+    delete map;
+    delete environment;
 }

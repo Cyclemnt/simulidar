@@ -1,5 +1,5 @@
-#ifndef _MAP_HPP_
-#define _MAP_HPP_
+#ifndef MAP_HPP
+#define MAP_HPP
 
 #include "types.hpp"
 #include <iostream>
@@ -22,4 +22,4 @@ public:
     ~Map();
 };
 
-#endif // _MAP_HPP_
+#endif // MAP_HPP
