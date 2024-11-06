@@ -30,5 +30,8 @@ set(HEADERS
     include/lidar.hpp
 )
 
+set(CMAKE_BUILD_TYPE Debug) 
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g")  
+
 add_executable( main ${SOURCES} ${HEADERS} )
 target_link_libraries( main ${OpenCV_LIBS} )
