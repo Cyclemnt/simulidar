@@ -43,7 +43,8 @@ double Lidar::read(int rayID) const {
     if (abs(x - x1) >= abs(x2) || abs(y - y1) >= abs(y2)) {
         return -1.0;
     } else {
-        return sqrt(abs(x - x1) * abs(x - x1) + abs(y - y1) * abs(y - y1));
+        double distance = sqrt(abs(x - x1) * abs(x - x1) + abs(y - y1) * abs(y - y1));
+        return distance;
     }
 }
 

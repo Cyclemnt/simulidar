@@ -33,9 +33,10 @@ void Simulation::initializeRobotPose() {
 void Simulation::run() {
     // Logique de simulation (boucle principale)
     initializeRobotPose();
-    displaySimulation();
+    environment->printRoom();
     double test = lidar->read(180);
-    std::cout << test << std::endl;
+    std::cout << std::setprecision(15) << test << std::endl;
+    displaySimulation();
 }
 
 // Méthode pour afficher la simulation
@@ -67,9 +68,14 @@ void Simulation::displaySimulation() const {
         }
     }
     // Agrandissement pour visualisation
-    cv::resize(roomCopy, roomCopy, cv::Size(width * 50, height * 50), 0, 0, cv::INTER_NEAREST);
+    //cv::resize(roomCopy, roomCopy, cv::Size(width * 50, height * 50), 0, 0, cv::INTER_NEAREST);
+    
     // Affichage du robot 
-    circle(roomCopy, cv::Point(xRobotStart, yRobotStart), 50 * (robot->getDiameter()) / 2, (0, 166, 255) , -1, 256, 0);
+    std::cout << xRobotStart << ", " << yRobotStart << std::endl;
+    //circle(roomCopy, cv::Point(xRobotStart, (height - yRobotStart)), (robot->getDiameter()) / 2, cv::Scalar(0, 166, 255), -1, 256, 0);
+
+    cv::Vec3b& pixel = roomCopy.at<cv::Vec3b>(height - 1 - yRobotStart, xRobotStart);
+    pixel = cv::Vec3b(0, 166, 255);
 
     // Afficher l'image
     cv::imshow("Affichage de la simulation", roomCopy);
