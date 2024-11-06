@@ -1,7 +1,6 @@
 #include "../include/environment.hpp"
-#include <opencv2/opencv.hpp>
-#include <cstdlib> // pour rand() et srand()
-#include <ctime>   // pour time()
+#include <iostream>
+#include <cmath>
 
 Environment::Environment(int width_, int height_)
     : width(width_), height(height_), room(width_, std::vector<CellState>(height_, CellState::Free)) {

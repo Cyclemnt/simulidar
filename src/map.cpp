@@ -1,4 +1,5 @@
 #include "../include/map.hpp"
+#include <iostream>
 
 Map::Map()
     : robotMap(1, std::vector<CellState>(1, CellState::Free)) {

@@ -2,8 +2,6 @@
 #define MAP_HPP
 
 #include "types.hpp"
-#include <iostream>
-#include <vector>
 
 using Types::CellState;
 using Types::Grid;

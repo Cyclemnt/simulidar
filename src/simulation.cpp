@@ -1,9 +1,7 @@
 #include "../include/simulation.hpp"
-#include "../include/types.hpp"
 #include <opencv2/opencv.hpp>
 #include <cstdlib> // pour rand() et srand()
 #include <ctime>   // pour time()
-#include <cmath>
 
 // Constructeur : Initialise l'environnement et le robot
 Simulation::Simulation()

@@ -11,7 +11,7 @@ class Environment
 private:
     int width;   // Longueur de l'environnement (cm)
     int height;  // Largeur de l'environnement (cm)
-    Grid room;   // Occupancy room
+    Grid room;   // Occupancy grid
 public:
     // Constructeur avec paramètres
     Environment(int length_, int width_);

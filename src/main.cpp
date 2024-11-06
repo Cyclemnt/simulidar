@@ -1,4 +1,3 @@
-#include <iostream>
 #include "../include/simulation.hpp"
 
 int main() {
