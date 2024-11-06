@@ -19,22 +19,74 @@ Simulation::Simulation()
 
 // Méthode pour initialiser la pose du robot dans l'environnement
 void Simulation::initializeRobotPose() {
-    srand(time(0));
-    // Tant qu'une position valide n'est pas trouvée
-    do {
-        xRobotStart = rand() % environment->getWidth(); // Position aléatoire en x
-        yRobotStart = rand() % environment->getHeight(); // Position aléatoire en y
-    } while (!environment->isCellFree(xRobotStart, yRobotStart, robot->getDiameter()));
-    // Orientation aléatoire entre + et - pi
-    //orientationRobotStart = rand() % 2 * M_PI - M_PI;
+    int width = environment->getWidth();
+    int height = environment->getHeight();
+    double robotRadius = robot->getDiameter() / 2.0;
+
+    srand(static_cast<unsigned>(time(0)));
+
+    int x, y;
+    bool isValidPosition = false;
+    int maxAttempts = 1000;  // Limite de tentatives pour trouver une position
+    int attempts = 0;
+
+    while (attempts < maxAttempts && !isValidPosition) {
+        attempts++;
+
+        // Génère une position aléatoire
+        x = rand() % width;
+        y = rand() % height;
+
+        // Vérifie que la position est libre pour le diamètre du robot
+        isValidPosition = true;
+
+        // Calculer le nombre de cellules à vérifier autour du centre `(x, y)`
+        int cellRadiusX = static_cast<int>(ceil(robotRadius));
+        int cellRadiusY = static_cast<int>(ceil(robotRadius));
+
+        // Vérifier toutes les cellules dans le carré autour de la position centrale
+        for (int dx = -cellRadiusX; dx <= cellRadiusX && isValidPosition; dx++) {
+            for (int dy = -cellRadiusY; dy <= cellRadiusY && isValidPosition; dy++) {
+                int checkX = x + dx;
+                int checkY = y + dy;
+
+                // Vérifier si les coordonnées sont dans la grille
+                if (checkX >= 0 && checkX < width && checkY >= 0 && checkY < height) {
+                    // Calculer la distance du centre de la cellule à `(x, y)`
+                    double distToCell = sqrt(dx * dx + dy * dy);
+                    // Si la distance est inférieure ou égale au rayon du robot, vérifier la cellule
+                    if (distToCell <= robotRadius) {
+                        if (environment->getRoom()[checkX][checkY] != CellState::Free) {
+                            isValidPosition = false;
+                        }
+                    }
+                } else {
+                    // Si on est en dehors de la grille, la position est invalide
+                    isValidPosition = false;
+                }
+            }
+        }
+    }
+
+    // Vérifie si une position valide a été trouvée
+    if (isValidPosition) {
+        // Place le centre du robot dans la cellule libre trouvée
+        xRobotStart = x;
+        yRobotStart = y;
+        // Orientation aléatoire en radians entre 0 et 2*PI
+        //orientationRobotStart = static_cast<double>(rand()) / RAND_MAX * 2 * M_PI;
+    } else {
+        // Affiche une erreur si aucune position valide n'est trouvée
+        throw std::runtime_error("Erreur : Impossible de positionner le robot dans un espace libre.");
+    }
 }
 
 // Méthode pour démarrer la simulation
 void Simulation::run() {
     // Logique de simulation (boucle principale)
-    initializeRobotPose();
     environment->generateRandomObstacles(4, 2);
-    environment->printRoom();    
+    environment->printRoom();
+    initializeRobotPose();
     displaySimulation();
 }
 

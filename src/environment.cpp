@@ -73,23 +73,6 @@ void Environment::drawLineDDA(int x1, int y1, int x2, int y2) {
     }
 }
 
-// Vérifier si une cellule est libre pour placer le robot
-bool Environment::isCellFree(int x, int y, double robotDiameter) const {
-    // Vérifier les cellules dans un carré de taille robotDiameter centré autour de (x, y)
-    
-    int radius = std::round(robotDiameter / 2);
-
-    for (int i = y - radius; i <= y + radius; i++) {
-        for (int j = x - radius; j <= x + radius; j++) {
-            // On s'assure qu'on est bien dans la grille et que la cellule est libre (0)
-            if (j < 0 || j >= width || i < 0 || i >= height || room[i][j] != CellState::Free) {
-                return false;  // Hors limites ou occupé
-            }
-        }
-    }
-    return true;  // Toutes les cellules sont libres
-}
-
 // Fonction pour afficher la grille
 void Environment::printRoom() const {
         for (int y = room[0].size() - 1; y >= 0; --y) {  // Parcourt les lignes de bas en haut

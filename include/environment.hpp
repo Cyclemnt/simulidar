@@ -20,8 +20,6 @@ public:
     void generateRandomObstacles(int number, int maxSize);
     // Algorithme DDA pour tracer une ligne entre deux points et remplir la grille
     void drawLineDDA(int x1, int y1, int x2, int y2);
-    // Vérifier si une cellule est libre pour placer le robot
-    bool isCellFree(int x, int y, double robotDiameter) const;
     // Fonction pour afficher la grille
     void printRoom() const;
 
