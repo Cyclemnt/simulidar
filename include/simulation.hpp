@@ -29,6 +29,8 @@ public:
     double getXRobotStart() const;
     double getYRobotStart() const;
     double getOrientationRobotStart() const;
+    void displaySimulation() const;
+
 
     ~Simulation();
 };

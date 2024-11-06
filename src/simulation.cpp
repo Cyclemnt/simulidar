@@ -1,6 +1,7 @@
 #include "../include/simulation.hpp"
 #include <cstdlib> // pour rand() et srand()
 #include <ctime>   // pour time()
+#include "types.hpp"
 
 // Constructeur : Initialise l'environnement et le robot
 Simulation::Simulation()
@@ -32,6 +33,43 @@ void Simulation::initializeRobotPose() {
 void Simulation::run() {
     // Logique de simulation (boucle principale)
     initializeRobotPose();
+}
+//Méthode pour afficher la simulation
+void Simulation::displaySimulation() const{
+    Grid room=environment->getRoom();
+    int height=environment->getHeight();
+    int width=environment->getWidth();
+    // Création de l'image OpenCV (CV_8UC3 pour une image couleur)
+    cv::Mat roomCopy(height, width, CV_8UC3);
+    
+    // Remplissage de CopieRoom en fonction des valeurs de room
+    for (int y = 0 ; y < height; y++) {
+        for (int x = 0; x < width; x++) {
+            cv::Vec3b& pixel = roomCopy.at<cv::Vec3b>(height - 1 - y, x);
+            switch (room[x][y]) {
+                case CellState::Wall:
+                    pixel = cv::Vec3b(255, 0, 0);  // Bleu pour Wall
+                    break;
+                case CellState::Free:
+                    pixel = cv::Vec3b(255, 255, 255);  // Blanc pour les cases libres
+                    break;                    
+                case CellState::Unknown:
+                    pixel = cv::Vec3b(0, 0, 0);  // Noir pour les cases inconnues
+                    break;
+                default:
+                    pixel = cv::Vec3b(247, 0, 248);    // Rose pour les cases non définies 
+                    break;
+            }
+        }
+    }
+    //Affichage du robot 
+    circle(roomCopy, cv::Point(xRobotStart, yRobotStart), (robot->getDiameter())/2, (0,166,255) , -1, 256, 0);
+    // Agrandissement pour visualisation
+    cv::resize(roomCopy, roomCopy, cv::Size(width * 50, height * 50), 0, 0, cv::INTER_NEAREST);
+
+    // Afficher l'image
+    cv::imshow("Affichage de l'environnement", roomCopy);
+    cv::waitKey(0);
 }
 
 // Getters
