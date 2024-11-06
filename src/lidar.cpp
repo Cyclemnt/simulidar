@@ -1,5 +1,6 @@
 #include "../include/lidar.hpp"
 #include "../include/simulation.hpp"  // Définition complète de Simulation
+#include <cmath>
 
 // Constructeur qui initialise le Lidar
 Lidar::Lidar(Simulation* simulation_)

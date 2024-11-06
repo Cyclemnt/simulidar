@@ -1,14 +1,14 @@
 #include "../include/simulation.hpp"
 #include "../include/types.hpp"
+#include <opencv2/opencv.hpp>
 #include <cstdlib> // pour rand() et srand()
 #include <ctime>   // pour time()
+#include <cmath>
 
 // Constructeur : Initialise l'environnement et le robot
 Simulation::Simulation()
     : xRobotStart(0.0), yRobotStart(0.0), orientationRobotStart(0.0) {
-    environment = new Environment(8, 10);
-    environment->generateRandomObstacles(4, 2);
-
+    environment = new Environment(10, 10);
     map = new Map();
     robot = new Robot();
     lidar = new Lidar(this);  // Lidar reçoit un pointeur vers Simulation
@@ -33,9 +33,8 @@ void Simulation::initializeRobotPose() {
 void Simulation::run() {
     // Logique de simulation (boucle principale)
     initializeRobotPose();
-    environment->printRoom();
-    double test = lidar->read(180);
-    std::cout << std::setprecision(15) << test << std::endl;
+    environment->generateRandomObstacles(4, 2);
+    environment->printRoom();    
     displaySimulation();
 }
 
@@ -67,17 +66,12 @@ void Simulation::displaySimulation() const {
             }
         }
     }
-    // Agrandissement pour visualisation
-    //cv::resize(roomCopy, roomCopy, cv::Size(width * 50, height * 50), 0, 0, cv::INTER_NEAREST);
-    
-    // Affichage du robot 
-    std::cout << xRobotStart << ", " << yRobotStart << std::endl;
-    //circle(roomCopy, cv::Point(xRobotStart, (height - yRobotStart)), (robot->getDiameter()) / 2, cv::Scalar(0, 166, 255), -1, 256, 0);
-
+    // Afficher le robot
     cv::Vec3b& pixel = roomCopy.at<cv::Vec3b>(height - 1 - yRobotStart, xRobotStart);
     pixel = cv::Vec3b(0, 166, 255);
 
     // Afficher l'image
+    cv::namedWindow("Affichage de la simulation", cv::WINDOW_GUI_NORMAL);
     cv::imshow("Affichage de la simulation", roomCopy);
     cv::waitKey(0);
 }

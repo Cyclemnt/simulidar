@@ -1,4 +1,7 @@
 #include "../include/environment.hpp"
+#include <opencv2/opencv.hpp>
+#include <cstdlib> // pour rand() et srand()
+#include <ctime>   // pour time()
 
 Environment::Environment(int width_, int height_)
     : width(width_), height(height_), room(width_, std::vector<CellState>(height_, CellState::Free)) {
@@ -79,7 +82,7 @@ bool Environment::isCellFree(int x, int y, double robotDiameter) const {
     for (int i = y - radius; i <= y + radius; i++) {
         for (int j = x - radius; j <= x + radius; j++) {
             // On s'assure qu'on est bien dans la grille et que la cellule est libre (0)
-            if (i < 0 || i >= room.size() || j < 0 || j >= room[0].size() || room[i][j] != CellState::Free) {
+            if (j < 0 || j >= width || i < 0 || i >= height || room[i][j] != CellState::Free) {
                 return false;  // Hors limites ou occupé
             }
         }
