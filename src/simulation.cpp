@@ -1,7 +1,7 @@
 #include "../include/simulation.hpp"
+#include "../include/types.hpp"
 #include <cstdlib> // pour rand() et srand()
 #include <ctime>   // pour time()
-#include "types.hpp"
 
 // Constructeur : Initialise l'environnement et le robot
 Simulation::Simulation()
@@ -33,12 +33,16 @@ void Simulation::initializeRobotPose() {
 void Simulation::run() {
     // Logique de simulation (boucle principale)
     initializeRobotPose();
+    displaySimulation();
+    double test = lidar->read(180);
+    std::cout << test << std::endl;
 }
-//Méthode pour afficher la simulation
-void Simulation::displaySimulation() const{
-    Grid room=environment->getRoom();
-    int height=environment->getHeight();
-    int width=environment->getWidth();
+
+// Méthode pour afficher la simulation
+void Simulation::displaySimulation() const {
+    Grid room = environment->getRoom();
+    int height = environment->getHeight();
+    int width = environment->getWidth();
     // Création de l'image OpenCV (CV_8UC3 pour une image couleur)
     cv::Mat roomCopy(height, width, CV_8UC3);
     
@@ -48,13 +52,13 @@ void Simulation::displaySimulation() const{
             cv::Vec3b& pixel = roomCopy.at<cv::Vec3b>(height - 1 - y, x);
             switch (room[x][y]) {
                 case CellState::Wall:
-                    pixel = cv::Vec3b(255, 0, 0);  // Bleu pour Wall
+                    pixel = cv::Vec3b(255, 0, 0);      // Bleu pour Wall
                     break;
                 case CellState::Free:
                     pixel = cv::Vec3b(255, 255, 255);  // Blanc pour les cases libres
                     break;                    
                 case CellState::Unknown:
-                    pixel = cv::Vec3b(0, 0, 0);  // Noir pour les cases inconnues
+                    pixel = cv::Vec3b(0, 0, 0);        // Noir pour les cases inconnues
                     break;
                 default:
                     pixel = cv::Vec3b(247, 0, 248);    // Rose pour les cases non définies 
@@ -62,13 +66,13 @@ void Simulation::displaySimulation() const{
             }
         }
     }
-    //Affichage du robot 
-    circle(roomCopy, cv::Point(xRobotStart, yRobotStart), (robot->getDiameter())/2, (0,166,255) , -1, 256, 0);
     // Agrandissement pour visualisation
     cv::resize(roomCopy, roomCopy, cv::Size(width * 50, height * 50), 0, 0, cv::INTER_NEAREST);
+    // Affichage du robot 
+    circle(roomCopy, cv::Point(xRobotStart, yRobotStart), 50 * (robot->getDiameter()) / 2, (0, 166, 255) , -1, 256, 0);
 
     // Afficher l'image
-    cv::imshow("Affichage de l'environnement", roomCopy);
+    cv::imshow("Affichage de la simulation", roomCopy);
     cv::waitKey(0);
 }
 

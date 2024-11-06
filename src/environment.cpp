@@ -88,8 +88,28 @@ bool Environment::isCellFree(int x, int y, double robotDiameter) const {
 }
 
 // Fonction pour afficher la grille
-void Environment::printRoom() const {    
+void Environment::printRoom() const {
+        for (int y = room[0].size() - 1; y >= 0; --y) {  // Parcourt les lignes de bas en haut
+        for (int x = 0; x < room.size(); ++x) {    // Parcourt chaque colonne de gauche à droite
+            switch (room[x][y])
+            {
+            case CellState::Wall:
+                std::cout << "█";
+                break;
+            case CellState::Free:
+                std::cout << " ";
+                break;
+            case CellState::Unknown:
+                std::cout << "?";
+                break;
 
+            default:
+                break;
+            }
+        }
+        std::cout << std::endl;
+    }    
+}
 
 // Getters
 Grid Environment::getRoom() const {

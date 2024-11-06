@@ -23,14 +23,15 @@ public:
     // Méthode pour démarrer la simulation
     void run();
 
+    // Méthode pour afficher la simulation
+    void displaySimulation() const;
+
     // Getters
     Environment* getEnvironment() const;
     Robot* getRobot() const;
     double getXRobotStart() const;
     double getYRobotStart() const;
     double getOrientationRobotStart() const;
-    void displaySimulation() const;
-
 
     ~Simulation();
 };
