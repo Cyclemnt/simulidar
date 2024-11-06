@@ -7,7 +7,7 @@
 #include <cmath>
 #include <cstdlib> // pour rand() et srand()
 #include <ctime>   // pour time()
-#include<opencv2/opencv.hpp>
+#include <opencv2/opencv.hpp>
 
 
 using Types::CellState;
@@ -18,7 +18,7 @@ class Environment
 private:
     int width;   // Longueur de l'environnement (cm)
     int height;  // Largeur de l'environnement (cm)
-    Grid grid;   // Occupancy grid
+    Grid room;   // Occupancy room
 public:
     // Constructeur avec paramètres
     Environment(int length_, int width_);
@@ -31,9 +31,10 @@ public:
     bool isCellFree(int x, int y, double robotDiameter) const;
     //bool isPathFree() const; mais doit permettre au robot d'avancer jusqu'à l'obstacle
     // Fonction pour afficher la grille
-    void printGrid() const;
+    void printRoom() const;
 
     // Getters
+    Grid getRoom() const;
     int getWidth() const;
     int getHeight() const;
 

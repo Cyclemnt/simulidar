@@ -1,17 +1,17 @@
 #include "../include/environment.hpp"
 
 Environment::Environment(int width_, int height_)
-    : width(width_), height(height_), grid(width_, std::vector<CellState>(height_, CellState::Free)) {
+    : width(width_), height(height_), room(width_, std::vector<CellState>(height_, CellState::Free)) {
         // Placer les murs en bordure
         for (int i = 0; i < width; i++)
         {
-            grid[i][0] = CellState::Wall;
-            grid[i][height - 1] = CellState::Wall;
+            room[i][0] = CellState::Wall;
+            room[i][height - 1] = CellState::Wall;
         }
         for (int i = 0; i < height; i++)
         {
-            grid[0][i] = CellState::Wall;
-            grid[width - 1][i] = CellState::Wall;
+            room[0][i] = CellState::Wall;
+            room[width - 1][i] = CellState::Wall;
         }
     }
 
@@ -29,13 +29,13 @@ void Environment::generateRandomObstacles(int number, int maxSize) {
         {
             x = rand() % (width - 1 - obstacleWidth) + 1;
             y = rand() % (height - 1 - obstacleHeight) + 1;
-        } while (grid[x][y] != CellState::Free);
+        } while (room[x][y] != CellState::Free);
         // Placer les murs dans la grille
         for (int j = x; j < x + obstacleWidth; j++)
         {
             for (int k = y; k < y + obstacleHeight; k++)
             {
-                grid[j][k] = CellState::Wall;
+                room[j][k] = CellState::Wall;
             }
         }
     }
@@ -61,8 +61,8 @@ void Environment::drawLineDDA(int x1, int y1, int x2, int y2) {
     // Remplir la grille en traçant la ligne
     for (int i = 0; i <= steps; i++) {
         // Placer un 1 dans la cellule correspondante de la grille
-        if (x >= 0 && x < grid.size() && y >= 0 && y < grid[0].size()) {
-            grid[std::round(x)][std::round(y)] = CellState::Wall;
+        if (x >= 0 && x < room.size() && y >= 0 && y < room[0].size()) {
+            room[std::round(x)][std::round(y)] = CellState::Wall;
         }
         // Avancer dans la direction du prochain point
         x += xIncrement;
@@ -79,7 +79,7 @@ bool Environment::isCellFree(int x, int y, double robotDiameter) const {
     for (int i = y - radius; i <= y + radius; ++i) {
         for (int j = x - radius; j <= x + radius; ++j) {
             // On s'assure qu'on est bien dans la grille et que la cellule est libre (0)
-            if (i < 0 || i >= grid.size() || j < 0 || j >= grid[0].size() || grid[i][j] != CellState::Free) {
+            if (i < 0 || i >= room.size() || j < 0 || j >= room[0].size() || room[i][j] != CellState::Free) {
                 return false;  // Hors limites ou occupé
             }
         }
@@ -88,15 +88,15 @@ bool Environment::isCellFree(int x, int y, double robotDiameter) const {
 }
 
 // Fonction pour afficher la grille
-void Environment::printGrid() const {    
+void Environment::printRoom() const {    
     // Création de l'image OpenCV (CV_8UC3 pour une image couleur)
-    cv::Mat gridCopy(height, width, CV_8UC3);
+    cv::Mat roomCopy(height, width, CV_8UC3);
  
-    // Remplissage de CopieGrid en fonction des valeurs de grid
+    // Remplissage de CopieRoom en fonction des valeurs de room
     for (int y = 0 ; y < height; y++) {
         for (int x = 0; x < width; x++) {
-            cv::Vec3b& pixel = gridCopy.at<cv::Vec3b>(height - 1 - y, x);
-            switch (grid[x][y]) {
+            cv::Vec3b& pixel = roomCopy.at<cv::Vec3b>(height - 1 - y, x);
+            switch (room[x][y]) {
                 case CellState::Wall:
                     pixel = cv::Vec3b(255, 0, 0);  // Bleu pour Wall
                     break;
@@ -113,14 +113,17 @@ void Environment::printGrid() const {
         }
     }
     // Agrandissement pour visualisation
-    cv::resize(gridCopy, gridCopy, cv::Size(width * 50, height * 50), 0, 0, cv::INTER_NEAREST);
+    cv::resize(roomCopy, roomCopy, cv::Size(width * 50, height * 50), 0, 0, cv::INTER_NEAREST);
 
     // Afficher l'image
-    cv::imshow("Affichage de l'environnement", gridCopy);
+    cv::imshow("Affichage de l'environnement", roomCopy);
     cv::waitKey(0);
 }
 
 // Getters
+Grid Environment::getRoom() const {
+    return room;
+}
 int Environment::getWidth() const {
     return width;
 }
