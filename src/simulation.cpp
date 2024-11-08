@@ -98,41 +98,42 @@ void Simulation::run() {
     //std::cout << lidar->read(180 + 46 + 90) << " d" << std::endl;
     //std::cout << lidar->read(180 - 1) << " d" << std::endl;
     //std::cout << lidar->read(180 + 44 + 90) << " d" << std::endl;
-    displaySimulation();
+    displaySimulation(50);
 }
 
 // Méthode pour afficher la simulation
-void Simulation::displaySimulation() const {
+
+void Simulation::displaySimulation(int scaleFactor) const {
+    double DiametreRobot= robot->getDiameter();
     Grid room = environment->getRoom();
     int height = environment->getHeight();
     int width = environment->getWidth();
     // Création de l'image OpenCV (CV_8UC3 pour une image couleur)
-    cv::Mat roomCopy(height, width, CV_8UC3);
-    
-    // Remplissage de CopieRoom en fonction des valeurs de room
-    for (int y = 0 ; y < height; y++) {
+    cv::Mat roomCopy(height*scaleFactor, width*scaleFactor, CV_8UC3);
+     // Dessin de la salle agrandie
+    for (int y = height- 1; y >= 0; --y){
         for (int x = 0; x < width; x++) {
-            cv::Vec3b& pixel = roomCopy.at<cv::Vec3b>(height - 1 - y, x);
+            cv::Rect cellRect(x * scaleFactor, (height-1-y) * scaleFactor, scaleFactor, scaleFactor);
             switch (room[x][y]) {
                 case CellState::Wall:
-                    pixel = cv::Vec3b(255, 0, 0);      // Bleu pour Wall
+                    cv::rectangle(roomCopy, cellRect, cv::Scalar(255, 0, 0), cv::FILLED); // Murs en bleu
                     break;
                 case CellState::Free:
-                    pixel = cv::Vec3b(255, 255, 255);  // Blanc pour les cases libres
+                    cv::rectangle(roomCopy, cellRect, cv::Scalar(255,255,255), cv::FILLED); // Sol en blanc
                     break;                    
                 case CellState::Unknown:
-                    pixel = cv::Vec3b(0, 0, 0);        // Noir pour les cases inconnues
+                    cv::rectangle(roomCopy, cellRect, cv::Scalar(0,0,0), cv::FILLED); // Case inconnues en noir
                     break;
                 default:
-                    pixel = cv::Vec3b(247, 0, 248);    // Rose pour les cases non définies 
+                    cv::rectangle(roomCopy, cellRect, cv::Scalar(247,0,248), cv::FILLED); // Cases non définies en rose
                     break;
             }
         }
     }
     // Afficher le robot
-    cv::Vec3b& pixel = roomCopy.at<cv::Vec3b>(height - 1 - yRobotStart, xRobotStart);
-    pixel = cv::Vec3b(0, 166, 255);
-
+    cv::Point coord_robot_display((xRobotStart+0.5)*scaleFactor,(height - 0.5 - yRobotStart)*scaleFactor);
+    cv::circle(roomCopy, coord_robot_display, DiametreRobot*scaleFactor/2, cv::Scalar(0, 0, 255), cv::FILLED); // Point rouge pour le robot
+    
     // Afficher l'image
     cv::namedWindow("Affichage de la simulation", cv::WINDOW_GUI_NORMAL);
     cv::imshow("Affichage de la simulation", roomCopy);

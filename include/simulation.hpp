@@ -24,7 +24,7 @@ public:
     void run();
 
     // Méthode pour afficher la simulation
-    void displaySimulation() const;
+    void displaySimulation(int scaleFactor) const;
 
     // Getters
     Environment* getEnvironment() const;
