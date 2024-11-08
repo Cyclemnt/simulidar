@@ -85,6 +85,19 @@ void Simulation::run() {
     environment->generateRandomObstacles(4, 2);
     environment->printRoom();
     initializeRobotPose();
+    std::vector<double> test = lidar->readAll();
+    for (int i = 0; i < 360; i++)
+    {
+        std::cout << std::setprecision(3) << "id:" << i << "\t" << test[i] << "\t";
+        if (i % 10 == 0)
+        {
+            std::cout << std::endl;
+        }
+    }
+    std::cout << std::endl;
+    //std::cout << lidar->read(180 + 46 + 90) << " d" << std::endl;
+    //std::cout << lidar->read(180 - 1) << " d" << std::endl;
+    //std::cout << lidar->read(180 + 44 + 90) << " d" << std::endl;
     displaySimulation();
 }
 

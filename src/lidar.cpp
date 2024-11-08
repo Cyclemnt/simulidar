@@ -1,6 +1,7 @@
 #include "../include/lidar.hpp"
 #include "../include/simulation.hpp"  // Définition complète de Simulation
 #include <cmath>
+#include <iostream>
 
 // Constructeur qui initialise le Lidar
 Lidar::Lidar(Simulation* simulation_)
@@ -9,43 +10,96 @@ Lidar::Lidar(Simulation* simulation_)
 
 // Méthode pour lire un rayon particulier
 double Lidar::read(int rayID) const {
-    // Récupérer la pose absolue du robot
-    double x1 = simulation->getXRobotStart() + simulation->getRobot()->getX();
-    double y1 = simulation->getYRobotStart() + simulation->getRobot()->getY();
-    double orientation = simulation->getOrientationRobotStart() + simulation->getRobot()->getOrientation();
-    // Ajouter l'ID du rayon
-    orientation += (rayID - 180) * M_PI / 180;
-    // Récupérer la grille de l'environnement
+    // Algorithme DDA ==========================
+    // https://lodev.org/cgtutor/raycasting.html
+
+    // Récupérer la carte de l'environnement
     Grid room = simulation->getEnvironment()->getRoom();
-    // Calculer le point visible le plus loin
-    double x2 = x1 + range * cos(orientation);
-    double y2 = y1 + range * sin(orientation);
+    int roomSizeX = simulation->getEnvironment()->getWidth();
+    int roomSizeY = simulation->getEnvironment()->getHeight();
 
-    // Différences dans les coordonnées
-    double dx = x2 - x1;
-    double dy = y2 - y1;
-    // Calculer le nombre de pas nécessaires pour marcher sur la ligne
-    int steps = std::max(std::abs(dx), std::abs(dy));
-    // Incréments par pas dans chaque direction
-    double xIncrement = dx / steps;
-    double yIncrement = dy / steps;
-    // Position de départ
-    double x = x1;
-    double y = y1;
+    // Récupérer la pose absolue du robot
+    double rayStartX = simulation->getXRobotStart() + simulation->getRobot()->getX();
+    double rayStartY = simulation->getYRobotStart() + simulation->getRobot()->getY();
+    double orientation = simulation->getOrientationRobotStart() + simulation->getRobot()->getOrientation();
+    
+    // Angle du rayon en fonction de rayID
+    double rayAngle = orientation + (rayID - 180) * (M_PI / 180.0);
+    
+    // Vecteur directeur du rayon
+    double rayDirX = cos(rayAngle);
+    double rayDirY = sin(rayAngle);
 
-    // Parcourir la grille en traçant la ligne
-    int index = 0;
-    do {
-        index++;
-        x += xIncrement;
-        y += yIncrement;
-    } while (room[std::round(x)][std::round(y)] != CellState::Wall && abs(x - x1) < abs(x2) && abs(y - y1) < abs(y2));
-    // Retourner la distance ou -1 si out of range
-    if (abs(x - x1) >= abs(x2) || abs(y - y1) >= abs(y2)) {
-        return -1.0;
+    // Longueur du rayon pour un déplacement unitaire en x ou y
+    double rayUnitStepSizeX = sqrt(1 + (rayDirY / rayDirX) * (rayDirY / rayDirX));
+    double rayUnitStepSizeY = sqrt(1 + (rayDirX / rayDirY) * (rayDirX / rayDirY));
+
+    // Case à vérifier
+    double mapCheckX = int(rayStartX + 0.5);
+    double mapCheckY = int(rayStartY + 0.5);
+
+    // Longueur accumulée
+    double rayLengthX = 0.0;
+    double rayLengthY = 0.0;
+
+    // Pas sur chaque composante
+    double stepX = 0.0;
+    double stepY = 0.0;
+
+    // Définir la direction et la distance à l'intersection de la première ligne/colonne
+    if (rayDirX < 0) {
+        stepX = -1;
+        rayLengthX = (0.5 - mapCheckX + rayStartX) * rayUnitStepSizeX;
     } else {
-        double distance = sqrt(abs(x - x1) * abs(x - x1) + abs(y - y1) * abs(y - y1));
+        stepX = 1;
+        rayLengthX = (0.5 + mapCheckX - rayStartX) * rayUnitStepSizeX;
+    }
+    if (rayDirY < 0) {
+        stepY = -1;
+        rayLengthY = (0.5 - mapCheckY + rayStartY) * rayUnitStepSizeY;
+    } else {
+        stepY = 1;
+        rayLengthY = (0.5 + mapCheckY - rayStartY) * rayUnitStepSizeY;
+    }
+    
+    bool tileFound = false;
+    float distance = 0.0;
+    while (!tileFound && distance < maxRange)
+    {
+        // Walk
+        if (rayLengthX < rayLengthY)
+        {
+            mapCheckX += stepX;
+            distance = rayLengthX;
+            rayLengthX += rayUnitStepSizeX;
+        }
+        else
+        {
+            mapCheckY += stepY;
+            distance = rayLengthY;
+            rayLengthY += rayUnitStepSizeY;
+        }
+        
+        if (mapCheckX >= 0 && mapCheckX < roomSizeX && mapCheckY >= 0 && mapCheckY < roomSizeY)
+        {
+            if (room[mapCheckX][mapCheckY] == CellState::Wall)
+            {
+                tileFound = true;
+            }
+        }
+    }
+    
+    double intersectionX = 0.0;
+    double intersectionY = 0.0;
+    if (tileFound)
+    {
+        intersectionX = rayStartX + rayDirX * distance;
+        intersectionY = rayStartY + rayDirY * distance;
         return distance;
+    }
+    else
+    {
+        return -1.0;
     }
 }
 
