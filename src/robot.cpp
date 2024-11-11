@@ -1,5 +1,6 @@
 #include "../include/robot.hpp"
 #include <cmath>
+#include <iostream>
 
 Robot::Robot()
     : lidar(nullptr), map(nullptr), x(0.0), y(0.0), orientation(0.0), diameter(1.0) {}
@@ -19,7 +20,16 @@ void Robot::rotate(double angle) {
 }
 
 // Fonction pour mettre à jour la carte du robot
-void Robot::updateMap(std::vector<double> lidarMeasures) {}
+void Robot::updateMap(std::vector<double> lidarMeasurements) {
+    for (int i = 0; i < lidar->getRayCount(); i++) {
+        double distance = lidarMeasurements[i];
+        // Calculer l'angle du rayon relatif à l'orientation du robot
+        double rayAngle = orientation + (i - 180) * (M_PI / 180.0);
+
+        // Cast ray in grid and mark cells as free until we hit the obstacle
+        map->traceAndUpdateGrid(x, y, rayAngle, distance);
+    }
+}
 
 // Algorithme pour explorer efficacement
 void Robot::explore() {}

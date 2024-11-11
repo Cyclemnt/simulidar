@@ -20,6 +20,9 @@ public:
     // Méthode pour lire tous les rayon
     std::vector<double> readAll() const;
 
+    // Getters
+    int getRayCount() const;
+
     ~Lidar();
 };
 

@@ -35,70 +35,65 @@ double Lidar::read(int rayID) const {
     double rayUnitStepSizeY = sqrt(1 + (rayDirX / rayDirY) * (rayDirX / rayDirY));
 
     // Case à vérifier
-    double mapCheckX = int(rayStartX + 0.5);
-    double mapCheckY = int(rayStartY + 0.5);
+    int mapCheckX = int(rayStartX + 0.5);
+    int mapCheckY = int(rayStartY + 0.5);
 
     // Longueur accumulée
     double rayLengthX = 0.0;
     double rayLengthY = 0.0;
 
     // Pas sur chaque composante
-    double stepX = 0.0;
-    double stepY = 0.0;
+    int stepX = 0;
+    int stepY = 0;
 
     // Définir la direction et la distance à l'intersection de la première ligne/colonne
     if (rayDirX < 0) {
         stepX = -1;
         rayLengthX = (0.5 - mapCheckX + rayStartX) * rayUnitStepSizeX;
-    } else {
+    }
+    else {
         stepX = 1;
         rayLengthX = (0.5 + mapCheckX - rayStartX) * rayUnitStepSizeX;
     }
     if (rayDirY < 0) {
         stepY = -1;
         rayLengthY = (0.5 - mapCheckY + rayStartY) * rayUnitStepSizeY;
-    } else {
+    }
+    else {
         stepY = 1;
         rayLengthY = (0.5 + mapCheckY - rayStartY) * rayUnitStepSizeY;
     }
     
     bool tileFound = false;
-    float distance = 0.0;
-    while (!tileFound && distance < maxRange)
-    {
+    double distance = 0.0;
+    while (!tileFound && distance < maxRange) {
         // Walk
-        if (rayLengthX < rayLengthY)
-        {
+        if (rayLengthX < rayLengthY) {
             mapCheckX += stepX;
             distance = rayLengthX;
             rayLengthX += rayUnitStepSizeX;
         }
-        else
-        {
+        else {
             mapCheckY += stepY;
             distance = rayLengthY;
             rayLengthY += rayUnitStepSizeY;
         }
         
-        if (mapCheckX >= 0 && mapCheckX < roomSizeX && mapCheckY >= 0 && mapCheckY < roomSizeY)
-        {
-            if (room[mapCheckX][mapCheckY] == CellState::Wall)
-            {
+        if (mapCheckX >= 0 && mapCheckX < roomSizeX && mapCheckY >= 0 && mapCheckY < roomSizeY) {
+            if (room[mapCheckX][mapCheckY] == CellState::Wall) {
                 tileFound = true;
             }
         }
     }
     
-    double intersectionX = 0.0;
-    double intersectionY = 0.0;
-    if (tileFound)
-    {
-        intersectionX = rayStartX + rayDirX * distance;
-        intersectionY = rayStartY + rayDirY * distance;
+    //double intersectionX = 0.0;
+    //double intersectionY = 0.0;
+    if (tileFound) {
+        //intersectionX = rayStartX + rayDirX * distance;
+        //intersectionY = rayStartY + rayDirY * distance;
         return distance;
     }
-    else
-    {
+    else {
         return -1.0;
     }
 }
@@ -111,6 +106,11 @@ std::vector<double> Lidar::readAll() const {
         readings.push_back(read(id));
     }
     return readings;
+}
+
+// Getters
+int Lidar::getRayCount() const {
+    return rayCount;
 }
 
 Lidar::~Lidar() {}
