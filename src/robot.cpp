@@ -26,7 +26,7 @@ void Robot::updateMap(std::vector<double> lidarMeasurements) {
         // Calculer l'angle du rayon relatif à l'orientation du robot
         double rayAngle = orientation + (i - 180) * (M_PI / 180.0);
 
-        // Cast ray in grid and mark cells as free until we hit the obstacle
+        // Ray casting dans la grille pour adapter l'état des cases
         map->traceAndUpdateGrid(x, y, rayAngle, distance);
     }
 }

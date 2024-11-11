@@ -18,7 +18,7 @@ public:
 
     // Binarisation de la grille en "libre", "occupé" et "inconnu"
     //Grid binarizeGrid(double freeThreshold, double occupiedThreshold);
-    // Méthode pour tracer un chemin de cases vides terminé par un mur
+    // Méthode pour tracer un chemin de cases libres terminé par un obstacle
     void traceAndUpdateGrid(double startX, double startY, double rayAngle, double distance);
     // Méthode pour afficher la carte dans le terminal
     void printMap() const;
