@@ -83,94 +83,65 @@ void Simulation::initializeRobotPose() {
 // Méthode pour démarrer la simulation
 void Simulation::run() {
     // Logique de simulation (boucle principale)
-    environment->generateRandomObstacles(4, 2);
+    //environment->generateRandomObstacles(4, 2);
     environment->printRoom();
     initializeRobotPose();
+    //xRobotStart = 4;
+    //yRobotStart = 1;
+    //map->printMap();
+    std::cout << xRobotStart << ", " << yRobotStart << std::endl;
     std::vector<double> test = lidar->readAll();
-    for (int i = 0; i < 360; i++)
-    {
-        std::cout << std::setprecision(3) << "id:" << i << "\t" << test[i] << "\t";
-        if (i % 10 == 0)
-        {
-            std::cout << std::endl;
-        }
-    }
+    robot->updateMap(test);
     std::cout << std::endl;
-    //std::cout << lidar->read(180 + 46 + 90) << " d" << std::endl;
-    //std::cout << lidar->read(180 - 1) << " d" << std::endl;
-    //std::cout << lidar->read(180 + 44 + 90) << " d" << std::endl;
-    displaySimulation(500);
-    displayRelativeMap(500);
-
+    map->printMap();
+    displaySimulation(50);
 }
 
 // Méthode pour afficher la simulation
 
 void Simulation::displaySimulation(int scaleFactor) const {
-    double DiametreRobot= robot->getDiameter();
     Grid room = environment->getRoom();
     int height = environment->getHeight();
     int width = environment->getWidth();
     // Création de l'image OpenCV (CV_8UC3 pour une image couleur)
-    cv::Mat roomCopy(height*scaleFactor, width*scaleFactor, CV_8UC3);
+    cv::Mat roomImage(height * scaleFactor, width * scaleFactor, CV_8UC3);
      // Dessin de la salle agrandie
-    for (int y = height- 1; y >= 0; --y){
+    for (int y = height - 1; y >= 0; y--) {
         for (int x = 0; x < width; x++) {
-            cv::Rect cellRect(x * scaleFactor, (height-1-y) * scaleFactor, scaleFactor, scaleFactor);
+            cv::Rect cell(x * scaleFactor, (height - 1 - y) * scaleFactor, scaleFactor, scaleFactor);
             switch (room[x][y]) {
                 case CellState::Wall:
-                    cv::rectangle(roomCopy, cellRect, cv::Scalar(255, 0, 0), cv::FILLED); // Murs en bleu
+                    cv::rectangle(roomImage, cell, cv::Scalar(255, 0, 0), cv::FILLED); // Murs en bleu
                     break;
                 case CellState::Free:
-                    cv::rectangle(roomCopy, cellRect, cv::Scalar(255,255,255), cv::FILLED); // Sol en blanc
+                    cv::rectangle(roomImage, cell, cv::Scalar(255,255,255), cv::FILLED); // Sol en blanc
                     break;                    
                 case CellState::Unknown:
-                    cv::rectangle(roomCopy, cellRect, cv::Scalar(0,0,0), cv::FILLED); // Case inconnues en noir
+                    cv::rectangle(roomImage, cell, cv::Scalar(0,0,0), cv::FILLED); // Case inconnues en noir
                     break;
                 default:
-                    cv::rectangle(roomCopy, cellRect, cv::Scalar(247,0,248), cv::FILLED); // Cases non définies en rose
+                    cv::rectangle(roomImage, cell, cv::Scalar(247,0,248), cv::FILLED); // Cases non définies en rose
                     break;
             }
         }
     }
     // Afficher le robot
-    cv::Point coord_robot_display((xRobotStart+0.5)*scaleFactor,(height - 0.5 - yRobotStart)*scaleFactor);
-    cv::circle(roomCopy, coord_robot_display, DiametreRobot*scaleFactor/2, cv::Scalar(0, 0, 255), cv::FILLED); // Point rouge pour le robot
+    cv::Point robotImage((xRobotStart + 0.5) * scaleFactor, (height - 0.5 - yRobotStart) * scaleFactor);
+    cv::circle(roomImage, robotImage, robot->getDiameter() * scaleFactor / 2, cv::Scalar(0, 166, 255), cv::FILLED); // Point orange pour le robot
     
     // Afficher l'image
-    cv::namedWindow("Affichage de la simulation", cv::WINDOW_GUI_NORMAL);
-    cv::imshow("Affichage de la simulation", roomCopy);
+    cv::namedWindow("Simulation", cv::WINDOW_GUI_NORMAL);
+    cv::imshow("Simulation", roomImage);
     cv::waitKey(0);
 }
 
-void Simulation::displayRelativeMap(int scaleFactor) const {
-    // Dimensions de la carte relative
-    int relativeMapSize = 21;  // Ajustez selon la portée du Lidar et l'échelle souhaitée
-    cv::Mat relativeMap(relativeMapSize * scaleFactor, relativeMapSize * scaleFactor, CV_8UC3, cv::Scalar(255, 255, 255));  // Fond blanc
-
-    // Position initiale du robot au centre de la carte
-    cv::Point robotPos(relativeMapSize / 2 * scaleFactor, relativeMapSize / 2 * scaleFactor);
-    cv::circle(relativeMap, robotPos, robot->getDiameter() * scaleFactor / 2, cv::Scalar(0, 0, 255), cv::FILLED); // Robot en rouge
-
-    // Lire toutes les mesures du Lidar
-    std::vector<double> lidarReadings = lidar->readAll();
-    for (int angle = 0; angle < lidarReadings.size(); ++angle) {
-        double distance = lidarReadings[angle];
-        if (distance > 0 && distance < maxRange) { // Ignorer les mesures invalides
-            // Calculer la position relative du mur
-            double radianAngle = angle * M_PI / 180.0;
-            int xRelative = static_cast<int>((robotPos.x + distance * cos(radianAngle)) * scaleFactor);
-            int yRelative = static_cast<int>((robotPos.y - distance * sin(radianAngle)) * scaleFactor); // Système de coordonnées inversé
-
-            // Marquer le mur détecté
-            cv::rectangle(relativeMap, cv::Point(xRelative, yRelative), cv::Point(xRelative + scaleFactor, yRelative + scaleFactor), cv::Scalar(0, 0, 0), cv::FILLED); // Mur en noir
-        }
-    }
-
+void Simulation::displayRobotMap(int scaleFactor) const {
+/*
     // Afficher la carte relative
-    cv::namedWindow("Carte Relative", cv::WINDOW_GUI_NORMAL);
-    cv::imshow("Carte Relative", relativeMap);
+    cv::namedWindow("Carte du robot", cv::WINDOW_GUI_NORMAL);
+    cv::imshow("Carte du robot", robotMapImage);
     cv::waitKey(0);
+*/
 }
 
 

@@ -27,7 +27,7 @@ public:
     void displaySimulation(int scaleFactor) const;
 
     // Méthode pour afficher la carte relative
-    void displayRelativeMap(int scaleFactor) const;
+    void displayRobotMap(int scaleFactor) const;
 
     // Getters
     Environment* getEnvironment() const;
