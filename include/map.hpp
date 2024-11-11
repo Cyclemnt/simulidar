@@ -5,6 +5,7 @@
 
 using Types::CellState;
 using Types::Grid;
+using Types::Direction;
 
 class Map
 {
@@ -16,10 +17,10 @@ public:
     // Constructeur qui initialise le carte du robot
     Map();
 
-    // Binarisation de la grille en "libre", "occupé" et "inconnu"
-    //Grid binarizeGrid(double freeThreshold, double occupiedThreshold);
+    // Méthode pour agrandir la carte
+    void adjustMapBounds(int amount, Direction dir);
     // Méthode pour tracer un chemin de cases libres terminé par un obstacle
-    void traceAndUpdateGrid(double startX, double startY, double rayAngle, double distance);
+    void castRayAndMarkObstacle(double startX, double startY, double rayAngle, double distance);
     // Méthode pour afficher la carte dans le terminal
     void printMap() const;
 

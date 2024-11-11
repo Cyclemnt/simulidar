@@ -27,7 +27,7 @@ void Robot::updateMap(std::vector<double> lidarMeasurements) {
         double rayAngle = orientation + (i - 180) * (M_PI / 180.0);
 
         // Ray casting dans la grille pour adapter l'état des cases
-        map->traceAndUpdateGrid(x, y, rayAngle, distance);
+        map->castRayAndMarkObstacle(x, y, rayAngle, distance);
     }
 }
 

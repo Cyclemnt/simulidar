@@ -7,8 +7,46 @@ Map::Map()
     : robotMap(1, std::vector<CellState>(1, CellState::Free)), leftExtension(0), bottomExtension(0) {
 }
 
+// Méthode pour agrandir la carte
+void Map::adjustMapBounds(int amount, Direction dir) {
+    if (amount <= 0) return; // Pas besoin d'extension si amount <= 0
+
+    int mapWidth = robotMap.size();
+    int mapHeight = robotMap[0].size();
+
+    std::vector<CellState> newCol(robotMap[0].size(), CellState::Unknown);
+
+    switch (dir) {
+        case Direction::W: // Gauche
+            for (int i = 0; i < amount; ++i) {
+                robotMap.insert(robotMap.begin(), newCol); // Ajoute des colonnes à gauche de chaque ligne
+            }
+            leftExtension += amount;
+            break;
+
+        case Direction::E:
+            for (int i = 0; i < amount; ++i) {
+                robotMap.push_back(newCol); // Ajoute des colonnes à droite de chaque ligne
+            }
+            break;
+
+        case Direction::S:
+            for (auto& row : robotMap) {
+                row.insert(row.begin(), amount, CellState::Unknown); // Ajoute des lignes en bas
+            }
+            bottomExtension += amount;
+            break;
+
+        case Direction::N:
+            for (auto& row : robotMap) {
+                row.insert(row.end(), amount, CellState::Unknown); // Ajoute des lignes en haut
+            }
+            break;
+    }
+}
+
 // Méthode pour tracer un chemin de cases vides terminé par un mur
-void Map::traceAndUpdateGrid(double startX, double startY, double rayAngle, double distance) {
+void Map::castRayAndMarkObstacle(double startX, double startY, double rayAngle, double distance) {
     // Calcul des coordonnées relatives du point de contact du rayon
     double dx = cos(rayAngle) * distance;
     double dy = sin(rayAngle) * distance;
@@ -16,47 +54,20 @@ void Map::traceAndUpdateGrid(double startX, double startY, double rayAngle, doub
     // Convertir les coordonnées en indices de grille
     int x0 = std::round(startX);
     int y0 = std::round(startY);
-    int x1 = std::round(dx + (dx < 0 ? -0.5 : 0.5)); // N'enlève pas toutes les cases mal placées
-    int y1 = std::round(dy + (dy < 0 ? -0.5 : 0.5)); // N'enlève pas toutes les cases mal placées
+    int x1 = std::round(dx + (dx < 0 ? -0.5 : 0.5)); // Sur estimer, pour l'extension
+    int y1 = std::round(dy + (dy < 0 ? -0.5 : 0.5)); // Sur estimer, pour l'extension
 
-    // Extension à gauche si la cible est hors de la grille à gauche
+    // Calculs pour les extensions dans chaque direction
     int colsToAddLeft =  -x1 - leftExtension - x0;
-    if (colsToAddLeft > 0) {
-        // Ajoute "colsToAdd" colonnes à gauche de chaque ligne
-        std::vector<CellState> newCol(robotMap[0].size(), CellState::Unknown);
-        for (int i = 0; i < colsToAddLeft; ++i) {
-            robotMap.insert(robotMap.begin(), newCol);
-        }
-        leftExtension += colsToAddLeft;
-    }
-
-    // Extension à droite si la cible est hors de la grille à droite
-    int colsToAddRight = x1 - (robotMap.size() - leftExtension - 1 - x0);
-    if (colsToAddRight > 0) {
-        // Ajoute "colsToAdd" colonnes à droite de chaque ligne
-        std::vector<CellState> newCol(robotMap[0].size(), CellState::Unknown);
-        for (int i = 0; i < colsToAddRight; ++i) {
-            robotMap.push_back(newCol);
-        }
-    }
-    
-    // Extension en bas si la cible est hors de la grille en dessous
+    int colsToAddRight = x1 - robotMap.size() + leftExtension + 1 + x0;
     int rowsToAddBottom = -y1 - bottomExtension - y0;
-    if (rowsToAddBottom > 0) {
-        // Ajoute "rowsToAdd" lignes en dessous 
-        for (auto& row : robotMap) {
-            row.insert(row.begin(), rowsToAddBottom, CellState::Unknown);
-        }
-        bottomExtension += rowsToAddBottom;
-    }
-    // Extension en haut si la cible est hors de la grille au dessus
-    int rowsToAddTop = y1 - (robotMap[0].size() - (bottomExtension + y0 + 1));
-    if (rowsToAddTop > 0) {
-        // Ajoute "rowsToAdd" colonnes à droite de chaque ligne
-        for (auto& row : robotMap) {
-            row.insert(row.end(), rowsToAddTop, CellState::Unknown);
-        }
-    }
+    int rowsToAddTop = y1 - robotMap[0].size() + bottomExtension + 1 + y0;
+
+    // Application des extensions avec la fonction adjustMapBounds
+    adjustMapBounds(colsToAddLeft, Direction::W);
+    adjustMapBounds(colsToAddRight, Direction::E);
+    adjustMapBounds(rowsToAddBottom, Direction::S);
+    adjustMapBounds(rowsToAddTop, Direction::N);
 }
 
 // Fonction pour afficher la carte

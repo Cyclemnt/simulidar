@@ -11,6 +11,8 @@ namespace Types {
     };
 
     using Grid = std::vector<std::vector<CellState>>;
+
+    enum class Direction { N, S, E, W };
 }
 
 #endif // TYPES_HPP
