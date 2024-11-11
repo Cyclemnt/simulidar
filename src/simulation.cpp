@@ -5,7 +5,8 @@
 
 // Constructeur : Initialise l'environnement et le robot
 Simulation::Simulation()
-    : xRobotStart(0.0), yRobotStart(0.0), orientationRobotStart(0.0) {
+    : xRobotStart(0.0), yRobotStart(0.0), orientationRobotStart(0.0), maxRange(10.0) {
+
     environment = new Environment(10, 10);
     map = new Map();
     robot = new Robot();
@@ -98,7 +99,9 @@ void Simulation::run() {
     //std::cout << lidar->read(180 + 46 + 90) << " d" << std::endl;
     //std::cout << lidar->read(180 - 1) << " d" << std::endl;
     //std::cout << lidar->read(180 + 44 + 90) << " d" << std::endl;
-    displaySimulation(50);
+    displaySimulation(500);
+    displayRelativeMap(500);
+
 }
 
 // Méthode pour afficher la simulation
@@ -139,6 +142,37 @@ void Simulation::displaySimulation(int scaleFactor) const {
     cv::imshow("Affichage de la simulation", roomCopy);
     cv::waitKey(0);
 }
+
+void Simulation::displayRelativeMap(int scaleFactor) const {
+    // Dimensions de la carte relative
+    int relativeMapSize = 21;  // Ajustez selon la portée du Lidar et l'échelle souhaitée
+    cv::Mat relativeMap(relativeMapSize * scaleFactor, relativeMapSize * scaleFactor, CV_8UC3, cv::Scalar(255, 255, 255));  // Fond blanc
+
+    // Position initiale du robot au centre de la carte
+    cv::Point robotPos(relativeMapSize / 2 * scaleFactor, relativeMapSize / 2 * scaleFactor);
+    cv::circle(relativeMap, robotPos, robot->getDiameter() * scaleFactor / 2, cv::Scalar(0, 0, 255), cv::FILLED); // Robot en rouge
+
+    // Lire toutes les mesures du Lidar
+    std::vector<double> lidarReadings = lidar->readAll();
+    for (int angle = 0; angle < lidarReadings.size(); ++angle) {
+        double distance = lidarReadings[angle];
+        if (distance > 0 && distance < maxRange) { // Ignorer les mesures invalides
+            // Calculer la position relative du mur
+            double radianAngle = angle * M_PI / 180.0;
+            int xRelative = static_cast<int>((robotPos.x + distance * cos(radianAngle)) * scaleFactor);
+            int yRelative = static_cast<int>((robotPos.y - distance * sin(radianAngle)) * scaleFactor); // Système de coordonnées inversé
+
+            // Marquer le mur détecté
+            cv::rectangle(relativeMap, cv::Point(xRelative, yRelative), cv::Point(xRelative + scaleFactor, yRelative + scaleFactor), cv::Scalar(0, 0, 0), cv::FILLED); // Mur en noir
+        }
+    }
+
+    // Afficher la carte relative
+    cv::namedWindow("Carte Relative", cv::WINDOW_GUI_NORMAL);
+    cv::imshow("Carte Relative", relativeMap);
+    cv::waitKey(0);
+}
+
 
 // Getters
 Environment* Simulation::getEnvironment() const {

@@ -12,7 +12,7 @@ private:
     Map* map;                  // Pointeur vers la carte du robot
     Robot* robot;              // Pointeur vers le robot simulé
     Lidar* lidar;              // Pointeur vers le lidar simulé
-    double xRobotStart, yRobotStart, orientationRobotStart;  // Coordonnées absolues de départ du robot
+    double xRobotStart, yRobotStart, orientationRobotStart, maxRange;;  // Coordonnées absolues de départ du robot
 
 public:
     // Constructeur qui initialise l'environnement et le robot
@@ -25,6 +25,9 @@ public:
 
     // Méthode pour afficher la simulation
     void displaySimulation(int scaleFactor) const;
+
+    // Méthode pour afficher la carte relative
+    void displayRelativeMap(int scaleFactor) const;
 
     // Getters
     Environment* getEnvironment() const;
