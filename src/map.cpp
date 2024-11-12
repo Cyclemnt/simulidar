@@ -47,9 +47,13 @@ void Map::adjustMapBounds(int amount, Direction dir) {
 
 // Méthode pour tracer un chemin de cases vides terminé par un mur
 void Map::castRayAndMarkObstacle(double startX, double startY, double rayAngle, double distance) {
+    // Vecteur directeur du rayon
+    double rayDirX = cos(rayAngle);
+    double rayDirY = sin(rayAngle);
+
     // Calcul des coordonnées relatives du point de contact du rayon
-    double dx = cos(rayAngle) * distance;
-    double dy = sin(rayAngle) * distance;
+    double dx = rayDirX * distance;
+    double dy = rayDirY * distance;
 
     // Convertir les coordonnées en indices de grille
     int x0 = std::round(startX);
@@ -68,6 +72,69 @@ void Map::castRayAndMarkObstacle(double startX, double startY, double rayAngle, 
     adjustMapBounds(colsToAddRight, Direction::E);
     adjustMapBounds(rowsToAddBottom, Direction::S);
     adjustMapBounds(rowsToAddTop, Direction::N);
+
+
+    int mapWidth = robotMap.size();
+    int mapHeight = robotMap[0].size();
+
+
+
+    
+
+
+    // Longueur du rayon pour un déplacement unitaire en x ou y
+    double rayUnitStepSizeX = sqrt(1 + (rayDirY / rayDirX) * (rayDirY / rayDirX));
+    double rayUnitStepSizeY = sqrt(1 + (rayDirX / rayDirY) * (rayDirX / rayDirY));
+
+    // Case à vérifier
+    int mapCheckX = int(startX + 0.5);
+    int mapCheckY = int(startY + 0.5);
+
+    // Longueur accumulée
+    double rayLengthX = 0.0;
+    double rayLengthY = 0.0;
+
+    // Pas sur chaque composante
+    int stepX = 0;
+    int stepY = 0;
+
+    // Définir la direction et la distance à l'intersection de la première ligne/colonne
+    if (rayDirX < 0) {
+        stepX = -1;
+        rayLengthX = (0.5 - mapCheckX + startX) * rayUnitStepSizeX;
+    }
+    else {
+        stepX = 1;
+        rayLengthX = (0.5 + mapCheckX - startX) * rayUnitStepSizeX;
+    }
+    if (rayDirY < 0) {
+        stepY = -1;
+        rayLengthY = (0.5 - mapCheckY + startY) * rayUnitStepSizeY;
+    }
+    else {
+        stepY = 1;
+        rayLengthY = (0.5 + mapCheckY - startY) * rayUnitStepSizeY;
+    }
+    
+    double walkDistance = 0.0;
+    while (walkDistance < distance) {
+        // Walk
+        if (rayLengthX < rayLengthY) {
+            mapCheckX += stepX;
+            walkDistance = rayLengthX;
+            rayLengthX += rayUnitStepSizeX;
+        }
+        else {
+            mapCheckY += stepY;
+            walkDistance = rayLengthY;
+            rayLengthY += rayUnitStepSizeY;
+        }
+        //std::cout << mapCheckX + leftExtension << ", " << mapCheckY + bottomExtension << std::endl;
+        if ((mapCheckX + leftExtension) >= 0 && (mapCheckX + leftExtension) < mapWidth && (mapCheckY + bottomExtension) >= 0 && (mapCheckY + bottomExtension) < mapHeight) {
+            robotMap[mapCheckX + leftExtension][mapCheckY + bottomExtension] = CellState::Free;
+        }
+    }
+    robotMap[mapCheckX + leftExtension][mapCheckY + bottomExtension] = CellState::Wall;
 }
 
 // Fonction pour afficher la carte

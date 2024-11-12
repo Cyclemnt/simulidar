@@ -83,7 +83,7 @@ void Simulation::initializeRobotPose() {
 // Méthode pour démarrer la simulation
 void Simulation::run() {
     // Logique de simulation (boucle principale)
-    //environment->generateRandomObstacles(4, 2);
+    environment->generateRandomObstacles(4, 2);
     environment->printRoom();
     initializeRobotPose();
     //xRobotStart = 4;
