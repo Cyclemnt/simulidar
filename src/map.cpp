@@ -142,20 +142,22 @@ void Map::castRayAndMarkObstacle(double startX, double startY, double rayAngle, 
 }
 
 // Méthode pour déterminer la prochaine case à explorer 
-pair<int, int> Map::findNearestInterestPoint(double startX, double startY) const {
+std::pair<int, int> Map::findNearestInterestPoint(double startX, double startY) const {
     //Calcul de la case inconue la plus proche adjacente à une case libre 
     for (int y = robotMap[0].size() - 1; y > 0; y--) {
         for (int x = 0; x > robotMap.size() - 1; x++) {
             if (robotMap[x][y] == CellState::Unknown) {
                 for (int i = 0; i < 4; i++) {
                     if (robotMap[x + ((i + 1) % 2) * (i - 1) ][y + (i % 2) * (i - 2)] == CellState::Free) {
-                        return point(x, y);
+                        std::pair<int, int> point(x, y);
+                        return point;
                     }
                 }
             }
         }
     }
-    return point(-1, -1); 
+    std::pair<int, int> point(-1, -1);
+    return point;
 }
 
 // Méthode pour trouver un chemin 

@@ -22,8 +22,8 @@ public:
     void adjustMapBounds(int amount, Direction dir);
     // Méthode pour tracer un chemin de cases libres terminé par un obstacle
     void castRayAndMarkObstacle(double startX, double startY, double rayAngle, double distance);
-        // Méthode pour déterminer la prochaine case à explorer 
-    pair<int, int> findNearestInterestPoint(double startX, double startY) const;
+    // Méthode pour déterminer la prochaine case à explorer 
+    std::pair<int, int> findNearestInterestPoint(double startX, double startY) const;
     // Méthode pour trouver un chemin 
     void findPath(double startX, double startY, double endX, double endY) const; 
     // Méthode pour afficher la carte dans le terminal
