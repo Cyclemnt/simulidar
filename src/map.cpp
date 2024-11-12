@@ -47,6 +47,10 @@ void Map::adjustMapBounds(int amount, Direction dir) {
 
 // Méthode pour tracer un chemin de cases vides terminé par un mur
 void Map::castRayAndMarkObstacle(double startX, double startY, double rayAngle, double distance) {
+    if (distance = -1) {
+        distance = 30.0;
+    }
+
     // Vecteur directeur du rayon
     double rayDirX = cos(rayAngle);
     double rayDirY = sin(rayAngle);
@@ -73,14 +77,11 @@ void Map::castRayAndMarkObstacle(double startX, double startY, double rayAngle, 
     adjustMapBounds(rowsToAddBottom, Direction::S);
     adjustMapBounds(rowsToAddTop, Direction::N);
 
+    // Ray Casting identique au fonctionnement du Lidar
+    // Mise à jour de l'état des cases
 
     int mapWidth = robotMap.size();
     int mapHeight = robotMap[0].size();
-
-
-
-    
-
 
     // Longueur du rayon pour un déplacement unitaire en x ou y
     double rayUnitStepSizeX = sqrt(1 + (rayDirY / rayDirX) * (rayDirY / rayDirX));
@@ -129,12 +130,15 @@ void Map::castRayAndMarkObstacle(double startX, double startY, double rayAngle, 
             walkDistance = rayLengthY;
             rayLengthY += rayUnitStepSizeY;
         }
-        //std::cout << mapCheckX + leftExtension << ", " << mapCheckY + bottomExtension << std::endl;
+        
         if ((mapCheckX + leftExtension) >= 0 && (mapCheckX + leftExtension) < mapWidth && (mapCheckY + bottomExtension) >= 0 && (mapCheckY + bottomExtension) < mapHeight) {
             robotMap[mapCheckX + leftExtension][mapCheckY + bottomExtension] = CellState::Free;
         }
     }
-    robotMap[mapCheckX + leftExtension][mapCheckY + bottomExtension] = CellState::Wall;
+
+    if (distance != 30) {
+        robotMap[mapCheckX + leftExtension][mapCheckY + bottomExtension] = CellState::Wall;
+    }
 }
 
 // Fonction pour afficher la carte
