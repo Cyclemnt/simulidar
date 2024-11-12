@@ -94,6 +94,7 @@ void Simulation::run() {
     robot->updateMap(test);
     std::cout << std::endl;
     map->printMap();
+    std::cout << map->findNearestInterestPoint(map->getLeftExtension(), map->getBottomExtension()).first << ", " << map->findNearestInterestPoint(map->getLeftExtension(), map->getBottomExtension()).second << std::endl;
     displaySimulation(50, environment->getRoom());
     displaySimulation(50, map->getRobotMap());
 }

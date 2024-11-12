@@ -148,16 +148,19 @@ std::pair<int, int> Map::findNearestInterestPoint(double startX, double startY) 
     std::pair<int, int> point(-1, -1);
     //Calcul de la case inconue la plus proche adjacente à une case libre
     for (int y = robotMap[0].size() - 1; y > 0; y--) {
-        for (int x = 0; x > robotMap.size() - 1; x++) {
+        for (int x = 0; x < robotMap.size(); x++) {
             if (robotMap[x][y] == CellState::Unknown) {
                 for (int i = 0; i < 4; i++) {
-                    if (robotMap[x + ((i + 1) % 2) * (i - 1) ][y + (i % 2) * (i - 2)] == CellState::Free) {
-                        if ((abs(startX - x) + abs(startY - y)) < ShortestManhattanDistance) {
-                            ShortestManhattanDistance = (abs(startX - x) + abs(startY - y));
-                            point.first = x;
-                            point.second = y;
+                    int dx = ((i + 1) % 2) * (i - 1);
+                    int dy = (i % 2) * (i - 2);
+                    if (x + dx >= 0 && x + dx < robotMap.size() && y + dy >= 0 && y + dy < robotMap[0].size()) {
+                        if (robotMap[x + dx][y + dy] == CellState::Free) {
+                            if ((abs(startX - x) + abs(startY - y)) < ShortestManhattanDistance) {
+                                ShortestManhattanDistance = (abs(startX - x) + abs(startY - y));
+                                point.first = x;
+                                point.second = y;
+                            }
                         }
-                        
                     }
                 }
             }
