@@ -94,13 +94,12 @@ void Simulation::run() {
     robot->updateMap(test);
     std::cout << std::endl;
     map->printMap();
-    std::cout << map->findNearestInterestPoint(map->getLeftExtension(), map->getBottomExtension()).first << ", " << map->findNearestInterestPoint(map->getLeftExtension(), map->getBottomExtension()).second << std::endl;
+    std::cout << map->findNearestInterestPoint(0, 0).first << ", " << map->findNearestInterestPoint(0, 0).second << std::endl;
     displaySimulation(50, environment->getRoom());
     displaySimulation(50, map->getRobotMap());
 }
 
 // Méthode pour afficher la simulation
-
 void Simulation::displaySimulation(int scaleFactor, Grid plan) const {
     int height = 0;
     int width = 0;
@@ -156,8 +155,6 @@ void Simulation::displaySimulation(int scaleFactor, Grid plan) const {
     cv::imshow(WindowName, roomImage);
     cv::waitKey(0);
 }
-
-
 
 // Getters
 Environment* Simulation::getEnvironment() const {

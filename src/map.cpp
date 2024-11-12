@@ -146,6 +146,8 @@ void Map::castRayAndMarkObstacle(double startX, double startY, double rayAngle, 
 std::pair<int, int> Map::findNearestInterestPoint(double startX, double startY) const {
     int ShortestManhattanDistance = std::numeric_limits<int>::max();
     std::pair<int, int> point(-1, -1);
+    startX += leftExtension;
+    startY += bottomExtension;
     //Calcul de la case inconue la plus proche adjacente à une case libre
     for (int y = robotMap[0].size() - 1; y > 0; y--) {
         for (int x = 0; x < robotMap.size(); x++) {
