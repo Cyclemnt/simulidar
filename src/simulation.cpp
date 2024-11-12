@@ -2,12 +2,12 @@
 #include <opencv2/opencv.hpp>
 #include <cstdlib> // pour rand() et srand()
 #include <ctime>   // pour time()
-
+#include <stdexcept>
 // Constructeur : Initialise l'environnement et le robot
 Simulation::Simulation()
     : xRobotStart(0.0), yRobotStart(0.0), orientationRobotStart(0.0), maxRange(10.0) {
 
-    environment = new Environment(10, 10);
+    environment = new Environment(50, 30);
     map = new Map();
     robot = new Robot();
     lidar = new Lidar(this);  // Lidar reçoit un pointeur vers Simulation
@@ -83,7 +83,7 @@ void Simulation::initializeRobotPose() {
 // Méthode pour démarrer la simulation
 void Simulation::run() {
     // Logique de simulation (boucle principale)
-    environment->generateRandomObstacles(4, 2);
+    environment->generateRandomObstacles(8, 2);
     environment->printRoom();
     initializeRobotPose();
     //xRobotStart = 4;
@@ -94,22 +94,36 @@ void Simulation::run() {
     robot->updateMap(test);
     std::cout << std::endl;
     map->printMap();
-    displaySimulation(50);
+    displaySimulation(50,environment->getRoom() );
+    displaySimulation(50,map->getRobotMap());
 }
 
 // Méthode pour afficher la simulation
 
-void Simulation::displaySimulation(int scaleFactor) const {
-    Grid room = environment->getRoom();
-    int height = environment->getHeight();
-    int width = environment->getWidth();
+void Simulation::displaySimulation(int scaleFactor, Grid plan) const {
+    int height;
+    int width;
+    std::string WindowName;
+    if (plan ==environment->getRoom()){
+        height=environment->getHeight();
+        width=environment->getWidth();
+        WindowName="EnvironmentDisplay";
+    }
+    else if (plan ==map->getRobotMap()){
+        height=map->getHeight();
+        width=map->getWidth();
+        WindowName="RobotMapDisplay";
+    }
+    else {
+        throw std::runtime_error("error");
+    }
     // Création de l'image OpenCV (CV_8UC3 pour une image couleur)
     cv::Mat roomImage(height * scaleFactor, width * scaleFactor, CV_8UC3);
      // Dessin de la salle agrandie
     for (int y = height - 1; y >= 0; y--) {
         for (int x = 0; x < width; x++) {
             cv::Rect cell(x * scaleFactor, (height - 1 - y) * scaleFactor, scaleFactor, scaleFactor);
-            switch (room[x][y]) {
+            switch (plan[x][y]) {
                 case CellState::Wall:
                     cv::rectangle(roomImage, cell, cv::Scalar(255, 0, 0), cv::FILLED); // Murs en bleu
                     break;
@@ -126,23 +140,15 @@ void Simulation::displaySimulation(int scaleFactor) const {
         }
     }
     // Afficher le robot
-    cv::Point robotImage((xRobotStart + 0.5) * scaleFactor, (height - 0.5 - yRobotStart) * scaleFactor);
+    cv::Point robotImage((xRobotStart + robot->getX() + 0.5) * scaleFactor, (height - 0.5 - yRobotStart+ robot->getY()) * scaleFactor);
     cv::circle(roomImage, robotImage, robot->getDiameter() * scaleFactor / 2, cv::Scalar(0, 166, 255), cv::FILLED); // Point orange pour le robot
     
     // Afficher l'image
-    cv::namedWindow("Simulation", cv::WINDOW_GUI_NORMAL);
-    cv::imshow("Simulation", roomImage);
+    cv::namedWindow(WindowName, cv::WINDOW_GUI_NORMAL);
+    cv::imshow(WindowName, roomImage);
     cv::waitKey(0);
 }
 
-void Simulation::displayRobotMap(int scaleFactor) const {
-/*
-    // Afficher la carte relative
-    cv::namedWindow("Carte du robot", cv::WINDOW_GUI_NORMAL);
-    cv::imshow("Carte du robot", robotMapImage);
-    cv::waitKey(0);
-*/
-}
 
 
 // Getters

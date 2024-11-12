@@ -162,4 +162,19 @@ void Map::printMap() const {
     std::cout << "+" << std::string(width, '-') << "+" << std::endl;
 }
 
+//Getter 
+Grid Map::getRobotMap() const {
+    return robotMap;
+}
+
+int Map::getWidth() const
+{
+    return robotMap.size();
+}
+
+int Map::getHeight() const
+{
+    return robotMap[0].size();
+}
+
 Map::~Map() {}

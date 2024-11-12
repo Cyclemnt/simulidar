@@ -24,10 +24,7 @@ public:
     void run();
 
     // Méthode pour afficher la simulation
-    void displaySimulation(int scaleFactor) const;
-
-    // Méthode pour afficher la carte relative
-    void displayRobotMap(int scaleFactor) const;
+    void displaySimulation(int scaleFactor, Grid plan) const;
 
     // Getters
     Environment* getEnvironment() const;

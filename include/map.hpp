@@ -23,6 +23,13 @@ public:
     void castRayAndMarkObstacle(double startX, double startY, double rayAngle, double distance);
     // Méthode pour afficher la carte dans le terminal
     void printMap() const;
+    //Getter 
+    Grid getRobotMap() const;
+
+    int getWidth() const; 
+
+    int getHeight() const;
+    
 
     ~Map();
 };
