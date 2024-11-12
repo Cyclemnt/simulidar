@@ -7,7 +7,7 @@
 Simulation::Simulation()
     : xRobotStart(0.0), yRobotStart(0.0), orientationRobotStart(0.0), maxRange(10.0) {
 
-    environment = new Environment(50, 30);
+    environment = new Environment(10, 10);
     map = new Map();
     robot = new Robot();
     lidar = new Lidar(this);  // Lidar reçoit un pointeur vers Simulation
@@ -94,32 +94,32 @@ void Simulation::run() {
     robot->updateMap(test);
     std::cout << std::endl;
     map->printMap();
-    displaySimulation(50,environment->getRoom() );
-    displaySimulation(50,map->getRobotMap());
+    displaySimulation(50, environment->getRoom());
+    displaySimulation(50, map->getRobotMap());
 }
 
 // Méthode pour afficher la simulation
 
 void Simulation::displaySimulation(int scaleFactor, Grid plan) const {
-    int height;
-    int width;
-    int positionRobotX;
-    int positionRobotY;
-    std::string WindowName;
-    if (plan ==environment->getRoom()){
-        height=environment->getHeight();
-        width=environment->getWidth();
-        WindowName="EnvironmentDisplay";
-        positionRobotX=xRobotStart + robot->getX() + 0.5;
-        positionRobotY=height - 0.5 - yRobotStart+ robot->getY();
+    int height = 0;
+    int width = 0;
+    double positionRobotX = 0;
+    double positionRobotY = 0;
+    std::string WindowName = "";
+    if (plan == environment->getRoom()) {
+        height = environment->getHeight();
+        width = environment->getWidth();
+        WindowName = "EnvironmentDisplay";
+        positionRobotX = xRobotStart + robot->getX() + 0.5;
+        positionRobotY = height - yRobotStart + robot->getY() - 0.5;
 
     }
-    else if (plan ==map->getRobotMap()){
-        height=map->getHeight();
-        width=map->getWidth();
-        WindowName="RobotMapDisplay";
-        positionRobotX=map->getLeftExtension() + robot->getX();
-        positionRobotY=map->getBottomExtension() + robot->getY();
+    else if (plan == map->getRobotMap()) {
+        height = map->getHeight();
+        width = map->getWidth();
+        WindowName = "RobotMapDisplay";
+        positionRobotX = map->getLeftExtension() + robot->getX() + 0.5;
+        positionRobotY = height - map->getBottomExtension() + robot->getY() - 0.5;
     }
     else {
         throw std::runtime_error("error");
@@ -147,7 +147,7 @@ void Simulation::displaySimulation(int scaleFactor, Grid plan) const {
         }
     }
     // Afficher le robot
-    cv::Point robotImage((positionRobotX) * scaleFactor, (positionRobotY) * scaleFactor);
+    cv::Point robotImage(positionRobotX * scaleFactor, positionRobotY * scaleFactor);
     cv::circle(roomImage, robotImage, robot->getDiameter() * scaleFactor / 2, cv::Scalar(0, 166, 255), cv::FILLED); // Point orange pour le robot
     
     // Afficher l'image

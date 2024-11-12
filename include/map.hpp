@@ -28,15 +28,12 @@ public:
     void findPath(double startX, double startY, double endX, double endY) const; 
     // Méthode pour afficher la carte dans le terminal
     void printMap() const;
+    
     //Getter 
     Grid getRobotMap() const;
-
     int getWidth() const; 
-
     int getHeight() const;
-    
     int getLeftExtension() const; 
-
     int getBottomExtension() const; 
 
     ~Map();

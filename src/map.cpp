@@ -2,6 +2,7 @@
 #include <iostream>
 #include <iomanip>
 #include <cmath>
+#include <limits>
 
 Map::Map()
     : robotMap(1, std::vector<CellState>(1, CellState::Free)), leftExtension(0), bottomExtension(0) {
@@ -143,20 +144,25 @@ void Map::castRayAndMarkObstacle(double startX, double startY, double rayAngle, 
 
 // Méthode pour déterminer la prochaine case à explorer 
 std::pair<int, int> Map::findNearestInterestPoint(double startX, double startY) const {
-    //Calcul de la case inconue la plus proche adjacente à une case libre 
+    int ShortestManhattanDistance = std::numeric_limits<int>::max();
+    std::pair<int, int> point(-1, -1);
+    //Calcul de la case inconue la plus proche adjacente à une case libre
     for (int y = robotMap[0].size() - 1; y > 0; y--) {
         for (int x = 0; x > robotMap.size() - 1; x++) {
             if (robotMap[x][y] == CellState::Unknown) {
                 for (int i = 0; i < 4; i++) {
                     if (robotMap[x + ((i + 1) % 2) * (i - 1) ][y + (i % 2) * (i - 2)] == CellState::Free) {
-                        std::pair<int, int> point(x, y);
-                        return point;
+                        if ((abs(startX - x) + abs(startY - y)) < ShortestManhattanDistance) {
+                            ShortestManhattanDistance = (abs(startX - x) + abs(startY - y));
+                            point.first = x;
+                            point.second = y;
+                        }
+                        
                     }
                 }
             }
         }
     }
-    std::pair<int, int> point(-1, -1);
     return point;
 }
 
@@ -188,22 +194,16 @@ void Map::printMap() const {
 Grid Map::getRobotMap() const {
     return robotMap;
 }
-
-int Map::getWidth() const
-{
+int Map::getWidth() const {
     return robotMap.size();
 }
-
-int Map::getHeight() const
-{
+int Map::getHeight() const {
     return robotMap[0].size();
 }
-int Map::getLeftExtension() const 
-{
+int Map::getLeftExtension() const {
     return leftExtension;
 }
-int Map::getBottomExtension() const 
-{
+int Map::getBottomExtension() const {
     return bottomExtension;
 }
 
