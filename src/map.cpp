@@ -198,5 +198,13 @@ int Map::getHeight() const
 {
     return robotMap[0].size();
 }
+int Map::getLeftExtension() const 
+{
+    return leftExtension;
+}
+int Map::getBottomExtension() const 
+{
+    return bottomExtension;
+}
 
 Map::~Map() {}

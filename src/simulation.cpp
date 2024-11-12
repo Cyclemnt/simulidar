@@ -103,16 +103,23 @@ void Simulation::run() {
 void Simulation::displaySimulation(int scaleFactor, Grid plan) const {
     int height;
     int width;
+    int positionRobotX;
+    int positionRobotY;
     std::string WindowName;
     if (plan ==environment->getRoom()){
         height=environment->getHeight();
         width=environment->getWidth();
         WindowName="EnvironmentDisplay";
+        positionRobotX=xRobotStart + robot->getX() + 0.5;
+        positionRobotY=height - 0.5 - yRobotStart+ robot->getY();
+
     }
     else if (plan ==map->getRobotMap()){
         height=map->getHeight();
         width=map->getWidth();
         WindowName="RobotMapDisplay";
+        positionRobotX=map->getLeftExtension() + robot->getX();
+        positionRobotY=map->getBottomExtension() + robot->getY();
     }
     else {
         throw std::runtime_error("error");
@@ -140,7 +147,7 @@ void Simulation::displaySimulation(int scaleFactor, Grid plan) const {
         }
     }
     // Afficher le robot
-    cv::Point robotImage((xRobotStart + robot->getX() + 0.5) * scaleFactor, (height - 0.5 - yRobotStart+ robot->getY()) * scaleFactor);
+    cv::Point robotImage((positionRobotX) * scaleFactor, (positionRobotY) * scaleFactor);
     cv::circle(roomImage, robotImage, robot->getDiameter() * scaleFactor / 2, cv::Scalar(0, 166, 255), cv::FILLED); // Point orange pour le robot
     
     // Afficher l'image

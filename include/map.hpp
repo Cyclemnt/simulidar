@@ -35,6 +35,9 @@ public:
 
     int getHeight() const;
     
+    int getLeftExtension() const; 
+
+    int getBottomExtension() const; 
 
     ~Map();
 };
