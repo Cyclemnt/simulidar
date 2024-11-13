@@ -73,8 +73,6 @@ void Simulation::initializeRobotPose() {
         // Place le centre du robot dans la cellule libre trouvée
         xRobotStart = x;
         yRobotStart = y;
-        // Orientation aléatoire en radians entre 0 et 2*PI
-        //orientationRobotStart = static_cast<double>(rand()) / RAND_MAX * 2 * M_PI;
     } else {
         // Affiche une erreur si aucune position valide n'est trouvée
         throw std::runtime_error("Erreur : Impossible de positionner le robot dans un espace libre.");
@@ -87,7 +85,6 @@ void Simulation::run() {
     environment->generateRandomObstacles(8, 2);
     environment->printRoom();
     initializeRobotPose();
-    orientationRobotStart = M_PI / 2;
     //xRobotStart = 4;
     //yRobotStart = 1;
     //map->printMap();
