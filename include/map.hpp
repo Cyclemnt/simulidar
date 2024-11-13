@@ -2,7 +2,6 @@
 #define MAP_HPP
 
 #include "types.hpp"
-#include <utility>
 
 using Types::CellState;
 using Types::Grid;

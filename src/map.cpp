@@ -1,8 +1,6 @@
 #include "../include/map.hpp"
 #include <iostream>
-#include <iomanip>
 #include <cmath>
-#include <limits>
 
 Map::Map()
     : robotMap(1, std::vector<CellState>(1, CellState::Free)), leftExtension(0), bottomExtension(0) {
@@ -149,7 +147,7 @@ std::pair<int, int> Map::findNearestInterestPoint(double startX, double startY) 
     startX += leftExtension;
     startY += bottomExtension;
     //Calcul de la case inconue la plus proche adjacente à une case libre
-    for (int y = robotMap[0].size() - 1; y > 0; y--) {
+    for (int y = robotMap[0].size() - 1; y >= 0; y--) {
         for (int x = 0; x < robotMap.size(); x++) {
             if (robotMap[x][y] == CellState::Unknown) {
                 for (int i = 0; i < 4; i++) {
@@ -174,6 +172,7 @@ std::pair<int, int> Map::findNearestInterestPoint(double startX, double startY) 
 // Méthode pour trouver un chemin 
 std::vector<std::pair<int, int>> Map::findPath(int startX, int startY, int goalX, int goalY) const {
     std::vector<std::pair<int, int>> path = {};
+    // ALGORITHME A*
     return path;
 }
 
