@@ -25,7 +25,8 @@ public:
     // Méthode pour déterminer la prochaine case à explorer 
     std::pair<int, int> findNearestInterestPoint(double startX, double startY) const;
     // Méthode pour trouver un chemin 
-    std::vector<std::pair<int, int>> Map::findPath(int startX, int startY, int goalX, int goalY) const {}    // Méthode pour afficher la carte dans le terminal
+    std::vector<std::pair<int, int>> findPath(int startX, int startY, int goalX, int goalY) const;
+    // Méthode pour afficher la carte dans le terminal
     void printMap() const;
     
     //Getter 

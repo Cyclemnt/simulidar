@@ -172,7 +172,10 @@ std::pair<int, int> Map::findNearestInterestPoint(double startX, double startY) 
 }
 
 // Méthode pour trouver un chemin 
-std::vector<std::pair<int, int>> Map::findPath(int startX, int startY, int goalX, int goalY) const {}
+std::vector<std::pair<int, int>> Map::findPath(int startX, int startY, int goalX, int goalY) const {
+    std::vector<std::pair<int, int>> path = {};
+    return path;
+}
 
 // Fonction pour afficher la carte
 void Map::printMap() const {
