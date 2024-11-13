@@ -63,8 +63,8 @@ void Map::castRayAndMarkObstacle(double startX, double startY, double rayAngle, 
     // Convertir les coordonnées en indices de grille
     int x0 = std::round(startX);
     int y0 = std::round(startY);
-    int x1 = std::round(dx + (dx < 0 ? -0.5 : 0.5)); // Sur estimer, pour l'extension
-    int y1 = std::round(dy + (dy < 0 ? -0.5 : 0.5)); // Sur estimer, pour l'extension
+    int x1 = std::round(dx + (dx < 0 ? -1 : 1)); // Sur estimer, pour l'extension
+    int y1 = std::round(dy + (dy < 0 ? -1 : 1)); // Sur estimer, pour l'extension
 
     // Calculs pour les extensions dans chaque direction
     int colsToAddLeft =  -x1 - leftExtension - x0;

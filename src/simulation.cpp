@@ -87,6 +87,7 @@ void Simulation::run() {
     environment->generateRandomObstacles(8, 2);
     environment->printRoom();
     initializeRobotPose();
+    orientationRobotStart = M_PI / 2;
     //xRobotStart = 4;
     //yRobotStart = 1;
     //map->printMap();
@@ -104,10 +105,8 @@ void Simulation::run() {
 
 // Méthode pour afficher la simulation
 void Simulation::displaySimulation(int scaleFactor, Grid plan) const {
-    int height = 0;
-    int width = 0;
-    double positionRobotX = 0;
-    double positionRobotY = 0;
+    int height = 0, width = 0;
+    double positionRobotX = 0, positionRobotY = 0, robotOrientation = 0;
     std::string WindowName = "";
     if (plan == environment->getRoom()) {
         height = environment->getHeight();
@@ -115,7 +114,7 @@ void Simulation::displaySimulation(int scaleFactor, Grid plan) const {
         WindowName = "EnvironmentDisplay";
         positionRobotX = xRobotStart + robot->getX() + 0.5;
         positionRobotY = height - yRobotStart + robot->getY() - 0.5;
-
+        robotOrientation = robot->getOrientation() + orientationRobotStart;
     }
     else if (plan == map->getRobotMap()) {
         height = map->getHeight();
@@ -123,6 +122,7 @@ void Simulation::displaySimulation(int scaleFactor, Grid plan) const {
         WindowName = "RobotMapDisplay";
         positionRobotX = map->getLeftExtension() + robot->getX() + 0.5;
         positionRobotY = height - map->getBottomExtension() + robot->getY() - 0.5;
+        robotOrientation = robot->getOrientation();
     }
     else {
         throw std::runtime_error("error");
@@ -154,7 +154,7 @@ void Simulation::displaySimulation(int scaleFactor, Grid plan) const {
     cv::Point robotPosition(positionRobotX * scaleFactor, positionRobotY * scaleFactor);
     cv::circle(roomImage, robotPosition, robotRadius, cv::Scalar(0, 166, 255), cv::FILLED); // Point orange pour le robot
     // Ligne pour l'orientation
-    cv::line(roomImage, robotPosition, robotPosition + cv::Point(robotRadius * cos(robot->getOrientation() + orientationRobotStart), -robotRadius * sin(robot->getOrientation() + orientationRobotStart)), cv::Scalar(0, 122, 190), 3);
+    cv::line(roomImage, robotPosition, robotPosition + cv::Point(robotRadius * cos(robotOrientation), -robotRadius * sin(robotOrientation)), cv::Scalar(0, 122, 190), 3);
 
     // Afficher l'image
     cv::namedWindow(WindowName, cv::WINDOW_GUI_NORMAL);
