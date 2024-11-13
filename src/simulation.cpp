@@ -98,7 +98,7 @@ void Simulation::run() {
     std::cout << map->findNearestInterestPoint(0, 0).first << ", " << map->findNearestInterestPoint(0, 0).second << std::endl;
     displaySimulation(50, environment->getRoom());
     displaySimulation(50, map->getRobotMap());
-    displayRaycasting(map->getRobotMap(),800,600,200,70);
+    displayRaycasting(map->getRobotMap(), 800, 600, 200, 70);
 
 }
 
@@ -150,9 +150,12 @@ void Simulation::displaySimulation(int scaleFactor, Grid plan) const {
         }
     }
     // Afficher le robot
-    cv::Point robotImage(positionRobotX * scaleFactor, positionRobotY * scaleFactor);
-    cv::circle(roomImage, robotImage, robot->getDiameter() * scaleFactor / 2, cv::Scalar(0, 166, 255), cv::FILLED); // Point orange pour le robot
-    
+    double robotRadius = robot->getDiameter() * scaleFactor / 2;
+    cv::Point robotPosition(positionRobotX * scaleFactor, positionRobotY * scaleFactor);
+    cv::circle(roomImage, robotPosition, robotRadius, cv::Scalar(0, 166, 255), cv::FILLED); // Point orange pour le robot
+    // Ligne pour l'orientation
+    cv::line(roomImage, robotPosition, robotPosition + cv::Point(robotRadius * cos(robot->getOrientation() + orientationRobotStart), -robotRadius * sin(robot->getOrientation() + orientationRobotStart)), cv::Scalar(0, 122, 190), 3);
+
     // Afficher l'image
     cv::namedWindow(WindowName, cv::WINDOW_GUI_NORMAL);
     cv::imshow(WindowName, roomImage);
@@ -160,18 +163,18 @@ void Simulation::displaySimulation(int scaleFactor, Grid plan) const {
 }
 
 //Affichage en 3D avec le raycasting
-void Simulation::displayRaycasting(Grid plan, int WindowWidth, int WindowHeight, int wallheight,int fov) const {
-cv::Mat raycasting = cv::Mat::zeros(WindowHeight,WindowWidth,CV_8UC3);
-std::vector<double> readings = lidar->readAll();
-for (int i=-fov/2;i<=fov/2;i++){
-double correcteddistance=readings[i+180]*cos(i*M_PI/180);
-double projectionwallheight= wallheight/correcteddistance;
-double band_startY =(WindowHeight- projectionwallheight) / 2.0;
-double band_x = (i+(fov/2))*(WindowWidth )/fov;
-cv::rectangle(raycasting, cv::Point(WindowWidth-band_x,band_startY),cv::Point(WindowWidth-(band_x +(WindowWidth/fov)),band_startY+projectionwallheight),cv::Scalar(255*(1-correcteddistance/30),0,0),cv::FILLED);
-}
-cv::imshow("Lidar Raycasting",raycasting);
-cv::waitKey(0);
+void Simulation::displayRaycasting(Grid plan, int WindowWidth, int WindowHeight, int wallHeight, int fov) const {
+    cv::Mat raycastingRender = cv::Mat::zeros(WindowHeight, WindowWidth, CV_8UC3);
+    std::vector<double> readings = lidar->readAll();
+    for (int i = -fov / 2; i <= fov / 2; i++) {
+        double correctedDistance = readings[i + 180] * cos(i * M_PI / 180);
+        double projectionWallHeight = wallHeight / correctedDistance;
+        double stripeStartY = (WindowHeight - projectionWallHeight) / 2.0;
+        double stripeX = (i + (fov / 2)) * (WindowWidth) / fov;
+        cv::rectangle(raycastingRender, cv::Point(WindowWidth - stripeX, stripeStartY), cv::Point(WindowWidth - (stripeX + (WindowWidth / fov)), stripeStartY + projectionWallHeight), cv::Scalar(255 * (1 - correctedDistance / 30), 0, 0), cv::FILLED);
+    }
+    cv::imshow("Lidar Raycasting", raycastingRender);
+    cv::waitKey(0);
 }
 
 
