@@ -26,12 +26,16 @@ public:
     // Méthode pour afficher la simulation
     void displaySimulation(int scaleFactor, Grid plan) const;
 
+    //Méthode pour afficher en 3D la vue du robot avec le raycasting 
+    void displayRaycasting(Grid plan, int WindowWidth, int WindowHeight, int wallheight,int fov) const; 
+
     // Getters
     Environment* getEnvironment() const;
     Robot* getRobot() const;
     double getXRobotStart() const;
     double getYRobotStart() const;
     double getOrientationRobotStart() const;
+
 
     ~Simulation();
 };
