@@ -3,9 +3,10 @@
 #include <cstdlib> // pour rand() et srand()
 #include <ctime>   // pour time()
 #include <stdexcept>
+
 // Constructeur : Initialise l'environnement et le robot
 Simulation::Simulation()
-    : xRobotStart(0.0), yRobotStart(0.0), orientationRobotStart(0.0), maxRange(10.0) {
+    : xRobotStart(0.0), yRobotStart(0.0), orientationRobotStart(0.0) {
 
     environment = new Environment(10, 10);
     map = new Map();

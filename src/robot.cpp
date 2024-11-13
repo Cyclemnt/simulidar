@@ -31,8 +31,42 @@ void Robot::updateMap(std::vector<double> lidarMeasurements) {
     }
 }
 
-// Algorithme pour explorer efficacement
-void Robot::explore() {}
+// Algorithme pour convertir un chemin en instructions
+std::vector<std::pair<Direction, int>> Robot::convertPathToInstructions(const std::vector<std::pair<int, int>>& path) const {
+    std::vector<std::pair<Direction, int>> instructions;
+    if (path.empty()) return instructions;
+
+    // Initialisation de la première direction et distance
+    Direction currentDir;
+    int currentDistance = 1;
+
+    for (size_t i = 1; i < path.size(); ++i) {
+        int dx = path[i].first - path[i - 1].first;
+        int dy = path[i].second - path[i - 1].second;
+
+        // Déterminer la direction du déplacement
+        Direction newDir;
+        if (dx == 0 && dy == 1) newDir = Direction::N;
+        else if (dx == 0 && dy == -1) newDir = Direction::S;
+        else if (dx == 1 && dy == 0) newDir = Direction::E;
+        else if (dx == -1 && dy == 0) newDir = Direction::W;
+        else continue; // Ignore tout mouvement non valide (diagonal, etc.)
+
+        // Si la direction change, on ajoute l'instruction courante et on réinitialise
+        if (i == 1 || newDir != currentDir) {
+            if (i != 1) instructions.push_back({currentDir, currentDistance});
+            currentDir = newDir;
+            currentDistance = 1;
+        } else {
+            // Si la direction reste la même, on augmente la distance
+            ++currentDistance;
+        }
+    }
+
+    // Ajouter la dernière instruction
+    instructions.push_back({currentDir, currentDistance});
+    return instructions;
+}
 
 // Setters
 void Robot::setLidar(Lidar* lidar_) {
@@ -41,8 +75,6 @@ void Robot::setLidar(Lidar* lidar_) {
 void Robot::setMap(Map* map_) {
     map = map_;
 }
-
-
 
 // Getters
 double Robot::getX() const {

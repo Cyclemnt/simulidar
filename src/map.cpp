@@ -145,7 +145,7 @@ void Map::castRayAndMarkObstacle(double startX, double startY, double rayAngle, 
 // Méthode pour déterminer la prochaine case à explorer 
 std::pair<int, int> Map::findNearestInterestPoint(double startX, double startY) const {
     int ShortestManhattanDistance = std::numeric_limits<int>::max();
-    std::pair<int, int> point(-1, -1);
+    std::pair<int, int> interestPoint(-1, -1);
     startX += leftExtension;
     startY += bottomExtension;
     //Calcul de la case inconue la plus proche adjacente à une case libre
@@ -159,8 +159,8 @@ std::pair<int, int> Map::findNearestInterestPoint(double startX, double startY) 
                         if (robotMap[x + dx][y + dy] == CellState::Free) {
                             if ((abs(startX - x) + abs(startY - y)) < ShortestManhattanDistance) {
                                 ShortestManhattanDistance = (abs(startX - x) + abs(startY - y));
-                                point.first = x;
-                                point.second = y;
+                                interestPoint.first = x;
+                                interestPoint.second = y;
                             }
                         }
                     }
@@ -168,11 +168,11 @@ std::pair<int, int> Map::findNearestInterestPoint(double startX, double startY) 
             }
         }
     }
-    return point;
+    return interestPoint;
 }
 
 // Méthode pour trouver un chemin 
-void Map::findPath(double startX, double startY, double endX, double endY) const {}
+std::vector<std::pair<int, int>> Map::findPath(int startX, int startY, int goalX, int goalY) const {}
 
 // Fonction pour afficher la carte
 void Map::printMap() const {

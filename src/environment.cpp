@@ -43,35 +43,6 @@ void Environment::generateRandomObstacles(int number, int maxSize) {
     }
 }
 
-// Algorithme DDA pour tracer une ligne entre deux points et remplir la grille
-void Environment::drawLineDDA(int x1, int y1, int x2, int y2) {
-    // Différences dans les coordonnées
-    double dx = x2 - x1;
-    double dy = y2 - y1;
-
-    // Calculer le nombre de pas nécessaires pour marcher sur la ligne
-    int steps = std::max(std::abs(dx), std::abs(dy));
-
-    // Incréments par pas dans chaque direction
-    double xIncrement = dx / steps;
-    double yIncrement = dy / steps;
-
-    // Position de départ
-    double x = x1;
-    double y = y1;
-
-    // Remplir la grille en traçant la ligne
-    for (int i = 0; i <= steps; i++) {
-        // Placer un 1 dans la cellule correspondante de la grille
-        if (x >= 0 && x < room.size() && y >= 0 && y < room[0].size()) {
-            room[std::round(x)][std::round(y)] = CellState::Wall;
-        }
-        // Avancer dans la direction du prochain point
-        x += xIncrement;
-        y += yIncrement;
-    }
-}
-
 // Fonction pour afficher la grille
 void Environment::printRoom() const {
         for (int y = room[0].size() - 1; y >= 0; --y) {  // Parcourt les lignes de bas en haut

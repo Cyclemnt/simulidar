@@ -25,7 +25,7 @@ public:
     // Fonction pour mettre à jour sa carte
     void updateMap(std::vector<double> lidarMeasures);
     // Algorithme pour explorer efficacement
-    void explore();
+    std::vector<std::pair<Direction, int>> convertPathToInstructions(const std::vector<std::pair<int, int>>& path) const;
 
     // Setters
     void setLidar(Lidar* lidar_);

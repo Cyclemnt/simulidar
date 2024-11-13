@@ -18,8 +18,6 @@ public:
 
     // Générer des obstacles aléatoires
     void generateRandomObstacles(int number, int maxSize);
-    // Algorithme DDA pour tracer une ligne entre deux points et remplir la grille
-    void drawLineDDA(int x1, int y1, int x2, int y2);
     // Fonction pour afficher la grille
     void printRoom() const;
 
