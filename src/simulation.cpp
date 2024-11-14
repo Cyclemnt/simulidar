@@ -8,7 +8,7 @@
 Simulation::Simulation()
     : xRobotStart(0.0), yRobotStart(0.0), orientationRobotStart(0.0) {
 
-    environment = new Environment(10, 10);
+    environment = new Environment(100, 100);
     map = new Map();
     robot = new Robot();
     lidar = new Lidar(this);  // Lidar reçoit un pointeur vers Simulation
@@ -82,7 +82,7 @@ void Simulation::initializeRobotPose() {
 // Méthode pour démarrer la simulation
 void Simulation::run() {
     // Logique de simulation (boucle principale)
-    environment->generateRandomObstacles(8, 2);
+    environment->generateRandomObstacles(300, 2);
     environment->printRoom();
     initializeRobotPose();
     //xRobotStart = 4;
@@ -93,7 +93,7 @@ void Simulation::run() {
     robot->updateMap(test);
     std::cout << std::endl;
     map->printMap();
-    
+
     std::pair<int, int> intrstPt = map->findNearestInterestPoint(0, 0);
     std::vector<std::pair<int, int>> path = map->aStar({map->getLeftExtension(), map->getBottomExtension()}, intrstPt);
     std::vector<std::pair<Types::Direction, int>> bob = robot->convertPathToInstructions(path);
@@ -167,8 +167,9 @@ void Simulation::displayRaycasting(Grid plan, int WindowWidth, int WindowHeight,
     cv::Mat raycastingRender = cv::Mat::zeros(WindowHeight, WindowWidth, CV_8UC3);
     std::vector<double> readings = lidar->readAll();
     for (int i = -fov / 2; i <= fov / 2; i++) {
-        double correctedDistance = readings[i + 180] * cos(i * M_PI / 180);
+        double correctedDistance = readings[i + 180] * cos(i * M_PI / 180);        
         double projectionWallHeight = wallHeight / correctedDistance;
+        if (readings[i + 180] == -1) { projectionWallHeight = 0; }
         double stripeStartY = (WindowHeight - projectionWallHeight) / 2.0;
         double stripeX = (i + (fov / 2)) * (WindowWidth) / fov;
         cv::rectangle(raycastingRender, cv::Point(WindowWidth - stripeX, stripeStartY), cv::Point(WindowWidth - (stripeX + (WindowWidth / fov)), stripeStartY + projectionWallHeight), cv::Scalar(255 * (1 - correctedDistance / 30), 0, 0), cv::FILLED);

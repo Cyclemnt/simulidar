@@ -12,6 +12,7 @@ private:
     double x, y;        // Position relative du robot
     double orientation; // Orientation relative du robot
     double diameter;    // Diamètre du robot (dm)
+    int timeStep;       // Temps entre chaque calcul
 public:
     // Constructeur par défaut
     Robot();
