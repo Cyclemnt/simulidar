@@ -1,8 +1,8 @@
 #include "../include/simulation.hpp"
 #include <opencv2/opencv.hpp>
-#include <cstdlib> // pour rand() et srand()
-#include <ctime>   // pour time()
-#include <stdexcept>
+//#include <cstdlib> // pour rand() et srand()
+//#include <ctime>   // pour time()
+//#include <stdexcept>
 
 // Constructeur : Initialise l'environnement et le robot
 Simulation::Simulation()
@@ -93,11 +93,14 @@ void Simulation::run() {
     robot->updateMap(test);
     std::cout << std::endl;
     map->printMap();
-    std::cout << map->findNearestInterestPoint(0, 0).first << ", " << map->findNearestInterestPoint(0, 0).second << std::endl;
+    
+    std::pair<int, int> intrstPt = map->findNearestInterestPoint(0, 0);
+    std::vector<std::pair<int, int>> path = map->aStar({map->getLeftExtension(), map->getBottomExtension()}, intrstPt);
+    std::vector<std::pair<Types::Direction, int>> bob = robot->convertPathToInstructions(path);
+    
     displaySimulation(50, environment->getRoom());
     displaySimulation(50, map->getRobotMap());
     displayRaycasting(map->getRobotMap(), 800, 600, 200, 70);
-
 }
 
 // Méthode pour afficher la simulation

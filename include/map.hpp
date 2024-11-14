@@ -2,6 +2,7 @@
 #define MAP_HPP
 
 #include "types.hpp"
+#include <map>
 
 using Types::CellState;
 using Types::Grid;
@@ -23,8 +24,8 @@ public:
     void castRayAndMarkObstacle(double startX, double startY, double rayAngle, double distance);
     // Méthode pour déterminer la prochaine case à explorer 
     std::pair<int, int> findNearestInterestPoint(double startX, double startY) const;
-    // Méthode pour trouver un chemin 
-    std::vector<std::pair<int, int>> findPath(int startX, int startY, int goalX, int goalY) const;
+    // Algorithme A* pour trouver le chemin le plus court entre "start" et "goal"
+    std::vector<std::pair<int, int>> aStar(std::pair<int, int> start, std::pair<int, int> goal) const;
     // Méthode pour afficher la carte dans le terminal
     void printMap() const;
     

@@ -1,6 +1,10 @@
 #include "../include/map.hpp"
 #include <iostream>
 #include <cmath>
+#include <map>
+#include <set>
+#include <queue>
+#include <limits> // pour std::numeric_limits<double>::infinity()
 
 Map::Map()
     : robotMap(1, std::vector<CellState>(1, CellState::Free)), leftExtension(0), bottomExtension(0) {
@@ -146,7 +150,7 @@ std::pair<int, int> Map::findNearestInterestPoint(double startX, double startY) 
     std::pair<int, int> interestPoint(-1, -1);
     startX += leftExtension;
     startY += bottomExtension;
-    //Calcul de la case inconue la plus proche adjacente à une case libre
+    // Calcul de la case inconue la plus proche adjacente à une case libre en distance de Manhattan
     for (int y = robotMap[0].size() - 1; y >= 0; y--) {
         for (int x = 0; x < robotMap.size(); x++) {
             if (robotMap[x][y] == CellState::Unknown) {
@@ -169,11 +173,96 @@ std::pair<int, int> Map::findNearestInterestPoint(double startX, double startY) 
     return interestPoint;
 }
 
-// Méthode pour trouver un chemin 
-std::vector<std::pair<int, int>> Map::findPath(int startX, int startY, int goalX, int goalY) const {
-    std::vector<std::pair<int, int>> path = {};
-    // ALGORITHME A*
-    return path;
+// Algorithme A* pour trouver le chemin le plus court entre "start" et "goal"
+std::vector<std::pair<int, int>> Map::aStar(std::pair<int, int> start, std::pair<int, int> goal) const {
+    int width = robotMap.size();          // Largeur de la carte (nombre de colonnes)
+    int height = robotMap[0].size();      // Hauteur de la carte (nombre de lignes)
+
+    // Ensemble des nœuds à explorer, initialisé avec le nœud de départ
+    std::set<std::pair<int, int>> openSet = {start};
+    
+    // Dictionnaire pour conserver le chemin le plus efficace trouvé pour chaque nœud
+    std::map<std::pair<int, int>, std::pair<int, int>> cameFrom;
+    
+    // Initialisation de gScore avec Infinity pour tous les nœuds sauf le départ
+    std::map<std::pair<int, int>, double> gScore;
+    for (int x = 0; x < width; ++x) {
+        for (int y = 0; y < height; ++y) {
+            gScore[{x, y}] = std::numeric_limits<double>::infinity();  // Coût infini pour les nœuds non encore explorés
+        }
+    }
+    gScore[start] = 0;  // Coût de départ est zéro pour le point de départ
+
+    // Initialisation de fScore avec Infinity, sauf pour le départ où fScore est la distance de Manhattan jusqu'au but
+    std::map<std::pair<int, int>, double> fScore;
+    fScore[start] = std::abs(start.first - goal.first) + std::abs(start.second - goal.second);
+
+    // File de priorité pour les nœuds à explorer, triée par fScore (priorité aux nœuds avec le coût estimé le plus bas)
+    auto cmp = [&fScore](std::pair<int, int> left, std::pair<int, int> right) { return fScore[left] > fScore[right]; };
+    std::priority_queue<std::pair<int, int>, std::vector<std::pair<int, int>>, decltype(cmp)> openQueue(cmp);
+    openQueue.push(start);
+
+    while (!openQueue.empty()) {
+        // Récupère le nœud avec le coût estimé (fScore) le plus bas
+        std::pair<int, int> current = openQueue.top();
+        openQueue.pop();
+
+        // Si on atteint le but, reconstruire et retourner le chemin
+        if (current == goal) {
+            std::vector<std::pair<int, int>> totalPath = {current};
+            while (cameFrom.find(current) != cameFrom.end()) {
+                current = cameFrom[current];
+                totalPath.insert(totalPath.begin(), current);  // Insère au début pour obtenir l'ordre de départ vers l'arrivée
+            }
+            return totalPath;  // Retourne le chemin complet
+        }
+
+        // Retire le nœud actuel de openSet, car il a été exploré
+        openSet.erase(current);
+
+        // Génère les voisins orthogonaux (haut, bas, gauche, droite)
+        std::vector<std::pair<int, int>> neighbors = {
+            {current.first + 1, current.second},
+            {current.first - 1, current.second},
+            {current.first, current.second + 1},
+            {current.first, current.second - 1}
+        };
+
+        // Parcourt chaque voisin du nœud actuel
+        for (std::pair<int, int> neighbor : neighbors) {
+            // Vérifie si le voisin est dans les limites de la grille
+            if (neighbor.first < 0 || neighbor.first >= width || neighbor.second < 0 || neighbor.second >= height) {
+                continue;  // Ignore le voisin s'il est hors des limites
+            }
+
+            // Ignore le voisin s'il est un mur
+            if (robotMap[neighbor.first][neighbor.second] == CellState::Wall) {
+                continue;
+            }
+
+            // Calcule le gScore provisoire du voisin (coût depuis le départ jusqu'à ce voisin)
+            double tentative_gScore = gScore[current] + 1;  // Coût de déplacement = 1 pour les déplacements orthogonaux
+
+            // Si le nouveau chemin est plus court ou si le voisin n'a jamais été visité
+            if (tentative_gScore < gScore[neighbor]) {
+                // Met à jour le chemin optimal pour atteindre le voisin
+                cameFrom[neighbor] = current;
+                
+                // Met à jour le gScore et le fScore pour le voisin
+                gScore[neighbor] = tentative_gScore;
+                fScore[neighbor] = tentative_gScore + std::abs(neighbor.first - goal.first) + std::abs(neighbor.second - goal.second);
+
+                // Ajoute le voisin à openQueue s'il n'est pas déjà dans openSet
+                if (openSet.find(neighbor) == openSet.end()) {
+                    openSet.insert(neighbor);
+                    openQueue.push(neighbor);
+                }
+            }
+        }
+    }
+    
+    // Retourne un chemin vide si l'objectif n'est pas atteint
+    return {};
 }
 
 // Fonction pour afficher la carte
