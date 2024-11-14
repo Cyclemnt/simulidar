@@ -68,12 +68,20 @@ std::vector<std::pair<Direction, int>> Robot::convertPathToInstructions(const st
     return instructions;
 }
 
+// Méthode pour suivre la liste d'instructions
+void Robot::followInstructions(std::vector<std::pair<Direction, int>>) {
+
+}
+
 // Setters
 void Robot::setLidar(Lidar* lidar_) {
     lidar = lidar_;
 }
 void Robot::setMap(Map* map_) {
     map = map_;
+}
+void Robot::setTimeStep(int timeStep_) {
+    timeStep = timeStep_;
 }
 
 // Getters

@@ -13,10 +13,11 @@ private:
     Robot* robot;              // Pointeur vers le robot simulé
     Lidar* lidar;              // Pointeur vers le lidar simulé
     double xRobotStart, yRobotStart, orientationRobotStart;  // Coordonnées absolues de départ du robot
+    int timeStep;              // Temps entre chaque calcul d'état
 
 public:
     // Constructeur qui initialise l'environnement et le robot
-    Simulation();
+    Simulation(int timeStep_);
 
     // Méthode pour initialiser la pose du robot
     void initializeRobotPose();

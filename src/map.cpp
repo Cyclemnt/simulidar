@@ -175,6 +175,9 @@ std::pair<int, int> Map::findNearestInterestPoint(double startX, double startY) 
 
 // Algorithme A* pour trouver le chemin le plus court entre "start" et "goal"
 std::vector<std::pair<int, int>> Map::aStar(std::pair<int, int> start, std::pair<int, int> goal) const {
+    // Algorithme de recherche A* =================================
+    // https://en.wikipedia.org/wiki/A*_search_algorithm#Pseudocode
+
     int width = robotMap.size();          // Largeur de la carte (nombre de colonnes)
     int height = robotMap[0].size();      // Hauteur de la carte (nombre de lignes)
 

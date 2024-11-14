@@ -12,7 +12,7 @@ private:
     double x, y;        // Position relative du robot
     double orientation; // Orientation relative du robot
     double diameter;    // Diamètre du robot (dm)
-    int timeStep;       // Temps entre chaque calcul
+    int timeStep;       // Temps entre chaque calcul d'état
 public:
     // Constructeur par défaut
     Robot();
@@ -25,12 +25,15 @@ public:
     void rotate(double angle);
     // Fonction pour mettre à jour sa carte
     void updateMap(std::vector<double> lidarMeasures);
-    // Algorithme pour explorer efficacement
+    // Algorithme pour convertir un chemin en instructions
     std::vector<std::pair<Direction, int>> convertPathToInstructions(const std::vector<std::pair<int, int>>& path) const;
+    // Méthode pour suivre la liste d'instructions
+    void followInstructions(std::vector<std::pair<Direction, int>>);
 
     // Setters
     void setLidar(Lidar* lidar_);
     void setMap(Map* map_);
+    void setTimeStep(int timeStemp_);
 
     // Getters
     double getX() const;

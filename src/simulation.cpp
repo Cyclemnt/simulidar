@@ -5,8 +5,8 @@
 //#include <stdexcept>
 
 // Constructeur : Initialise l'environnement et le robot
-Simulation::Simulation()
-    : xRobotStart(0.0), yRobotStart(0.0), orientationRobotStart(0.0) {
+Simulation::Simulation(int timeStep_)
+    : xRobotStart(0.0), yRobotStart(0.0), orientationRobotStart(0.0), timeStep(timeStep_) {
 
     environment = new Environment(100, 100);
     map = new Map();
@@ -15,6 +15,7 @@ Simulation::Simulation()
 
     robot->setLidar(lidar);
     robot->setMap(map);
+    robot->setTimeStep(timeStep);
 }
 
 // Méthode pour initialiser la pose du robot dans l'environnement
@@ -94,6 +95,17 @@ void Simulation::run() {
     std::cout << std::endl;
     map->printMap();
 
+    for (int i = 0; i < 10000; i++) {
+        std::vector<double> test = lidar->readAll();
+        robot->updateMap(test);
+        robot->move(0.25);
+
+        displaySimulation(50, environment->getRoom());
+        displaySimulation(50, map->getRobotMap());
+        displayRaycasting(map->getRobotMap(), 800, 600, 200, 70);
+    }
+    
+
     std::pair<int, int> intrstPt = map->findNearestInterestPoint(0, 0);
     std::vector<std::pair<int, int>> path = map->aStar({map->getLeftExtension(), map->getBottomExtension()}, intrstPt);
     std::vector<std::pair<Types::Direction, int>> bob = robot->convertPathToInstructions(path);
@@ -159,7 +171,7 @@ void Simulation::displaySimulation(int scaleFactor, Grid plan) const {
     // Afficher l'image
     cv::namedWindow(WindowName, cv::WINDOW_GUI_NORMAL);
     cv::imshow(WindowName, roomImage);
-    cv::waitKey(0);
+    cv::waitKey(timeStep / 3);
 }
 
 //Affichage en 3D avec le raycasting
@@ -175,7 +187,7 @@ void Simulation::displayRaycasting(Grid plan, int WindowWidth, int WindowHeight,
         cv::rectangle(raycastingRender, cv::Point(WindowWidth - stripeX, stripeStartY), cv::Point(WindowWidth - (stripeX + (WindowWidth / fov)), stripeStartY + projectionWallHeight), cv::Scalar(255 * (1 - correctedDistance / 30), 0, 0), cv::FILLED);
     }
     cv::imshow("Lidar Raycasting", raycastingRender);
-    cv::waitKey(0);
+    cv::waitKey(timeStep / 3);
 }
 
 
