@@ -1,10 +1,12 @@
 #include "../include/map.hpp"
-#include <iostream>
+#include <iostream> // pour afficher en terminal
 #include <cmath>
-#include <map>
-#include <set>
-#include <queue>
+#include <map>   // pour aStar
+#include <set>   // pour aStar
+#include <queue> // pour aStar
 #include <limits> // pour std::numeric_limits<double>::infinity()
+
+using Types::CellState;
 
 Map::Map()
     : robotMap(1, std::vector<CellState>(1, CellState::Free)), leftExtension(0), bottomExtension(0) {

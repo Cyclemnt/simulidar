@@ -1,8 +1,6 @@
 #include "../include/robot.hpp"
 #include <cmath>
-#include <iostream>
-#include <algorithm>
-#include <iomanip>      // std::setprecision
+#include <algorithm> // Pour std::clamp()
 
 #define ANG_V M_PI/2.0
 #define SPEED 1
@@ -21,8 +19,6 @@ void Robot::rotate(double angle) {
     orientation += angle;
     if (orientation >= 2 * M_PI) orientation -= 2 * M_PI;
     if (orientation <= -2 * M_PI) orientation += 2 * M_PI;
-    //const int two_pi = 2 * M_PI;
-    //orientation = fmodf(fmodf(orientation + angle + M_PI, two_pi) + two_pi, two_pi) - M_PI;
 }
 
 // Fonction pour mettre à jour la carte du robot
@@ -40,9 +36,10 @@ void Robot::updateMap(std::vector<double> lidarMeasurements) {
     }
 }
 
+// à REVOIR
 // Méthode pour suivre la liste d'instructions
 bool Robot::executeInstruction(std::pair<int, int> targetPos_) {
-    if (targetPos != targetPos_) { targetPos = targetPos_; }
+    if (targetPos != targetPos_) targetPos = targetPos_;
     // Case actuelle du robot
     int mapX = floor(x + 0.5) + map->getLeftExtension();
     int mapY = floor(y + 0.5) + map->getBottomExtension();
@@ -94,15 +91,6 @@ void Robot::setMap(Map* map_) {
 }
 void Robot::setTimeStep(int timeStep_) {
     timeStep = timeStep_ / 1000.0;
-}
-void Robot::setX(double x_) {
-    x = x_;
-}
-void Robot::setY(double y_) {
-    y = y_;
-}
-void Robot::setOrientation(double orientation_) {
-    orientation = orientation_;
 }
 
 // Getters

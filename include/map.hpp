@@ -2,9 +2,7 @@
 #define MAP_HPP
 
 #include "types.hpp"
-#include <map>
 
-using Types::CellState;
 using Types::Grid;
 using Types::Direction;
 

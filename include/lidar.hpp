@@ -9,7 +9,7 @@ class Simulation;
 class Lidar
 {
 private:
-    const int maxRange = 30;      // Portée d'un rayon
+    const int maxRange = 30;   // Portée d'un rayon
     const int rayCount = 360;  // Nombre de rayons
     Simulation* simulation;    // Pointeur vers Simulation
 public:

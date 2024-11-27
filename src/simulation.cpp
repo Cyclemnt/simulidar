@@ -1,6 +1,8 @@
 #include "../include/simulation.hpp"
 #include <opencv2/opencv.hpp>
 
+using Types::CellState;
+
 #define ENV_WIDTH 10
 #define ENV_HEIGHT 10
 #define OBSTACLE_NUM 8
@@ -9,21 +11,21 @@
 
 // Constructeur : Initialise l'environnement et le robot
 Simulation::Simulation()
-    : xRobotStart(0.0), yRobotStart(0.0), orientationRobotStart(0.0), timeStep(TIMESTEP) {
-
-    environment = new Environment(ENV_WIDTH, ENV_HEIGHT);
-    map = new Map();
-    robot = new Robot();
-    lidar = new Lidar(this);  // Lidar reçoit un pointeur vers Simulation
-
-    robot->setLidar(lidar);
-    robot->setMap(map);
-    robot->setTimeStep(timeStep);
-}
+    : xRobotStart(0.0), yRobotStart(0.0), orientationRobotStart(0.0), timeStep(TIMESTEP) {}
 
 // Méthode pour démarrer la simulation
 void Simulation::run() {
-    // Logique de simulation (boucle principale)
+    // Instanciation des objets
+    environment = new Environment(ENV_WIDTH, ENV_HEIGHT);
+    map = new Map();
+    robot = new Robot();
+    lidar = new Lidar(this); // Lidar reçoit un pointeur vers Simulation
+    // Assignation des objets au robot
+    robot->setLidar(lidar);
+    robot->setMap(map);
+    robot->setTimeStep(timeStep);
+
+    // LOGIQUE DE SIMULATION
     environment->generateRandomObstacles(OBSTACLE_NUM, OBSTACLE_MAX_SIZE);
     environment->printRoom();
     initializeRobotPose();
@@ -33,6 +35,7 @@ void Simulation::run() {
     displayRaycasting(map->getRobotMap(), 800, 600, 200, 70);
     cv::waitKey(0);
     
+    // BOUCLE PRINCIPALE
     for (int i = 0; i < 10000; i++) {
         std::vector<double> lidarReadings = lidar->readAll();
         robot->updateMap(lidarReadings);

@@ -3,7 +3,6 @@
 
 #include "types.hpp"
 
-using Types::CellState;
 using Types::Grid;
 
 class Environment
@@ -18,7 +17,7 @@ public:
 
     // Générer des obstacles aléatoires
     void generateRandomObstacles(int number, int maxSize);
-    // Fonction pour afficher la grille
+    // Fonction pour afficher la grille dans le terminal
     void printRoom() const;
 
     // Getters

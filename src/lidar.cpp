@@ -1,7 +1,8 @@
 #include "../include/lidar.hpp"
 #include "../include/simulation.hpp"  // Définition complète de Simulation
 #include <cmath>
-#include <iostream>
+
+using Types::CellState;
 
 // Constructeur qui initialise le Lidar
 Lidar::Lidar(Simulation* simulation_)
@@ -86,8 +87,8 @@ double Lidar::read(int rayID) const {
         }
     }
     
-    //double intersectionX = 0.0;
-    //double intersectionY = 0.0;
+    //double intersectionX = 0.0; // Coordonnée x du point de contact
+    //double intersectionY = 0.0; // Coordonnée y du point de contact
     if (tileFound) {
         //intersectionX = rayStartX + rayDirX * distance;
         //intersectionY = rayStartY + rayDirY * distance;
@@ -101,8 +102,7 @@ double Lidar::read(int rayID) const {
 // Méthode pour lire tous les rayon
 std::vector<double> Lidar::readAll() const {
     std::vector<double> readings;
-    for (int id = 0; id < rayCount; id++)
-    {
+    for (int id = 0; id < rayCount; id++) {
         readings.push_back(read(id));
     }
     return readings;
