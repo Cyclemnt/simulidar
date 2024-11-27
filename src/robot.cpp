@@ -18,7 +18,11 @@ void Robot::move(double distance) {
 
 // Fonction pour faire tourner le robot
 void Robot::rotate(double angle) {
-    orientation = fmod((orientation + angle), (2 * M_PI));
+    orientation += angle;
+    if (orientation >= 2 * M_PI) orientation -= 2 * M_PI;
+    if (orientation <= -2 * M_PI) orientation += 2 * M_PI;
+    //const int two_pi = 2 * M_PI;
+    //orientation = fmodf(fmodf(orientation + angle + M_PI, two_pi) + two_pi, two_pi) - M_PI;
 }
 
 // Fonction pour mettre à jour la carte du robot
@@ -27,7 +31,10 @@ void Robot::updateMap(std::vector<double> lidarMeasurements) {
         double distance = lidarMeasurements[i];
         // Calculer l'angle du rayon relatif à l'orientation du robot
         double rayAngle = orientation + (i - 180) * (M_PI / 180.0);
-
+        // NE PAS PRENDRE LES DIAGONALES ------------+
+        // car l'erreur de la représentation binaire |
+        // des virgules flottantes est plus impactante
+        if (fmod(fabs(rayAngle), M_PI / 2.0) == (M_PI / 4.0)) continue;
         // Ray casting dans la grille pour adapter l'état des cases
         map->castRayAndMarkObstacle(x, y, rayAngle, distance);
     }

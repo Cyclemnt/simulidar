@@ -21,29 +21,21 @@ void Map::adjustMapBounds(int amount, Direction dir) {
 
     switch (dir) {
         case Direction::W: // Gauche
-            for (int i = 0; i < amount; ++i) {
-                robotMap.insert(robotMap.begin(), newCol); // Ajoute des colonnes à gauche de chaque ligne
-            }
+            for (int i = 0; i < amount; ++i) robotMap.insert(robotMap.begin(), newCol); // Ajoute des colonnes à gauche de chaque ligne
             leftExtension += amount;
             break;
 
         case Direction::E:
-            for (int i = 0; i < amount; ++i) {
-                robotMap.push_back(newCol); // Ajoute des colonnes à droite de chaque ligne
-            }
+            for (int i = 0; i < amount; ++i) robotMap.push_back(newCol); // Ajoute des colonnes à droite de chaque ligne
             break;
 
         case Direction::S:
-            for (auto& row : robotMap) {
-                row.insert(row.begin(), amount, CellState::Unknown); // Ajoute des lignes en bas
-            }
+            for (auto& row : robotMap) row.insert(row.begin(), amount, CellState::Unknown); // Ajoute des lignes en bas
             bottomExtension += amount;
             break;
 
         case Direction::N:
-            for (auto& row : robotMap) {
-                row.insert(row.end(), amount, CellState::Unknown); // Ajoute des lignes en haut
-            }
+            for (auto& row : robotMap) row.insert(row.end(), amount, CellState::Unknown); // Ajoute des lignes en haut
             break;
     }
 }
@@ -89,8 +81,8 @@ void Map::castRayAndMarkObstacle(double startX, double startY, double rayAngle, 
     double rayUnitStepSizeY = sqrt(1 + (rayDirX / rayDirY) * (rayDirX / rayDirY));
 
     // Case à vérifier
-    int mapCheckX = int(startX + 0.5);
-    int mapCheckY = int(startY + 0.5);
+    int mapCheckX = floor(startX + 0.5);
+    int mapCheckY = floor(startY + 0.5);
 
     // Longueur accumulée
     double rayLengthX = 0.0;
@@ -119,7 +111,7 @@ void Map::castRayAndMarkObstacle(double startX, double startY, double rayAngle, 
     }
     
     double walkDistance = 0.0;
-    while (walkDistance < distance) {
+    while (walkDistance < (distance - 1e-12)) { // 1e-12 pour contourner les erreurs dues au binaire
         // Walk
         if (rayLengthX < rayLengthY) {
             mapCheckX += stepX;
@@ -148,7 +140,7 @@ std::pair<int, int> Map::findNearestInterestPoint(double startX, double startY) 
     std::pair<int, int> interestPoint(-1, -1);
     startX += leftExtension;
     startY += bottomExtension;
-    // Calcul de la case inconue la plus proche adjacente à une case libre en distance de Manhattan
+    // Calcul de la case inconue la plus proche adjacente à une case libre, en distance de Manhattan
     for (int y = robotMap[0].size() - 1; y >= 0; y--) {
         for (int x = 0; x < robotMap.size(); x++) {
             if (robotMap[x][y] == CellState::Unknown) {
@@ -266,7 +258,7 @@ std::vector<std::pair<int, int>> Map::aStar(std::pair<int, int> start, std::pair
     return {};
 }
 
-// Fonction pour afficher la carte
+// Fonction pour afficher la carte dans le terminal
 void Map::printMap() const {
     int width = robotMap.size();
     int height = width > 0 ? robotMap[0].size() : 0;

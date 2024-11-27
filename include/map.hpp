@@ -29,7 +29,7 @@ public:
     // Méthode pour afficher la carte dans le terminal
     void printMap() const;
     
-    //Getter 
+    //Getter
     Grid getRobotMap() const;
     int getWidth() const; 
     int getHeight() const;

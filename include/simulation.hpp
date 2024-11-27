@@ -17,7 +17,7 @@ private:
 
 public:
     // Constructeur qui initialise l'environnement et le robot
-    Simulation(int timeStep_);
+    Simulation();
 
     // Méthode pour démarrer la simulation
     void run();

@@ -1,14 +1,17 @@
 #include "../include/simulation.hpp"
 #include <opencv2/opencv.hpp>
-//#include <cstdlib> // pour rand() et srand()
-//#include <ctime>   // pour time()
-//#include <stdexcept>
+
+#define ENV_WIDTH 10
+#define ENV_HEIGHT 10
+#define OBSTACLE_NUM 8
+#define OBSTACLE_MAX_SIZE 2
+#define TIMESTEP 30
 
 // Constructeur : Initialise l'environnement et le robot
-Simulation::Simulation(int timeStep_)
-    : xRobotStart(0.0), yRobotStart(0.0), orientationRobotStart(0.0), timeStep(timeStep_) {
+Simulation::Simulation()
+    : xRobotStart(0.0), yRobotStart(0.0), orientationRobotStart(0.0), timeStep(TIMESTEP) {
 
-    environment = new Environment(10, 10);
+    environment = new Environment(ENV_WIDTH, ENV_HEIGHT);
     map = new Map();
     robot = new Robot();
     lidar = new Lidar(this);  // Lidar reçoit un pointeur vers Simulation
@@ -21,7 +24,7 @@ Simulation::Simulation(int timeStep_)
 // Méthode pour démarrer la simulation
 void Simulation::run() {
     // Logique de simulation (boucle principale)
-    environment->generateRandomObstacles(3, 2);
+    environment->generateRandomObstacles(OBSTACLE_NUM, OBSTACLE_MAX_SIZE);
     environment->printRoom();
     initializeRobotPose();
     
@@ -31,23 +34,17 @@ void Simulation::run() {
     cv::waitKey(0);
     
     for (int i = 0; i < 10000; i++) {
-        double x = robot->getX();
-        double y = robot->getY();
-        double orient = robot->getOrientation();
-        robot->setX(int(x + 0.5));
-        robot->setY(int(y + 0.5));
-        robot->setOrientation(0.0);
         std::vector<double> lidarReadings = lidar->readAll();
         robot->updateMap(lidarReadings);
-        robot->setX(x);
-        robot->setY(y);
-        robot->setOrientation(orient);
 
         std::pair<int, int> intrstPt = map->findNearestInterestPoint(robot->getX(), robot->getY());
         std::vector<std::pair<int, int>> path = map->aStar({map->getLeftExtension() + robot->getX(), map->getBottomExtension() + robot->getY()}, intrstPt);
 
         if (path.empty()) {
             std::cout << "Exploration terminée" << std::endl;
+            displaySimulation(50, environment->getRoom());
+            displaySimulation(50, map->getRobotMap());
+            displayRaycasting(map->getRobotMap(), 800, 600, 200, 70);
             cv::waitKey(0);
             exit(0);
         }
@@ -130,13 +127,13 @@ void Simulation::displaySimulation(int scaleFactor, Grid plan) const {
                     cv::rectangle(roomImage, cell, cv::Scalar(255, 0, 0), cv::FILLED); // Murs en bleu
                     break;
                 case CellState::Free:
-                    cv::rectangle(roomImage, cell, cv::Scalar(255,255,255), cv::FILLED); // Sol en blanc
+                    cv::rectangle(roomImage, cell, cv::Scalar(255, 255, 255), cv::FILLED); // Sol en blanc
                     break;                    
                 case CellState::Unknown:
-                    cv::rectangle(roomImage, cell, cv::Scalar(0,0,0), cv::FILLED); // Case inconnues en noir
+                    cv::rectangle(roomImage, cell, cv::Scalar(0, 0, 0), cv::FILLED); // Case inconnues en noir
                     break;
                 default:
-                    cv::rectangle(roomImage, cell, cv::Scalar(247,0,248), cv::FILLED); // Cases non définies en rose
+                    cv::rectangle(roomImage, cell, cv::Scalar(247, 0, 248), cv::FILLED); // Cases non définies en rose
                     break;
             }
         }
