@@ -1,12 +1,14 @@
 #include "../include/robot.hpp"
 #include <cmath>
 #include <iostream>
+#include <algorithm>
+#include <iomanip>      // std::setprecision
+
+#define ANG_V M_PI/2.0
+#define SPEED 1
 
 Robot::Robot()
-    : lidar(nullptr), map(nullptr), x(0.0), y(0.0), orientation(0.0), diameter(1.0) {}
-
-Robot::Robot(double diameter_)
-    : lidar(nullptr), map(nullptr), x(0.0), y(0.0), orientation(0.0), diameter(diameter_) {}
+    : lidar(nullptr), map(nullptr), x(0.0), y(0.0), orientation(0.0), targetPos({0, 0}) {}
 
 // Fonction pour faire avancer le robot
 void Robot::move(double distance) {
@@ -31,47 +33,50 @@ void Robot::updateMap(std::vector<double> lidarMeasurements) {
     }
 }
 
-// Algorithme pour convertir un chemin en instructions
-std::vector<std::pair<Direction, int>> Robot::convertPathToInstructions(const std::vector<std::pair<int, int>>& path) const {
-    std::vector<std::pair<Direction, int>> instructions;
-    if (path.empty()) return instructions;
-
-    // Initialisation de la première direction et distance
-    Direction currentDir;
-    int currentDistance = 1;
-
-    for (size_t i = 1; i < path.size(); ++i) {
-        int dx = path[i].first - path[i - 1].first;
-        int dy = path[i].second - path[i - 1].second;
-
-        // Déterminer la direction du déplacement
-        Direction newDir;
-        if (dx == 0 && dy == 1) newDir = Direction::N;
-        else if (dx == 0 && dy == -1) newDir = Direction::S;
-        else if (dx == 1 && dy == 0) newDir = Direction::E;
-        else if (dx == -1 && dy == 0) newDir = Direction::W;
-        else continue; // Ignore tout mouvement non valide (diagonal, etc.)
-
-        // Si la direction change, on ajoute l'instruction courante et on réinitialise
-        if (i == 1 || newDir != currentDir) {
-            if (i != 1) instructions.push_back({currentDir, currentDistance});
-            currentDir = newDir;
-            currentDistance = 1;
-        } else {
-            // Si la direction reste la même, on augmente la distance
-            ++currentDistance;
-        }
-    }
-
-    // Ajouter la dernière instruction
-    instructions.push_back({currentDir, currentDistance});
-    return instructions;
-}
-
 // Méthode pour suivre la liste d'instructions
-void Robot::followInstructions(std::vector<std::pair<Direction, int>>) {
+bool Robot::executeInstruction(std::pair<int, int> targetPos_) {
+    if (targetPos != targetPos_) { targetPos = targetPos_; }
+    // Case actuelle du robot
+    int mapX = floor(x + 0.5) + map->getLeftExtension();
+    int mapY = floor(y + 0.5) + map->getBottomExtension();
+    // Position actuelle du robot sur sa carte
+    double robotX = x + map->getLeftExtension();
+    double robotY = y + map->getBottomExtension();
+    // Chemin à parcourir
+    int dx = round(targetPos.first - mapX);
+    int dy = round(targetPos.second - mapY);
 
+    bool achievedTarget = false;
+
+    // Détermine l'orientation cible en fonction de dx et dy
+    double targetOrientation = orientation;
+    if (dx > 0) targetOrientation = 0;                   // Droite
+    else if (dx < 0) targetOrientation = M_PI;           // Gauche
+    else if (dy > 0) targetOrientation = M_PI / 2.0;     // Haut
+    else if (dy < 0) targetOrientation = 3 * M_PI / 2.0; // Bas
+
+    double diff = targetOrientation - orientation;
+    
+    // Ajuste la différence d'angle pour être dans [-π, π]
+    if (diff > M_PI) diff -= 2 * M_PI;
+    if (diff < -M_PI) diff += 2 * M_PI;
+    
+    if (diff == 0) { // Si l'orientation est bonne, avancer
+        move(std::min(std::max(fabs(targetPos.first - robotX), fabs(targetPos.second - robotY)), SPEED * timeStep)); // Orientation correcte, avancer
+    } else { // Sinon, tourner
+        rotate(std::clamp(diff, -ANG_V * timeStep, ANG_V * timeStep)); // Ajuster l'orientation
+    }
+    // Recalcul de la position sur la carte
+    robotX = x + map->getLeftExtension();
+    robotY = y + map->getBottomExtension();
+    // Si correspondance avec l'objectif, alors fin
+    if (targetPos.first == robotX && targetPos.second == robotY) {
+        achievedTarget = true; // Pas de déplacement nécessaire
+    }
+    
+    return achievedTarget;
 }
+
 
 // Setters
 void Robot::setLidar(Lidar* lidar_) {
@@ -81,7 +86,16 @@ void Robot::setMap(Map* map_) {
     map = map_;
 }
 void Robot::setTimeStep(int timeStep_) {
-    timeStep = timeStep_;
+    timeStep = timeStep_ / 1000.0;
+}
+void Robot::setX(double x_) {
+    x = x_;
+}
+void Robot::setY(double y_) {
+    y = y_;
+}
+void Robot::setOrientation(double orientation_) {
+    orientation = orientation_;
 }
 
 // Getters
@@ -93,9 +107,6 @@ double Robot::getY() const {
 }
 double Robot::getOrientation() const {
     return orientation;
-}
-double Robot::getDiameter() const {
-    return diameter;
 }
 
 Robot::~Robot() {}

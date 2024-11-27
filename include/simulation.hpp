@@ -19,10 +19,10 @@ public:
     // Constructeur qui initialise l'environnement et le robot
     Simulation(int timeStep_);
 
-    // Méthode pour initialiser la pose du robot
-    void initializeRobotPose();
     // Méthode pour démarrer la simulation
     void run();
+    // Méthode pour initialiser la pose du robot
+    void initializeRobotPose();
 
     // Méthode pour afficher la simulation
     void displaySimulation(int scaleFactor, Grid plan) const;

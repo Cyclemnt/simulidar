@@ -8,7 +8,7 @@
 Simulation::Simulation(int timeStep_)
     : xRobotStart(0.0), yRobotStart(0.0), orientationRobotStart(0.0), timeStep(timeStep_) {
 
-    environment = new Environment(100, 100);
+    environment = new Environment(10, 10);
     map = new Map();
     robot = new Robot();
     lidar = new Lidar(this);  // Lidar reçoit un pointeur vers Simulation
@@ -18,17 +18,59 @@ Simulation::Simulation(int timeStep_)
     robot->setTimeStep(timeStep);
 }
 
+// Méthode pour démarrer la simulation
+void Simulation::run() {
+    // Logique de simulation (boucle principale)
+    environment->generateRandomObstacles(3, 2);
+    environment->printRoom();
+    initializeRobotPose();
+    
+    displaySimulation(50, environment->getRoom());
+    displaySimulation(50, map->getRobotMap());
+    displayRaycasting(map->getRobotMap(), 800, 600, 200, 70);
+    cv::waitKey(0);
+    
+    for (int i = 0; i < 10000; i++) {
+        double x = robot->getX();
+        double y = robot->getY();
+        double orient = robot->getOrientation();
+        robot->setX(int(x + 0.5));
+        robot->setY(int(y + 0.5));
+        robot->setOrientation(0.0);
+        std::vector<double> lidarReadings = lidar->readAll();
+        robot->updateMap(lidarReadings);
+        robot->setX(x);
+        robot->setY(y);
+        robot->setOrientation(orient);
+
+        std::pair<int, int> intrstPt = map->findNearestInterestPoint(robot->getX(), robot->getY());
+        std::vector<std::pair<int, int>> path = map->aStar({map->getLeftExtension() + robot->getX(), map->getBottomExtension() + robot->getY()}, intrstPt);
+
+        if (path.empty()) {
+            std::cout << "Exploration terminée" << std::endl;
+            cv::waitKey(0);
+            exit(0);
+        }
+
+        while (!robot->executeInstruction(path[1])) {
+            displaySimulation(50, environment->getRoom());
+            displaySimulation(50, map->getRobotMap());
+            displayRaycasting(map->getRobotMap(), 800, 600, 200, 70);
+            cv::waitKey(0);
+        }
+    }
+}
+
 // Méthode pour initialiser la pose du robot dans l'environnement
 void Simulation::initializeRobotPose() {
     int width = environment->getWidth();
     int height = environment->getHeight();
-    double robotRadius = robot->getDiameter() / 2.0;
 
     srand(static_cast<unsigned>(time(0)));
 
     int x, y;
     bool isValidPosition = false;
-    int maxAttempts = 1000;  // Limite de tentatives pour trouver une position
+    const int maxAttempts = 1000;  // Limite de tentatives pour trouver une position
     int attempts = 0;
 
     while (attempts < maxAttempts && !isValidPosition) {
@@ -38,35 +80,8 @@ void Simulation::initializeRobotPose() {
         x = rand() % width;
         y = rand() % height;
 
-        // Vérifie que la position est libre pour le diamètre du robot
-        isValidPosition = true;
-
-        // Calculer le nombre de cellules à vérifier autour du centre `(x, y)`
-        int cellRadiusX = static_cast<int>(ceil(robotRadius));
-        int cellRadiusY = static_cast<int>(ceil(robotRadius));
-
-        // Vérifier toutes les cellules dans le carré autour de la position centrale
-        for (int dx = -cellRadiusX; dx <= cellRadiusX && isValidPosition; dx++) {
-            for (int dy = -cellRadiusY; dy <= cellRadiusY && isValidPosition; dy++) {
-                int checkX = x + dx;
-                int checkY = y + dy;
-
-                // Vérifier si les coordonnées sont dans la grille
-                if (checkX >= 0 && checkX < width && checkY >= 0 && checkY < height) {
-                    // Calculer la distance du centre de la cellule à `(x, y)`
-                    double distToCell = sqrt(dx * dx + dy * dy);
-                    // Si la distance est inférieure ou égale au rayon du robot, vérifier la cellule
-                    if (distToCell <= robotRadius) {
-                        if (environment->getRoom()[checkX][checkY] != CellState::Free) {
-                            isValidPosition = false;
-                        }
-                    }
-                } else {
-                    // Si on est en dehors de la grille, la position est invalide
-                    isValidPosition = false;
-                }
-            }
-        }
+        // Vérifie que la position est libre pour le robot
+        isValidPosition = (environment->getRoom()[x][y] == CellState::Free);
     }
 
     // Vérifie si une position valide a été trouvée
@@ -80,41 +95,6 @@ void Simulation::initializeRobotPose() {
     }
 }
 
-// Méthode pour démarrer la simulation
-void Simulation::run() {
-    // Logique de simulation (boucle principale)
-    environment->generateRandomObstacles(300, 2);
-    environment->printRoom();
-    initializeRobotPose();
-    //xRobotStart = 4;
-    //yRobotStart = 1;
-    //map->printMap();
-    std::cout << xRobotStart << ", " << yRobotStart << std::endl;
-    std::vector<double> test = lidar->readAll();
-    robot->updateMap(test);
-    std::cout << std::endl;
-    map->printMap();
-
-    for (int i = 0; i < 10000; i++) {
-        std::vector<double> test = lidar->readAll();
-        robot->updateMap(test);
-        robot->move(0.25);
-
-        displaySimulation(50, environment->getRoom());
-        displaySimulation(50, map->getRobotMap());
-        displayRaycasting(map->getRobotMap(), 800, 600, 200, 70);
-    }
-    
-
-    std::pair<int, int> intrstPt = map->findNearestInterestPoint(0, 0);
-    std::vector<std::pair<int, int>> path = map->aStar({map->getLeftExtension(), map->getBottomExtension()}, intrstPt);
-    std::vector<std::pair<Types::Direction, int>> bob = robot->convertPathToInstructions(path);
-    
-    displaySimulation(50, environment->getRoom());
-    displaySimulation(50, map->getRobotMap());
-    displayRaycasting(map->getRobotMap(), 800, 600, 200, 70);
-}
-
 // Méthode pour afficher la simulation
 void Simulation::displaySimulation(int scaleFactor, Grid plan) const {
     int height = 0, width = 0;
@@ -125,7 +105,7 @@ void Simulation::displaySimulation(int scaleFactor, Grid plan) const {
         width = environment->getWidth();
         WindowName = "EnvironmentDisplay";
         positionRobotX = xRobotStart + robot->getX() + 0.5;
-        positionRobotY = height - yRobotStart + robot->getY() - 0.5;
+        positionRobotY = height - yRobotStart - robot->getY() - 0.5;
         robotOrientation = robot->getOrientation() + orientationRobotStart;
     }
     else if (plan == map->getRobotMap()) {
@@ -133,7 +113,7 @@ void Simulation::displaySimulation(int scaleFactor, Grid plan) const {
         width = map->getWidth();
         WindowName = "RobotMapDisplay";
         positionRobotX = map->getLeftExtension() + robot->getX() + 0.5;
-        positionRobotY = height - map->getBottomExtension() + robot->getY() - 0.5;
+        positionRobotY = height - map->getBottomExtension() - robot->getY() - 0.5;
         robotOrientation = robot->getOrientation();
     }
     else {
@@ -162,7 +142,7 @@ void Simulation::displaySimulation(int scaleFactor, Grid plan) const {
         }
     }
     // Afficher le robot
-    double robotRadius = robot->getDiameter() * scaleFactor / 2;
+    double robotRadius = 1 * scaleFactor / 2;
     cv::Point robotPosition(positionRobotX * scaleFactor, positionRobotY * scaleFactor);
     cv::circle(roomImage, robotPosition, robotRadius, cv::Scalar(0, 166, 255), cv::FILLED); // Point orange pour le robot
     // Ligne pour l'orientation
@@ -171,7 +151,6 @@ void Simulation::displaySimulation(int scaleFactor, Grid plan) const {
     // Afficher l'image
     cv::namedWindow(WindowName, cv::WINDOW_GUI_NORMAL);
     cv::imshow(WindowName, roomImage);
-    cv::waitKey(timeStep / 3);
 }
 
 //Affichage en 3D avec le raycasting
@@ -187,7 +166,6 @@ void Simulation::displayRaycasting(Grid plan, int WindowWidth, int WindowHeight,
         cv::rectangle(raycastingRender, cv::Point(WindowWidth - stripeX, stripeStartY), cv::Point(WindowWidth - (stripeX + (WindowWidth / fov)), stripeStartY + projectionWallHeight), cv::Scalar(255 * (1 - correctedDistance / 30), 0, 0), cv::FILLED);
     }}
     cv::imshow("Lidar Raycasting", raycastingRender);
-    cv::waitKey(timeStep / 3);
 }
 
 
