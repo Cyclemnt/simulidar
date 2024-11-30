@@ -27,24 +27,6 @@ Ce projet implémente une simulation robotique utilisant un **robot mobile équi
    ./main
   ```
 
-## Structure de projet
-├── include/          # Fichiers d'en-tête  
-│   ├── environment.hpp  
-│   ├── lidar.hpp  
-│   ├── map.hpp  
-│   ├── robot.hpp  
-│   ├── simulation.hpp  
-│   └── types.hpp  
-├── src/              # Fichiers source  
-│   ├── environment.cpp  
-│   ├── lidar.cpp  
-│   ├── map.cpp  
-│   ├── robot.cpp  
-│   ├── simulation.cpp  
-│   └── main.cpp  
-├── CMakeLists.txt    # Configuration CMake  
-└── README.md         # Ce fichier
-
 ## Utilisation
 1. Une fois le programme lancé, la simulation démarre en plaçant le robot aléatoirement dans un environnement.
 2. Appuyez sur n'importe quelle touche pour commencer.
