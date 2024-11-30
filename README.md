@@ -2,6 +2,10 @@
 
 Ce projet implémente une simulation robotique utilisant un **robot mobile équipé d'un Lidar** pour explorer un environnement inconnu. Il utilise OpenCV pour visualiser l'environnement et la carte du robot en temps réel.
 
+## Diagramme UML du projet
+Voici le diagramme UML de l'architecture du projet :
+![Diagramme UML](images/simulidar_uml.png)
+
 ## Fonctionnalités
 - **Environnement généré aléatoirement** avec des obstacles de tailles variées.
 - **Algorithme A*** pour la recherche de chemin.
