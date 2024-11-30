@@ -18,7 +18,7 @@ Ce projet implémente une simulation robotique utilisant un **robot mobile équi
 ## Installation et Compilation
 **Cloner le dépôt** :
    ```bash
-   git clone https://github.com/votre-utilisateur/simulidar.git
+   git clone https://github.com/Cyclemnt/simulidar.git
    cd simulidar
    mkdir build
    cd build
