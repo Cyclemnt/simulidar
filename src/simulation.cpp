@@ -3,10 +3,10 @@
 
 using Types::CellState;
 
-#define ENV_WIDTH 10
-#define ENV_HEIGHT 10
-#define OBSTACLE_NUM 8
-#define OBSTACLE_MAX_SIZE 2
+#define ENV_WIDTH 20
+#define ENV_HEIGHT 20
+#define OBSTACLE_NUM 30
+#define OBSTACLE_MAX_SIZE 3
 #define TIMESTEP 30
 
 // Constructeur : Initialise l'environnement et le robot
@@ -41,7 +41,7 @@ void Simulation::run() {
         robot->updateMap(lidarReadings);
 
         std::pair<int, int> intrstPt = map->findNearestInterestPoint(robot->getX(), robot->getY());
-        std::vector<std::pair<int, int>> path = map->aStar({map->getLeftExtension() + robot->getX(), map->getBottomExtension() + robot->getY()}, intrstPt);
+        std::vector<std::pair<int, int>> path = map->aStar({map->getLeftExtension() + floor(robot->getX() + 0.5), map->getBottomExtension() + floor(robot->getY() + 0.5)}, intrstPt);
 
         if (path.empty()) {
             std::cout << "Exploration terminée" << std::endl;
@@ -51,12 +51,14 @@ void Simulation::run() {
             cv::waitKey(0);
             exit(0);
         }
-
-        while (!robot->executeInstruction(path[1])) {
+        bool stepDone = false;
+        while (!stepDone) {
+            stepDone = robot->executeInstruction(path[1]);
+            
             displaySimulation(50, environment->getRoom());
             displaySimulation(50, map->getRobotMap());
             displayRaycasting(map->getRobotMap(), 800, 600, 200, 70);
-            cv::waitKey(0);
+            cv::waitKey(timeStep);
         }
     }
 }

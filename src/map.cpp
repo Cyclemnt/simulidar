@@ -44,7 +44,7 @@ void Map::adjustMapBounds(int amount, Direction dir) {
 
 // Méthode pour tracer un chemin de cases vides terminé par un mur
 void Map::castRayAndMarkObstacle(double startX, double startY, double rayAngle, double distance) {
-    if (distance == -1) { distance = 30.0; }
+    if (distance == -1) distance = 30.0;
 
     // Vecteur directeur du rayon
     double rayDirX = cos(rayAngle);
