@@ -13,7 +13,7 @@ private:
     Robot* robot;              // Pointeur vers le robot simulé
     Lidar* lidar;              // Pointeur vers le lidar simulé
     double xRobotStart, yRobotStart, orientationRobotStart;  // Coordonnées absolues de départ du robot
-    int timeStep;              // Temps entre chaque calcul d'état
+    int timeStep;              // Temps entre chaque état de simulation
 
 public:
     // Constructeur qui initialise l'environnement et le robot
@@ -26,7 +26,9 @@ public:
     // Méthode pour afficher la simulation
     void displaySimulation(int scaleFactor, Grid plan) const;
     //Méthode pour afficher en 3D la vue du robot avec le raycasting 
-    void displayRaycasting(Grid plan, int WindowWidth, int WindowHeight, int wallheight,int fov) const; 
+    void displayRaycasting(Grid plan, int WindowWidth, int WindowHeight, int wallheight,int fov) const;
+    // Méthode pour afficher les trois fenêtres
+    void displayAll();
 
     // Getters
     Environment* getEnvironment() const;

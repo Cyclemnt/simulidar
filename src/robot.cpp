@@ -2,11 +2,6 @@
 #include <cmath>
 #include <algorithm> // Pour std::clamp()
 
-#include <iostream>
-
-#define ANG_V 2 * M_PI
-#define SPEED 4
-
 Robot::Robot()
     : lidar(nullptr), map(nullptr), x(0.0), y(0.0), orientation(0.0), targetPos({0, 0}) {}
 
@@ -31,11 +26,12 @@ void Robot::updateMap(std::vector<double> lidarMeasurements) {
     for (int i = 0; i < lidar->getRayCount(); i++) {
         double distance = lidarMeasurements[i];
         // Calculer l'angle du rayon relatif à l'orientation du robot
-        double rayAngle = orientation + (i - 180) * (M_PI / 180.0);
+        double rayAngle = orientation + (i - lidar->getRayCount() / 2) * (M_PI / 180.0);
         // NE PAS PRENDRE LES DIAGONALES ------------+
         // car l'erreur de la représentation binaire |
         // des virgules flottantes est plus impactante
         if (fabs(fmod(fabs(rayAngle), M_PI_2) - M_PI_4) < (0.034)) continue;
+        // ------------------------------------------+
         // Ray casting dans la grille pour adapter l'état des cases
         map->castRayAndMarkObstacle(x, y, rayAngle, distance);
     }
@@ -73,17 +69,16 @@ bool Robot::executeInstruction(std::pair<int, int> targetPos_) {
         double distance = fabs(targetPos.first - robotX) + fabs(targetPos.second - robotY);
         move(std::min(distance, SPEED * timeStep));
     } else { // Sinon, tourner
-        rotate(std::clamp(angleDiff, -ANG_V * timeStep, ANG_V * timeStep)); // Ajuster l'orientation
+        rotate(std::clamp(angleDiff, -ANG_V * timeStep, ANG_V * timeStep));
     }
     // Recalcul de la position sur la carte
     robotX = x + map->getLeftExtension();
     robotY = y + map->getBottomExtension();
     // Si correspondance avec l'objectif, alors fin
-    if (targetPos.first == robotX && targetPos.second == robotY) achievedTarget = true; // Pas de déplacement nécessaire
+    if (targetPos.first == robotX && targetPos.second == robotY) achievedTarget = true;
     
     return achievedTarget;
 }
-
 
 // Setters
 void Robot::setLidar(Lidar* lidar_) {

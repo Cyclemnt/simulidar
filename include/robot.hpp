@@ -12,7 +12,7 @@ private:
     double x, y;        // Position relative du robot
     double orientation; // Orientation relative du robot
     std::pair<int, int> targetPos; // Position cible sur la carte du robot
-    double timeStep;    // Temps entre chaque calcul d'état
+    double timeStep;    // Temps entre chaque état de simulation
 public:
     // Constructeur par défaut
     Robot();

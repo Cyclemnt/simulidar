@@ -25,7 +25,7 @@ double Lidar::read(int rayID) const {
     double orientation = simulation->getOrientationRobotStart() + simulation->getRobot()->getOrientation();
     
     // Angle du rayon en fonction de rayID
-    double rayAngle = orientation + (rayID - 180) * (M_PI / 180.0);
+    double rayAngle = orientation + (rayID - rayCount / 2) * (M_PI / 180.0);
     
     // Vecteur directeur du rayon
     double rayDirX = cos(rayAngle);

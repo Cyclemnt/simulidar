@@ -26,16 +26,13 @@ void Map::adjustMapBounds(int amount, Direction dir) {
             for (int i = 0; i < amount; ++i) robotMap.insert(robotMap.begin(), newCol); // Ajoute des colonnes à gauche de chaque ligne
             leftExtension += amount;
             break;
-
         case Direction::E:
             for (int i = 0; i < amount; ++i) robotMap.push_back(newCol); // Ajoute des colonnes à droite de chaque ligne
             break;
-
         case Direction::S:
             for (auto& row : robotMap) row.insert(row.begin(), amount, CellState::Unknown); // Ajoute des lignes en bas
             bottomExtension += amount;
             break;
-
         case Direction::N:
             for (auto& row : robotMap) row.insert(row.end(), amount, CellState::Unknown); // Ajoute des lignes en haut
             break;
@@ -44,7 +41,7 @@ void Map::adjustMapBounds(int amount, Direction dir) {
 
 // Méthode pour tracer un chemin de cases vides terminé par un mur
 void Map::castRayAndMarkObstacle(double startX, double startY, double rayAngle, double distance) {
-    if (distance == -1) distance = 30.0;
+    if (distance == -1) distance = LIDAR_MAX_RANGE;
 
     // Vecteur directeur du rayon
     double rayDirX = cos(rayAngle);
@@ -125,13 +122,13 @@ void Map::castRayAndMarkObstacle(double startX, double startY, double rayAngle, 
             walkDistance = rayLengthY;
             rayLengthY += rayUnitStepSizeY;
         }
-        
+        // Sur le chemin du rayon, placer des cases libres
         if ((mapCheckX + leftExtension) >= 0 && (mapCheckX + leftExtension) < mapWidth && (mapCheckY + bottomExtension) >= 0 && (mapCheckY + bottomExtension) < mapHeight) {
             robotMap[mapCheckX + leftExtension][mapCheckY + bottomExtension] = CellState::Free;
         }
     }
-
-    if (distance != 30) {
+    // Si mesure dans les limites, placer un mur à la fin
+    if (distance != LIDAR_MAX_RANGE) {
         robotMap[mapCheckX + leftExtension][mapCheckY + bottomExtension] = CellState::Wall;
     }
 }

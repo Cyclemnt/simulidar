@@ -3,12 +3,6 @@
 
 using Types::CellState;
 
-#define ENV_WIDTH 20
-#define ENV_HEIGHT 20
-#define OBSTACLE_NUM 30
-#define OBSTACLE_MAX_SIZE 3
-#define TIMESTEP 30
-
 // Constructeur : Initialise l'environnement et le robot
 Simulation::Simulation()
     : xRobotStart(0.0), yRobotStart(0.0), orientationRobotStart(0.0), timeStep(TIMESTEP) {}
@@ -27,37 +21,34 @@ void Simulation::run() {
 
     // LOGIQUE DE SIMULATION
     environment->generateRandomObstacles(OBSTACLE_NUM, OBSTACLE_MAX_SIZE);
-    environment->printRoom();
     initializeRobotPose();
     
-    displaySimulation(50, environment->getRoom());
-    displaySimulation(50, map->getRobotMap());
-    displayRaycasting(map->getRobotMap(), 800, 600, 200, 70);
+    displayAll();
     cv::waitKey(0);
     
     // BOUCLE PRINCIPALE
-    for (int i = 0; i < 10000; i++) {
+    for (int i = 0; i < 10000; ++i) {
+        // Lecture du Lidar
         std::vector<double> lidarReadings = lidar->readAll();
         robot->updateMap(lidarReadings);
-
+        // Chercher un chemin
         std::pair<int, int> intrstPt = map->findNearestInterestPoint(robot->getX(), robot->getY());
-        std::vector<std::pair<int, int>> path = map->aStar({map->getLeftExtension() + floor(robot->getX() + 0.5), map->getBottomExtension() + floor(robot->getY() + 0.5)}, intrstPt);
+        int robotMapX = map->getLeftExtension() + floor(robot->getX() + 0.5);
+        int robotMapY = map->getBottomExtension() + floor(robot->getY() + 0.5);
+        std::vector<std::pair<int, int>> path = map->aStar({robotMapX, robotMapY}, intrstPt);
 
+        // Si tout exploré, fin de la simulation
         if (path.empty()) {
             std::cout << "Exploration terminée" << std::endl;
-            displaySimulation(50, environment->getRoom());
-            displaySimulation(50, map->getRobotMap());
-            displayRaycasting(map->getRobotMap(), 800, 600, 200, 70);
+            displayAll();
             cv::waitKey(0);
             exit(0);
         }
+        // Exécuter la première instruction
         bool stepDone = false;
         while (!stepDone) {
             stepDone = robot->executeInstruction(path[1]);
-            
-            displaySimulation(50, environment->getRoom());
-            displaySimulation(50, map->getRobotMap());
-            displayRaycasting(map->getRobotMap(), 800, 600, 200, 70);
+            displayAll();
             cv::waitKey(timeStep);
         }
     }
@@ -105,7 +96,7 @@ void Simulation::displaySimulation(int scaleFactor, Grid plan) const {
     if (plan == environment->getRoom()) {
         height = environment->getHeight();
         width = environment->getWidth();
-        WindowName = "EnvironmentDisplay";
+        WindowName = "Environnement";
         positionRobotX = xRobotStart + robot->getX() + 0.5;
         positionRobotY = height - yRobotStart - robot->getY() - 0.5;
         robotOrientation = robot->getOrientation() + orientationRobotStart;
@@ -113,13 +104,13 @@ void Simulation::displaySimulation(int scaleFactor, Grid plan) const {
     else if (plan == map->getRobotMap()) {
         height = map->getHeight();
         width = map->getWidth();
-        WindowName = "RobotMapDisplay";
+        WindowName = "Carte du robot";
         positionRobotX = map->getLeftExtension() + robot->getX() + 0.5;
         positionRobotY = height - map->getBottomExtension() - robot->getY() - 0.5;
         robotOrientation = robot->getOrientation();
     }
     else {
-        throw std::runtime_error("error");
+        throw std::invalid_argument("Erreur : Impossible d'afficher le plan demandé");
     }
     // Création de l'image OpenCV (CV_8UC3 pour une image couleur)
     cv::Mat roomImage(height * scaleFactor, width * scaleFactor, CV_8UC3);
@@ -128,23 +119,19 @@ void Simulation::displaySimulation(int scaleFactor, Grid plan) const {
         for (int x = 0; x < width; x++) {
             cv::Rect cell(x * scaleFactor, (height - 1 - y) * scaleFactor, scaleFactor, scaleFactor);
             switch (plan[x][y]) {
-                case CellState::Wall:
-                    cv::rectangle(roomImage, cell, cv::Scalar(255, 0, 0), cv::FILLED); // Murs en bleu
+                case CellState::Wall: cv::rectangle(roomImage, cell, cv::Scalar(255, 0, 0), cv::FILLED); // Murs en bleu
                     break;
-                case CellState::Free:
-                    cv::rectangle(roomImage, cell, cv::Scalar(255, 255, 255), cv::FILLED); // Sol en blanc
+                case CellState::Free: cv::rectangle(roomImage, cell, cv::Scalar(255, 255, 255), cv::FILLED); // Sol en blanc
                     break;                    
-                case CellState::Unknown:
-                    cv::rectangle(roomImage, cell, cv::Scalar(0, 0, 0), cv::FILLED); // Case inconnues en noir
+                case CellState::Unknown: cv::rectangle(roomImage, cell, cv::Scalar(0, 0, 0), cv::FILLED); // Case inconnues en noir
                     break;
-                default:
-                    cv::rectangle(roomImage, cell, cv::Scalar(247, 0, 248), cv::FILLED); // Cases non définies en rose
+                default: cv::rectangle(roomImage, cell, cv::Scalar(247, 0, 248), cv::FILLED); // Cases non définies en rose
                     break;
             }
         }
     }
     // Afficher le robot
-    double robotRadius = 1 * scaleFactor / 2;
+    double robotRadius = scaleFactor / 2;
     cv::Point robotPosition(positionRobotX * scaleFactor, positionRobotY * scaleFactor);
     cv::circle(roomImage, robotPosition, robotRadius, cv::Scalar(0, 166, 255), cv::FILLED); // Point orange pour le robot
     // Ligne pour l'orientation
@@ -155,14 +142,14 @@ void Simulation::displaySimulation(int scaleFactor, Grid plan) const {
     cv::imshow(WindowName, roomImage);
 }
 
-//Affichage en 3D avec le raycasting
+//Affichage de la vue du robot en 3D avec le raycasting
 void Simulation::displayRaycasting(Grid plan, int WindowWidth, int WindowHeight, int wallHeight, int fov) const {
     cv::Mat raycastingRender = cv::Mat::zeros(WindowHeight, WindowWidth, CV_8UC3);
     std::vector<double> readings = lidar->readAll();
     for (int i = -fov / 2; i <= fov / 2; i++) {
-        double correctedDistance = readings[i + 180] * cos(i * M_PI / 180);        
+        double correctedDistance = readings[i + lidar->getRayCount() / 2] * cos(i * M_PI / 180);        
         double projectionWallHeight = wallHeight / correctedDistance;
-        if (readings[i + 180] != -1) { 
+        if (readings[i + lidar->getRayCount() / 2] != -1) { 
         double stripeStartY = (WindowHeight - projectionWallHeight) / 2.0;
         double stripeX = (i + (fov / 2)) * (WindowWidth) / fov;
         cv::rectangle(raycastingRender, cv::Point(WindowWidth - stripeX, stripeStartY), cv::Point(WindowWidth - (stripeX + (WindowWidth / fov)), stripeStartY + projectionWallHeight), cv::Scalar(255 * (1 - correctedDistance / 30), 0, 0), cv::FILLED);
@@ -170,7 +157,12 @@ void Simulation::displayRaycasting(Grid plan, int WindowWidth, int WindowHeight,
     cv::imshow("Lidar Raycasting", raycastingRender);
 }
 
-
+// Tout afficher
+void Simulation::displayAll() {
+    displaySimulation(50, environment->getRoom());
+    displaySimulation(50, map->getRobotMap());
+    displayRaycasting(map->getRobotMap(), 800, 600, 200, 70);
+}
 
 // Getters
 Environment* Simulation::getEnvironment() const {

@@ -8,8 +8,8 @@ using Types::Grid;
 class Environment
 {
 private:
-    int width;   // Longueur de l'environnement (cm)
-    int height;  // Largeur de l'environnement (cm)
+    int width;   // Longueur de l'environnement
+    int height;  // Largeur de l'environnement
     Grid room;   // Occupancy grid
 public:
     // Constructeur avec paramètres
