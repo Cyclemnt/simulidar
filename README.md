@@ -28,10 +28,10 @@ Ce projet implémente une simulation robotique utilisant un **robot mobile équi
   ```
 
 ## Utilisation
-1. Une fois le programme lancé, la simulation démarre en plaçant le robot aléatoirement dans un environnement.
+1. Une fois le programme lancé, la simulation démarre en plaçant le robot aléatoirement dans un environnement.  
    Appuyez sur n'importe quelle touche pour commencer.
 2. La simulation met à jour en temps réel l'état de l'environnement et la carte du robot.
-3. Une fois que toutes les zones accessibles ont été explorées, la simulation s'arrête.
+3. Une fois que toutes les zones accessibles ont été explorées, la simulation s'arrête.  
    Appuyez sur n'importe quelle touche pour fermer les fenêtres.
 
 ## Personalisation
