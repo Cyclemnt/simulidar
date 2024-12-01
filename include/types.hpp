@@ -15,8 +15,8 @@
 #define LIDAR_MAX_RANGE 30  // Portée du Lidar (u)
 #define LIDAR_RAY_COUNT 360 // Nombre de rayons du Lidar
 // Robot
-#define ANG_V 2 * M_PI      // Vitesse angulaire du robot (rad/s)
-#define SPEED 3             // vitesse de mouvement du robot (u/s)
+#define ANG_V M_PI          // Vitesse angulaire du robot (rad/s)
+#define SPEED 2             // vitesse de mouvement du robot (u/s)
 // (u) unité de distance
 
 namespace Types {

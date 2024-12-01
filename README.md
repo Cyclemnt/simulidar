@@ -1,21 +1,32 @@
-# Simulation de Navigation Robotique avec Lidar et OpenCV
+# Simulation de Navigation Robotique avec LiDAR
 
-Ce projet implémente une simulation robotique utilisant un **robot mobile équipé d'un Lidar** pour explorer un environnement inconnu. Il utilise OpenCV pour visualiser l'environnement et la carte du robot en temps réel.
+Ce projet implémente une simulation robotique utilisant un **robot mobile équipé d'un LiDAR** pour explorer un environnement inconnu. Il utilise OpenCV pour visualiser l'environnement et la carte du robot en temps réel.
+
+## Membres du groupe
+- FERRIER Simon
+- LAMOULLER Clément
+- PARIZOT Luan
+
+## Objectif du projet
+Le but est de simuler un robot mobile explorant un environnement inconnu en utilisant un LiDAR pour construire une carte. Le robot doit éviter les obstacles, explorer toutes les zones accessibles et naviguer efficacement.
 
 ## Diagramme UML du projet
-Voici le diagramme UML de l'architecture du projet :
-![Diagramme UML](images/simulidar_uml.png)
+<p align="center">
+  <img src="images/simulidar_uml.svg" alt="Diagramme UML"/>
+</p>
 
 ## Fonctionnalités
 - **Environnement généré aléatoirement** avec des obstacles de tailles variées.
-- **Algorithme A*** pour la recherche de chemin.
-- **Exploration autonome** avec mise à jour de la carte à partir des données du Lidar.
+- **Robot initialisé aléatoirement** sans conaissance de sa position.
+- **Algorithme de [raycasting](https://lodev.org/cgtutor/raycasting.html)** pour les mesures LiDAR.
+- **Exploration autonome** avec mise à jour de la carte à partir des données du LiDAR.
+    - Algorithme [A*](https://en.wikipedia.org/wiki/A*_search_algorithm) pour la recherche de chemin.
 - **Visualisation en temps réel** :
   - Vue 2D de l'environnement et de la carte du robot.
   - Vue 3D simplifiée utilisant le raycasting pour simuler la perception du robot.
 
 ## Dépendances
-- [OpenCV](https://opencv.org/) : Pour les affichages graphiques.
+- **[OpenCV](https://opencv.org/)** : Pour les affichages graphiques.
 - **CMake** : Pour la configuration et la construction du projet.
 - **C++11** ou version ultérieure.
 
@@ -23,6 +34,9 @@ Voici le diagramme UML de l'architecture du projet :
 **Cloner le dépôt** :
    ```bash
    git clone https://github.com/Cyclemnt/simulidar.git
+  ```
+**Compiler** :
+   ```bash
    cd simulidar
    mkdir build
    cd build
@@ -39,17 +53,15 @@ Voici le diagramme UML de l'architecture du projet :
    Appuyez sur n'importe quelle touche pour fermer les fenêtres.
 
 ## Personalisation
-Vous pouvez ajuster certains paramètres dans le fichier types.hpp :
-- Dimensions de l'environnement (ENV_WIDTH, ENV_HEIGHT).
-- Nombre d'obstacles (OBSTACLE_NUM).
-- Taille maximale des obstacles (OBSTACLE_MAX_SIZE).
-- Pas de temps de la simulation (TIMESTEP).
-- Portée du Lidar (LIDAR_MAX_RANGE).
-- Nombre de rayons du Lidar (LIDAR_RAY_COUNT).
-- Vitesse angulaire du robot (ANG_V).
-- Vitesse de déplacement du robot (SPEED).
+Modifiez les paramètres dans types.hpp pour personnaliser la simulation :
 
-## Contributions
-- FERRIER Simon
-- LAMOULLER Clément
-- PARIZOT Luan
+- **ENV_WIDTH**, **ENV_HEIGHT** : Dimensions de l’environnement.
+- **OBSTACLE_NUM**, **OBSTACLE_MAX_SIZE** : Nombre et taille des obstacles.
+- **TIMESTEP** : Pas de temps entre les mises à jour.
+- **LIDAR_MAX_RANGE**, **LIDAR_RAY_COUNT** : Portée et précision du Lidar.
+- **SPEED**, **ANG_V** : Vitesse du robot.
+
+## Exemple visuel
+<p align="center">
+  <img src="images/demo_simulidar.gif" alt="Demo"/>
+</p>
