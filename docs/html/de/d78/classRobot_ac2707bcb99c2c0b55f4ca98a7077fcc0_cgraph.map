@@ -1,7 +1,0 @@
-<map id="Robot::executeInstruction" name="Robot::executeInstruction">
-<area shape="rect" id="node1" title="Exécuter l&#39;instruction (s&#39;orienter et avancer)." alt="" coords="5,81,193,108"/>
-<area shape="rect" id="node2" href="$d7/db0/classMap.html#a0f1b7e8279fdb7400cd42fdfbbe00656" title=" " alt="" coords="241,5,432,32"/>
-<area shape="rect" id="node3" href="$d7/db0/classMap.html#a513e996f503260c074d73bd2dc80a4c9" title=" " alt="" coords="253,56,420,83"/>
-<area shape="rect" id="node4" href="$de/d78/classRobot.html#a14a466b67548b6aac5632527c8df584b" title="Avancer le robot." alt="" coords="284,107,389,133"/>
-<area shape="rect" id="node5" href="$de/d78/classRobot.html#a5a3acb414922e8336b5f960288a2d518" title="Tourner le robot." alt="" coords="283,157,390,184"/>
-</map>
