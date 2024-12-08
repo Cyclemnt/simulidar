@@ -1,0 +1,7 @@
+<map id="Lidar::readAll" name="Lidar::readAll">
+<area shape="rect" id="node1" title="Lire tous les rayons. Cette méthode mesure les distances pour tous les rayons simulés par le Lidar,..." alt="" coords="756,31,864,57"/>
+<area shape="rect" id="node2" href="$d1/d7b/classSimulation.html#ac77cf141fd8d8fce9a6c8c14f2014cda" title="Afficher en 3D la vue du robot avec le raycasting. Cette méthode affiche une vue en 3D simulée basée ..." alt="" coords="489,5,708,32"/>
+<area shape="rect" id="node4" href="$d1/d7b/classSimulation.html#ae5c367f87c0b5dc9740bc6d00e44e72c" title="Démarrer la simulation. Cette méthode lance la simulation et gère la logique principale du déplacemen..." alt="" coords="108,31,229,57"/>
+<area shape="rect" id="node3" href="$d1/d7b/classSimulation.html#ad3c853511c7d02a90ecd006ef427bf23" title="Afficher les trois fenêtres Cette méthode affiche les trois vues principales de la simulation : l&#39;env..." alt="" coords="277,5,441,32"/>
+<area shape="rect" id="node5" href="$df/d0a/main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,31,60,57"/>
+</map>

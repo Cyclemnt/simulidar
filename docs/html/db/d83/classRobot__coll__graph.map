@@ -1,0 +1,8 @@
+<map id="Robot" name="Robot">
+<area shape="rect" id="node1" title="Représente le robot." alt="" coords="5,627,172,924"/>
+<area shape="rect" id="node5" href="$d1/d7b/classSimulation.html" title="Chef d&#39;orchestre de la simulation." alt="" coords="134,987,345,1269"/>
+<area shape="rect" id="node2" href="$d7/db0/classMap.html" title="Représente la carte du robot." alt="" coords="99,145,313,399"/>
+<area shape="rect" id="node3" title=" " alt="" coords="253,5,303,83"/>
+<area shape="rect" id="node6" href="$d0/d98/classEnvironment.html" title="Représente l&#39;environnement dans lequel le robot évolue." alt="" coords="240,423,463,603"/>
+<area shape="rect" id="node4" href="$d2/da5/classLidar.html" title="Représente le Lidar simulé." alt="" coords="65,1332,195,1483"/>
+</map>

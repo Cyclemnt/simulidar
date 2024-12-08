@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.4"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Simulidar:  Fichier source de include/types.hpp</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Simulidar
+   </div>
+   <div id="projectbrief">Simulation d&#39;un robot cartographiant un environnement à l&#39;aide d&#39;un Lidar en C++.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.4 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "../../search",'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('../../',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="../../dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle"><div class="title">types.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="../../dd/de3/types_8hpp.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef TYPES_HPP</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define TYPES_HPP</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">// PARAMèTRES DE LA SIMULATION</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">// Environnement</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="../../dd/de3/types_8hpp.html#ad24f0acc7f13d3f014474552587db7c5">    8</a></span><span class="preprocessor">#define ENV_WIDTH 20        </span><span class="comment">// Largeur de l&#39;environnement (u)</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="../../dd/de3/types_8hpp.html#af8f859ba7d677d89b28e7946543c5c42">    9</a></span><span class="preprocessor">#define ENV_HEIGHT 20       </span><span class="comment">// Hauteur de l&#39;environnement (u)</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="../../dd/de3/types_8hpp.html#a42f341a81c89a0f90fda2d15e57fbf10">   10</a></span><span class="preprocessor">#define OBSTACLE_NUM 30     </span><span class="comment">// Nombre d&#39;obstacles</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="../../dd/de3/types_8hpp.html#aadaaa774270a5599a5357de49c0913e3">   11</a></span><span class="preprocessor">#define OBSTACLE_MAX_SIZE 3 </span><span class="comment">// Taille maximale des obstacles (u)</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">// Simulation</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="../../dd/de3/types_8hpp.html#a68ee019dafc12ee47d427cda7f17713e">   13</a></span><span class="preprocessor">#define TIMESTEP 30         </span><span class="comment">// Temps entre chaque état de la simulation (ms)</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">// Lidar</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="../../dd/de3/types_8hpp.html#abc5f394f38087aa768286365b6ec3ec3">   15</a></span><span class="preprocessor">#define LIDAR_MAX_RANGE 30  </span><span class="comment">// Portée du Lidar (u)</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="../../dd/de3/types_8hpp.html#a3f725c5c71169d1934ee2f2afe8474b7">   16</a></span><span class="preprocessor">#define LIDAR_RAY_COUNT 360 </span><span class="comment">// Nombre de rayons du Lidar</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">// Robot</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="../../dd/de3/types_8hpp.html#a5cb1fa7ba08e757e42bdb3d948aebaab">   18</a></span><span class="preprocessor">#define ANG_V M_PI          </span><span class="comment">// Vitesse angulaire du robot (rad/s)</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="../../dd/de3/types_8hpp.html#aac3553b3932cbfeeac4526ce7ca0336b">   19</a></span><span class="preprocessor">#define SPEED 2             </span><span class="comment">// vitesse de mouvement du robot (u/s)</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">// (u) unité de distance</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="../../d1/d04/namespaceTypes.html">   22</a></span><span class="keyword">namespace </span><a class="code hl_namespace" href="../../d1/d04/namespaceTypes.html">Types</a> {</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="../../d1/d04/namespaceTypes.html#a0fcccc2788acf1b16f118db8e82a567e">   23</a></span>    <span class="keyword">enum class</span> <a class="code hl_enumeration" href="../../d1/d04/namespaceTypes.html#a0fcccc2788acf1b16f118db8e82a567e">CellState</a> {</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        <a class="code hl_enumvalue" href="../../d1/d04/namespaceTypes.html#a0fcccc2788acf1b16f118db8e82a567ea94e8a499539d1a472f3b5dbbb85508c0">Wall</a> = 1,</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        <a class="code hl_enumvalue" href="../../d1/d04/namespaceTypes.html#a0fcccc2788acf1b16f118db8e82a567eab24ce0cd392a5b0b8dedc66c25213594">Free</a> = 0,</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        <a class="code hl_enumvalue" href="../../d1/d04/namespaceTypes.html#a0fcccc2788acf1b16f118db8e82a567ea88183b946cc5f0e8c96b2e66e1c74a7e">Unknown</a> = -1</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    };</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="../../d1/d04/namespaceTypes.html#a21aefbaf3fd02f1c045d5316c3abd0dc">   29</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="../../d1/d04/namespaceTypes.html#a21aefbaf3fd02f1c045d5316c3abd0dc">Grid</a> = std::vector&lt;std::vector&lt;CellState&gt;&gt;;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="../../d1/d04/namespaceTypes.html#ad07c6ae643a399d806acd7b268107c61">   31</a></span>    <span class="keyword">enum class</span> <a class="code hl_enumeration" href="../../d1/d04/namespaceTypes.html#ad07c6ae643a399d806acd7b268107c61">Direction</a> { <a class="code hl_enumvalue" href="../../d1/d04/namespaceTypes.html#ad07c6ae643a399d806acd7b268107c61a8d9c307cb7f3c4a32822a51922d1ceaa">N</a>, <a class="code hl_enumvalue" href="../../d1/d04/namespaceTypes.html#ad07c6ae643a399d806acd7b268107c61a5dbc98dcc983a70728bd082d1a47546e">S</a>, <a class="code hl_enumvalue" href="../../d1/d04/namespaceTypes.html#ad07c6ae643a399d806acd7b268107c61a3a3ea00cfc35332cedf6e5e9a32e94da">E</a>, <a class="code hl_enumvalue" href="../../d1/d04/namespaceTypes.html#ad07c6ae643a399d806acd7b268107c61a61e9c06ea9a85a5088a499df6458d276">W</a> };</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>}</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">#endif </span><span class="comment">// TYPES_HPP</span></div>
+<div class="ttc" id="anamespaceTypes_html"><div class="ttname"><a href="../../d1/d04/namespaceTypes.html">Types</a></div><div class="ttdef"><b>Definition:</b> types.hpp:22</div></div>
+<div class="ttc" id="anamespaceTypes_html_a0fcccc2788acf1b16f118db8e82a567e"><div class="ttname"><a href="../../d1/d04/namespaceTypes.html#a0fcccc2788acf1b16f118db8e82a567e">Types::CellState</a></div><div class="ttdeci">CellState</div><div class="ttdef"><b>Definition:</b> types.hpp:23</div></div>
+<div class="ttc" id="anamespaceTypes_html_a0fcccc2788acf1b16f118db8e82a567ea88183b946cc5f0e8c96b2e66e1c74a7e"><div class="ttname"><a href="../../d1/d04/namespaceTypes.html#a0fcccc2788acf1b16f118db8e82a567ea88183b946cc5f0e8c96b2e66e1c74a7e">Types::CellState::Unknown</a></div><div class="ttdeci">@ Unknown</div></div>
+<div class="ttc" id="anamespaceTypes_html_a0fcccc2788acf1b16f118db8e82a567ea94e8a499539d1a472f3b5dbbb85508c0"><div class="ttname"><a href="../../d1/d04/namespaceTypes.html#a0fcccc2788acf1b16f118db8e82a567ea94e8a499539d1a472f3b5dbbb85508c0">Types::CellState::Wall</a></div><div class="ttdeci">@ Wall</div></div>
+<div class="ttc" id="anamespaceTypes_html_a0fcccc2788acf1b16f118db8e82a567eab24ce0cd392a5b0b8dedc66c25213594"><div class="ttname"><a href="../../d1/d04/namespaceTypes.html#a0fcccc2788acf1b16f118db8e82a567eab24ce0cd392a5b0b8dedc66c25213594">Types::CellState::Free</a></div><div class="ttdeci">@ Free</div></div>
+<div class="ttc" id="anamespaceTypes_html_a21aefbaf3fd02f1c045d5316c3abd0dc"><div class="ttname"><a href="../../d1/d04/namespaceTypes.html#a21aefbaf3fd02f1c045d5316c3abd0dc">Types::Grid</a></div><div class="ttdeci">std::vector&lt; std::vector&lt; CellState &gt; &gt; Grid</div><div class="ttdef"><b>Definition:</b> types.hpp:29</div></div>
+<div class="ttc" id="anamespaceTypes_html_ad07c6ae643a399d806acd7b268107c61"><div class="ttname"><a href="../../d1/d04/namespaceTypes.html#ad07c6ae643a399d806acd7b268107c61">Types::Direction</a></div><div class="ttdeci">Direction</div><div class="ttdef"><b>Definition:</b> types.hpp:31</div></div>
+<div class="ttc" id="anamespaceTypes_html_ad07c6ae643a399d806acd7b268107c61a3a3ea00cfc35332cedf6e5e9a32e94da"><div class="ttname"><a href="../../d1/d04/namespaceTypes.html#ad07c6ae643a399d806acd7b268107c61a3a3ea00cfc35332cedf6e5e9a32e94da">Types::Direction::E</a></div><div class="ttdeci">@ E</div></div>
+<div class="ttc" id="anamespaceTypes_html_ad07c6ae643a399d806acd7b268107c61a5dbc98dcc983a70728bd082d1a47546e"><div class="ttname"><a href="../../d1/d04/namespaceTypes.html#ad07c6ae643a399d806acd7b268107c61a5dbc98dcc983a70728bd082d1a47546e">Types::Direction::S</a></div><div class="ttdeci">@ S</div></div>
+<div class="ttc" id="anamespaceTypes_html_ad07c6ae643a399d806acd7b268107c61a61e9c06ea9a85a5088a499df6458d276"><div class="ttname"><a href="../../d1/d04/namespaceTypes.html#ad07c6ae643a399d806acd7b268107c61a61e9c06ea9a85a5088a499df6458d276">Types::Direction::W</a></div><div class="ttdeci">@ W</div></div>
+<div class="ttc" id="anamespaceTypes_html_ad07c6ae643a399d806acd7b268107c61a8d9c307cb7f3c4a32822a51922d1ceaa"><div class="ttname"><a href="../../d1/d04/namespaceTypes.html#ad07c6ae643a399d806acd7b268107c61a8d9c307cb7f3c4a32822a51922d1ceaa">Types::Direction::N</a></div><div class="ttdeci">@ N</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4
+</small></address>
+</body>
+</html>

@@ -1,0 +1,5 @@
+<map id="Map::aStar" name="Map::aStar">
+<area shape="rect" id="node1" title="Trouver le chemin le plus court entre &quot;start&quot; et &quot;goal&quot;. Cette méthode implémente l&#39;algorithme A* pou..." alt="" coords="277,5,369,32"/>
+<area shape="rect" id="node2" href="$d1/d7b/classSimulation.html#ae5c367f87c0b5dc9740bc6d00e44e72c" title="Démarrer la simulation. Cette méthode lance la simulation et gère la logique principale du déplacemen..." alt="" coords="108,5,229,32"/>
+<area shape="rect" id="node3" href="$df/d0a/main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,5,60,32"/>
+</map>

@@ -1,0 +1,6 @@
+<map id="Robot::updateMap" name="Robot::updateMap">
+<area shape="rect" id="node1" title="Mettre à jour la carte. Cette méthode met à jour une carte locale du robot à l&#39;aide des mesures du ca..." alt="" coords="5,31,147,57"/>
+<area shape="rect" id="node2" href="$d7/db0/classMap.html#a05e67979fc0f5e865ddd69b39a24eded" title="Tracer un chemin de cases libres terminé par un obstacle. Cette méthode simule un rayon émis depuis u..." alt="" coords="195,5,420,32"/>
+<area shape="rect" id="node4" href="$d2/da5/classLidar.html#a9abe033b12f8d002be75ec93839087bd" title=" " alt="" coords="234,56,381,83"/>
+<area shape="rect" id="node3" href="$d7/db0/classMap.html#a2288247b5feba3e6742e23d096ab1837" title="Agrandir la carte. Cette méthode permet d&#39;agrandir la carte avec cellules à l&#39;état inconnu (CellState..." alt="" coords="468,5,643,32"/>
+</map>

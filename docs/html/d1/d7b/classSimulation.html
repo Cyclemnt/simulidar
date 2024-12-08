@@ -1,0 +1,853 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.4"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Simulidar: Référence de la classe Simulation</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Simulidar
+   </div>
+   <div id="projectbrief">Simulation d&#39;un robot cartographiant un environnement à l&#39;aide d&#39;un Lidar en C++.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.4 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "../../search",'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('../../',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Fonctions membres publiques</a> &#124;
+<a href="#pri-attribs">Attributs privés</a> &#124;
+<a href="../../d5/dc5/classSimulation-members.html">Liste de tous les membres</a>  </div>
+  <div class="headertitle"><div class="title">Référence de la classe Simulation</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Chef d'orchestre de la simulation.  
+ <a href="../../d1/d7b/classSimulation.html#details">Plus de détails...</a></p>
+
+<p><code>#include &lt;<a class="el" href="../../d3/d27/simulation_8hpp_source.html">simulation.hpp</a>&gt;</code></p>
+<div class="dynheader">
+Graphe de collaboration de Simulation:</div>
+<div class="dyncontent">
+<div class="center"><img src="../../df/d40/classSimulation__coll__graph.png" border="0" usemap="#aSimulation_coll__map" alt="Collaboration graph"/></div>
+<map name="aSimulation_coll__map" id="aSimulation_coll__map">
+<area shape="rect" title="Chef d&#39;orchestre de la simulation." alt="" coords="111,461,322,744"/>
+<area shape="rect" href="../../d2/da5/classLidar.html" title="Représente le Lidar simulé." alt="" coords="99,807,230,957"/>
+<area shape="rect" href="../../d0/d98/classEnvironment.html" title="Représente l&#39;environnement dans lequel le robot évolue." alt="" coords="5,182,228,362"/>
+<area shape="rect" title=" " alt="" coords="213,5,263,83"/>
+<area shape="rect" href="../../d7/db0/classMap.html" title="Représente la carte du robot." alt="" coords="252,145,467,399"/>
+<area shape="rect" href="../../de/d78/classRobot.html" title="Représente le robot." alt="" coords="195,1020,361,1317"/>
+</map>
+</div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Fonctions membres publiques</h2></td></tr>
+<tr class="memitem:a5b224cc5b36bcc8eb29689aff223de41"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d7b/classSimulation.html#a5b224cc5b36bcc8eb29689aff223de41">Simulation</a> ()</td></tr>
+<tr class="memdesc:a5b224cc5b36bcc8eb29689aff223de41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ce constructeur initialise les principaux éléments de la simulation : le point de départ et l'orientation du robot, ainsi que le pas de temps utilisé pour le déroulement de la simulation.  <a href="../../d1/d7b/classSimulation.html#a5b224cc5b36bcc8eb29689aff223de41">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a5b224cc5b36bcc8eb29689aff223de41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5c367f87c0b5dc9740bc6d00e44e72c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d7b/classSimulation.html#ae5c367f87c0b5dc9740bc6d00e44e72c">run</a> ()</td></tr>
+<tr class="memdesc:ae5c367f87c0b5dc9740bc6d00e44e72c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Démarrer la simulation. Cette méthode lance la simulation et gère la logique principale du déplacement et de l'exploration du robot.  <a href="../../d1/d7b/classSimulation.html#ae5c367f87c0b5dc9740bc6d00e44e72c">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ae5c367f87c0b5dc9740bc6d00e44e72c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf25608aa65973b2940601a4326a89ab"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d7b/classSimulation.html#aaf25608aa65973b2940601a4326a89ab">initializeRobotPose</a> ()</td></tr>
+<tr class="memdesc:aaf25608aa65973b2940601a4326a89ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialiser la pose du robot. Cette méthode positionne le robot dans une cellule libre aléatoire de l'environnement.  <a href="../../d1/d7b/classSimulation.html#aaf25608aa65973b2940601a4326a89ab">Plus de détails...</a><br /></td></tr>
+<tr class="separator:aaf25608aa65973b2940601a4326a89ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3803092b1a97815b336d59c64557f8ee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d7b/classSimulation.html#a3803092b1a97815b336d59c64557f8ee">displaySimulation</a> (int scaleFactor, Grid plan) const</td></tr>
+<tr class="memdesc:a3803092b1a97815b336d59c64557f8ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Afficher la simulation Cette méthode affiche l'état d'une grille donnée (environnement ou carte du robot) avec une échelle définie.  <a href="../../d1/d7b/classSimulation.html#a3803092b1a97815b336d59c64557f8ee">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a3803092b1a97815b336d59c64557f8ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac77cf141fd8d8fce9a6c8c14f2014cda"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d7b/classSimulation.html#ac77cf141fd8d8fce9a6c8c14f2014cda">displayRaycasting</a> (Grid plan, int WindowWidth, int WindowHeight, int wallheight, int fov) const</td></tr>
+<tr class="memdesc:ac77cf141fd8d8fce9a6c8c14f2014cda"><td class="mdescLeft">&#160;</td><td class="mdescRight">Afficher en 3D la vue du robot avec le raycasting. Cette méthode affiche une vue en 3D simulée basée sur les relevés du <a class="el" href="../../d2/da5/classLidar.html" title="Représente le Lidar simulé.">Lidar</a>.  <a href="../../d1/d7b/classSimulation.html#ac77cf141fd8d8fce9a6c8c14f2014cda">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ac77cf141fd8d8fce9a6c8c14f2014cda"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3c853511c7d02a90ecd006ef427bf23"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d7b/classSimulation.html#ad3c853511c7d02a90ecd006ef427bf23">displayAll</a> ()</td></tr>
+<tr class="memdesc:ad3c853511c7d02a90ecd006ef427bf23"><td class="mdescLeft">&#160;</td><td class="mdescRight">Afficher les trois fenêtres Cette méthode affiche les trois vues principales de la simulation : l'environnement complet, la carte locale du robot et La vue simulée en 3D via le raycasting.  <a href="../../d1/d7b/classSimulation.html#ad3c853511c7d02a90ecd006ef427bf23">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ad3c853511c7d02a90ecd006ef427bf23"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f0a6c41e5181df8f73c10c0ded79dfc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d0/d98/classEnvironment.html">Environment</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d7b/classSimulation.html#a8f0a6c41e5181df8f73c10c0ded79dfc">getEnvironment</a> () const</td></tr>
+<tr class="separator:a8f0a6c41e5181df8f73c10c0ded79dfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e5185a60642660c0bae15823fa1d638"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../de/d78/classRobot.html">Robot</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d7b/classSimulation.html#a3e5185a60642660c0bae15823fa1d638">getRobot</a> () const</td></tr>
+<tr class="separator:a3e5185a60642660c0bae15823fa1d638"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a090858d3cad1c27d4cce4253c9c79edc"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d7b/classSimulation.html#a090858d3cad1c27d4cce4253c9c79edc">getXRobotStart</a> () const</td></tr>
+<tr class="separator:a090858d3cad1c27d4cce4253c9c79edc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a668b1589efeb8de9e50683b81dde7181"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d7b/classSimulation.html#a668b1589efeb8de9e50683b81dde7181">getYRobotStart</a> () const</td></tr>
+<tr class="separator:a668b1589efeb8de9e50683b81dde7181"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26bab3a8cb7d435a3233c327ef9f173d"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d7b/classSimulation.html#a26bab3a8cb7d435a3233c327ef9f173d">getOrientationRobotStart</a> () const</td></tr>
+<tr class="separator:a26bab3a8cb7d435a3233c327ef9f173d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80fad3f57dfaf195a36f7bc49bc88279"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d7b/classSimulation.html#a80fad3f57dfaf195a36f7bc49bc88279">~Simulation</a> ()</td></tr>
+<tr class="separator:a80fad3f57dfaf195a36f7bc49bc88279"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Attributs privés</h2></td></tr>
+<tr class="memitem:a969ccb12c3dc14aaa236a50eda71da04"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d0/d98/classEnvironment.html">Environment</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d7b/classSimulation.html#a969ccb12c3dc14aaa236a50eda71da04">environment</a></td></tr>
+<tr class="separator:a969ccb12c3dc14aaa236a50eda71da04"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0bbb2970b19c9de1e4236a31f183fe54"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d7/db0/classMap.html">Map</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d7b/classSimulation.html#a0bbb2970b19c9de1e4236a31f183fe54">map</a></td></tr>
+<tr class="separator:a0bbb2970b19c9de1e4236a31f183fe54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a014a97fb572686e0ab2412f0ca405ccf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../de/d78/classRobot.html">Robot</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d7b/classSimulation.html#a014a97fb572686e0ab2412f0ca405ccf">robot</a></td></tr>
+<tr class="separator:a014a97fb572686e0ab2412f0ca405ccf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a51342ccba4a60b0342e4367b319065"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d2/da5/classLidar.html">Lidar</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d7b/classSimulation.html#a6a51342ccba4a60b0342e4367b319065">lidar</a></td></tr>
+<tr class="separator:a6a51342ccba4a60b0342e4367b319065"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf321f94b7c42f57b879f813bffe2430"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d7b/classSimulation.html#aaf321f94b7c42f57b879f813bffe2430">xRobotStart</a></td></tr>
+<tr class="separator:aaf321f94b7c42f57b879f813bffe2430"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a124dede4b2be827698f8ed57aa51c6b5"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d7b/classSimulation.html#a124dede4b2be827698f8ed57aa51c6b5">yRobotStart</a></td></tr>
+<tr class="separator:a124dede4b2be827698f8ed57aa51c6b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a456fdbbfe31787a18a2c50bb059684b8"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d7b/classSimulation.html#a456fdbbfe31787a18a2c50bb059684b8">orientationRobotStart</a></td></tr>
+<tr class="separator:a456fdbbfe31787a18a2c50bb059684b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52eb4c8f0c73692215708c4175be8d64"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d7b/classSimulation.html#a52eb4c8f0c73692215708c4175be8d64">timeStep</a></td></tr>
+<tr class="separator:a52eb4c8f0c73692215708c4175be8d64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
+<div class="textblock"><p >Chef d'orchestre de la simulation. </p>
+</div><h2 class="groupheader">Documentation des constructeurs et destructeur</h2>
+<a id="a5b224cc5b36bcc8eb29689aff223de41" name="a5b224cc5b36bcc8eb29689aff223de41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b224cc5b36bcc8eb29689aff223de41">&#9670;&nbsp;</a></span>Simulation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Simulation::Simulation </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Ce constructeur initialise les principaux éléments de la simulation : le point de départ et l'orientation du robot, ainsi que le pas de temps utilisé pour le déroulement de la simulation. </p>
+
+</div>
+</div>
+<a id="a80fad3f57dfaf195a36f7bc49bc88279" name="a80fad3f57dfaf195a36f7bc49bc88279"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80fad3f57dfaf195a36f7bc49bc88279">&#9670;&nbsp;</a></span>~Simulation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Simulation::~Simulation </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Documentation des fonctions membres</h2>
+<a id="ad3c853511c7d02a90ecd006ef427bf23" name="ad3c853511c7d02a90ecd006ef427bf23"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3c853511c7d02a90ecd006ef427bf23">&#9670;&nbsp;</a></span>displayAll()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Simulation::displayAll </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Afficher les trois fenêtres Cette méthode affiche les trois vues principales de la simulation : l'environnement complet, la carte locale du robot et La vue simulée en 3D via le raycasting. </p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="../../d1/d7b/classSimulation_ad3c853511c7d02a90ecd006ef427bf23_cgraph.png" border="0" usemap="#ad1/d7b/classSimulation_ad3c853511c7d02a90ecd006ef427bf23_cgraph" alt=""/></div>
+<map name="ad1/d7b/classSimulation_ad3c853511c7d02a90ecd006ef427bf23_cgraph" id="ad1/d7b/classSimulation_ad3c853511c7d02a90ecd006ef427bf23_cgraph">
+<area shape="rect" title="Afficher les trois fenêtres Cette méthode affiche les trois vues principales de la simulation : l&#39;env..." alt="" coords="5,528,169,555"/>
+<area shape="rect" href="../../d1/d7b/classSimulation.html#ac77cf141fd8d8fce9a6c8c14f2014cda" title="Afficher en 3D la vue du robot avec le raycasting. Cette méthode affiche une vue en 3D simulée basée ..." alt="" coords="217,401,436,428"/>
+<area shape="rect" href="../../d0/d98/classEnvironment.html#a42c8956b01016d2e283c3bec97cfd631" title=" " alt="" coords="960,528,1132,555"/>
+<area shape="rect" href="../../d1/d7b/classSimulation.html#a3803092b1a97815b336d59c64557f8ee" title="Afficher la simulation Cette méthode affiche l&#39;état d&#39;une grille donnée (environnement ou carte du ro..." alt="" coords="679,503,896,529"/>
+<area shape="rect" href="../../d7/db0/classMap.html#a81ef3172e85784f1197a81a27e6d7621" title=" " alt="" coords="973,781,1119,808"/>
+<area shape="rect" href="../../d2/da5/classLidar.html#a9abe033b12f8d002be75ec93839087bd" title=" " alt="" coords="484,401,631,428"/>
+<area shape="rect" href="../../d2/da5/classLidar.html#ac02c43dce0f273690b5532e7da420d96" title="Lire tous les rayons. Cette méthode mesure les distances pour tous les rayons simulés par le Lidar,..." alt="" coords="503,325,611,352"/>
+<area shape="rect" href="../../d2/da5/classLidar.html#aee1780110b243794b03d4ef3c0c6d22d" title="Lire un rayon particulier. Cette méthode calcule la distance entre le Lidar (situé sur le robot) et l..." alt="" coords="742,300,833,327"/>
+<area shape="rect" href="../../d1/d7b/classSimulation.html#a8f0a6c41e5181df8f73c10c0ded79dfc" title=" " alt="" coords="944,157,1148,184"/>
+<area shape="rect" href="../../d0/d98/classEnvironment.html#ad17660db40711861f8416d3ea641cd4f" title=" " alt="" coords="957,477,1135,504"/>
+<area shape="rect" href="../../de/d78/classRobot.html#a8270811ceae9e31af9905169050ccdf9" title=" " alt="" coords="965,275,1127,301"/>
+<area shape="rect" href="../../d1/d7b/classSimulation.html#a26bab3a8cb7d435a3233c327ef9f173d" title=" " alt="" coords="949,209,1143,250"/>
+<area shape="rect" href="../../d1/d7b/classSimulation.html#a3e5185a60642660c0bae15823fa1d638" title=" " alt="" coords="967,5,1125,32"/>
+<area shape="rect" href="../../d0/d98/classEnvironment.html#a053f882f4ecec6e9ade99fba3317001c" title=" " alt="" coords="960,325,1132,352"/>
+<area shape="rect" href="../../de/d78/classRobot.html#a4def336497f7e5f9dbedacf97d7f38ac" title=" " alt="" coords="997,376,1095,403"/>
+<area shape="rect" href="../../d1/d7b/classSimulation.html#a090858d3cad1c27d4cce4253c9c79edc" title=" " alt="" coords="947,56,1145,83"/>
+<area shape="rect" href="../../de/d78/classRobot.html#ad1d5656d60a203e1024b6a112390f3cd" title=" " alt="" coords="997,427,1095,453"/>
+<area shape="rect" href="../../d1/d7b/classSimulation.html#a668b1589efeb8de9e50683b81dde7181" title=" " alt="" coords="947,107,1145,133"/>
+<area shape="rect" href="../../d7/db0/classMap.html#a0f1b7e8279fdb7400cd42fdfbbe00656" title=" " alt="" coords="951,579,1141,605"/>
+<area shape="rect" href="../../d7/db0/classMap.html#a67113f1ffac80d9a20b15fa18a58edc2" title=" " alt="" coords="985,629,1107,656"/>
+<area shape="rect" href="../../d7/db0/classMap.html#a513e996f503260c074d73bd2dc80a4c9" title=" " alt="" coords="963,680,1129,707"/>
+<area shape="rect" href="../../d7/db0/classMap.html#ab3181204ba96eb15b96ee1ced85e198e" title=" " alt="" coords="987,731,1105,757"/>
+</map>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="../../d1/d7b/classSimulation_ad3c853511c7d02a90ecd006ef427bf23_icgraph.png" border="0" usemap="#ad1/d7b/classSimulation_ad3c853511c7d02a90ecd006ef427bf23_icgraph" alt=""/></div>
+<map name="ad1/d7b/classSimulation_ad3c853511c7d02a90ecd006ef427bf23_icgraph" id="ad1/d7b/classSimulation_ad3c853511c7d02a90ecd006ef427bf23_icgraph">
+<area shape="rect" title="Afficher les trois fenêtres Cette méthode affiche les trois vues principales de la simulation : l&#39;env..." alt="" coords="277,5,441,32"/>
+<area shape="rect" href="../../d1/d7b/classSimulation.html#ae5c367f87c0b5dc9740bc6d00e44e72c" title="Démarrer la simulation. Cette méthode lance la simulation et gère la logique principale du déplacemen..." alt="" coords="108,5,229,32"/>
+<area shape="rect" href="../../df/d0a/main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,5,60,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ac77cf141fd8d8fce9a6c8c14f2014cda" name="ac77cf141fd8d8fce9a6c8c14f2014cda"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac77cf141fd8d8fce9a6c8c14f2014cda">&#9670;&nbsp;</a></span>displayRaycasting()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Simulation::displayRaycasting </td>
+          <td>(</td>
+          <td class="paramtype">Grid&#160;</td>
+          <td class="paramname"><em>plan</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>WindowWidth</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>WindowHeight</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>wallheight</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>fov</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Afficher en 3D la vue du robot avec le raycasting. Cette méthode affiche une vue en 3D simulée basée sur les relevés du <a class="el" href="../../d2/da5/classLidar.html" title="Représente le Lidar simulé.">Lidar</a>. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">plan</td><td>Carte à afficher. </td></tr>
+    <tr><td class="paramname">WindowWidth</td><td>Largeur de fenêtre. </td></tr>
+    <tr><td class="paramname">WindowHeight</td><td>Hauteur de fenêtre. </td></tr>
+    <tr><td class="paramname">wallheight</td><td>Hauteur des murs. </td></tr>
+    <tr><td class="paramname">fov</td><td>Champ de vision (°). </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="../../d1/d7b/classSimulation_ac77cf141fd8d8fce9a6c8c14f2014cda_cgraph.png" border="0" usemap="#ad1/d7b/classSimulation_ac77cf141fd8d8fce9a6c8c14f2014cda_cgraph" alt=""/></div>
+<map name="ad1/d7b/classSimulation_ac77cf141fd8d8fce9a6c8c14f2014cda_cgraph" id="ad1/d7b/classSimulation_ac77cf141fd8d8fce9a6c8c14f2014cda_cgraph">
+<area shape="rect" title="Afficher en 3D la vue du robot avec le raycasting. Cette méthode affiche une vue en 3D simulée basée ..." alt="" coords="5,249,224,276"/>
+<area shape="rect" href="../../d2/da5/classLidar.html#a9abe033b12f8d002be75ec93839087bd" title=" " alt="" coords="272,224,419,251"/>
+<area shape="rect" href="../../d2/da5/classLidar.html#ac02c43dce0f273690b5532e7da420d96" title="Lire tous les rayons. Cette méthode mesure les distances pour tous les rayons simulés par le Lidar,..." alt="" coords="291,275,399,301"/>
+<area shape="rect" href="../../d2/da5/classLidar.html#aee1780110b243794b03d4ef3c0c6d22d" title="Lire un rayon particulier. Cette méthode calcule la distance entre le Lidar (situé sur le robot) et l..." alt="" coords="467,275,557,301"/>
+<area shape="rect" href="../../d1/d7b/classSimulation.html#a8f0a6c41e5181df8f73c10c0ded79dfc" title=" " alt="" coords="605,5,809,32"/>
+<area shape="rect" href="../../d0/d98/classEnvironment.html#ad17660db40711861f8416d3ea641cd4f" title=" " alt="" coords="619,56,796,83"/>
+<area shape="rect" href="../../de/d78/classRobot.html#a8270811ceae9e31af9905169050ccdf9" title=" " alt="" coords="626,107,789,133"/>
+<area shape="rect" href="../../d1/d7b/classSimulation.html#a26bab3a8cb7d435a3233c327ef9f173d" title=" " alt="" coords="610,158,805,199"/>
+<area shape="rect" href="../../d1/d7b/classSimulation.html#a3e5185a60642660c0bae15823fa1d638" title=" " alt="" coords="628,224,787,251"/>
+<area shape="rect" href="../../d0/d98/classEnvironment.html#a42c8956b01016d2e283c3bec97cfd631" title=" " alt="" coords="621,275,793,301"/>
+<area shape="rect" href="../../d0/d98/classEnvironment.html#a053f882f4ecec6e9ade99fba3317001c" title=" " alt="" coords="621,325,793,352"/>
+<area shape="rect" href="../../de/d78/classRobot.html#a4def336497f7e5f9dbedacf97d7f38ac" title=" " alt="" coords="658,376,757,403"/>
+<area shape="rect" href="../../d1/d7b/classSimulation.html#a090858d3cad1c27d4cce4253c9c79edc" title=" " alt="" coords="608,427,807,453"/>
+<area shape="rect" href="../../de/d78/classRobot.html#ad1d5656d60a203e1024b6a112390f3cd" title=" " alt="" coords="659,477,756,504"/>
+<area shape="rect" href="../../d1/d7b/classSimulation.html#a668b1589efeb8de9e50683b81dde7181" title=" " alt="" coords="608,528,807,555"/>
+</map>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="../../d1/d7b/classSimulation_ac77cf141fd8d8fce9a6c8c14f2014cda_icgraph.png" border="0" usemap="#ad1/d7b/classSimulation_ac77cf141fd8d8fce9a6c8c14f2014cda_icgraph" alt=""/></div>
+<map name="ad1/d7b/classSimulation_ac77cf141fd8d8fce9a6c8c14f2014cda_icgraph" id="ad1/d7b/classSimulation_ac77cf141fd8d8fce9a6c8c14f2014cda_icgraph">
+<area shape="rect" title="Afficher en 3D la vue du robot avec le raycasting. Cette méthode affiche une vue en 3D simulée basée ..." alt="" coords="489,5,708,32"/>
+<area shape="rect" href="../../d1/d7b/classSimulation.html#ad3c853511c7d02a90ecd006ef427bf23" title="Afficher les trois fenêtres Cette méthode affiche les trois vues principales de la simulation : l&#39;env..." alt="" coords="277,5,441,32"/>
+<area shape="rect" href="../../d1/d7b/classSimulation.html#ae5c367f87c0b5dc9740bc6d00e44e72c" title="Démarrer la simulation. Cette méthode lance la simulation et gère la logique principale du déplacemen..." alt="" coords="108,5,229,32"/>
+<area shape="rect" href="../../df/d0a/main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,5,60,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a3803092b1a97815b336d59c64557f8ee" name="a3803092b1a97815b336d59c64557f8ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3803092b1a97815b336d59c64557f8ee">&#9670;&nbsp;</a></span>displaySimulation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Simulation::displaySimulation </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>scaleFactor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Grid&#160;</td>
+          <td class="paramname"><em>plan</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Afficher la simulation Cette méthode affiche l'état d'une grille donnée (environnement ou carte du robot) avec une échelle définie. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">scaleFactor</td><td>Facteur d'agrandissement de la matrice à afficher (px). </td></tr>
+    <tr><td class="paramname">plan</td><td>Carte à afficher. </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="../../d1/d7b/classSimulation_a3803092b1a97815b336d59c64557f8ee_cgraph.png" border="0" usemap="#ad1/d7b/classSimulation_a3803092b1a97815b336d59c64557f8ee_cgraph" alt=""/></div>
+<map name="ad1/d7b/classSimulation_a3803092b1a97815b336d59c64557f8ee_cgraph" id="ad1/d7b/classSimulation_a3803092b1a97815b336d59c64557f8ee_cgraph">
+<area shape="rect" title="Afficher la simulation Cette méthode affiche l&#39;état d&#39;une grille donnée (environnement ou carte du ro..." alt="" coords="5,259,223,285"/>
+<area shape="rect" href="../../d7/db0/classMap.html#a0f1b7e8279fdb7400cd42fdfbbe00656" title=" " alt="" coords="271,5,461,32"/>
+<area shape="rect" href="../../d0/d98/classEnvironment.html#ad17660db40711861f8416d3ea641cd4f" title=" " alt="" coords="277,56,455,83"/>
+<area shape="rect" href="../../d7/db0/classMap.html#a67113f1ffac80d9a20b15fa18a58edc2" title=" " alt="" coords="305,107,427,133"/>
+<area shape="rect" href="../../d7/db0/classMap.html#a513e996f503260c074d73bd2dc80a4c9" title=" " alt="" coords="283,157,449,184"/>
+<area shape="rect" href="../../de/d78/classRobot.html#a8270811ceae9e31af9905169050ccdf9" title=" " alt="" coords="285,208,447,235"/>
+<area shape="rect" href="../../d7/db0/classMap.html#a81ef3172e85784f1197a81a27e6d7621" title=" " alt="" coords="293,259,439,285"/>
+<area shape="rect" href="../../d0/d98/classEnvironment.html#a42c8956b01016d2e283c3bec97cfd631" title=" " alt="" coords="280,309,452,336"/>
+<area shape="rect" href="../../d0/d98/classEnvironment.html#a053f882f4ecec6e9ade99fba3317001c" title=" " alt="" coords="280,360,452,387"/>
+<area shape="rect" href="../../d7/db0/classMap.html#ab3181204ba96eb15b96ee1ced85e198e" title=" " alt="" coords="307,411,425,437"/>
+<area shape="rect" href="../../de/d78/classRobot.html#a4def336497f7e5f9dbedacf97d7f38ac" title=" " alt="" coords="317,461,415,488"/>
+<area shape="rect" href="../../de/d78/classRobot.html#ad1d5656d60a203e1024b6a112390f3cd" title=" " alt="" coords="317,512,415,539"/>
+</map>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="../../d1/d7b/classSimulation_a3803092b1a97815b336d59c64557f8ee_icgraph.png" border="0" usemap="#ad1/d7b/classSimulation_a3803092b1a97815b336d59c64557f8ee_icgraph" alt=""/></div>
+<map name="ad1/d7b/classSimulation_a3803092b1a97815b336d59c64557f8ee_icgraph" id="ad1/d7b/classSimulation_a3803092b1a97815b336d59c64557f8ee_icgraph">
+<area shape="rect" title="Afficher la simulation Cette méthode affiche l&#39;état d&#39;une grille donnée (environnement ou carte du ro..." alt="" coords="489,5,707,32"/>
+<area shape="rect" href="../../d1/d7b/classSimulation.html#ad3c853511c7d02a90ecd006ef427bf23" title="Afficher les trois fenêtres Cette méthode affiche les trois vues principales de la simulation : l&#39;env..." alt="" coords="277,5,441,32"/>
+<area shape="rect" href="../../d1/d7b/classSimulation.html#ae5c367f87c0b5dc9740bc6d00e44e72c" title="Démarrer la simulation. Cette méthode lance la simulation et gère la logique principale du déplacemen..." alt="" coords="108,5,229,32"/>
+<area shape="rect" href="../../df/d0a/main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,5,60,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a8f0a6c41e5181df8f73c10c0ded79dfc" name="a8f0a6c41e5181df8f73c10c0ded79dfc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f0a6c41e5181df8f73c10c0ded79dfc">&#9670;&nbsp;</a></span>getEnvironment()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d0/d98/classEnvironment.html">Environment</a> * Simulation::getEnvironment </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="../../d1/d7b/classSimulation_a8f0a6c41e5181df8f73c10c0ded79dfc_icgraph.png" border="0" usemap="#ad1/d7b/classSimulation_a8f0a6c41e5181df8f73c10c0ded79dfc_icgraph" alt=""/></div>
+<map name="ad1/d7b/classSimulation_a8f0a6c41e5181df8f73c10c0ded79dfc_icgraph" id="ad1/d7b/classSimulation_a8f0a6c41e5181df8f73c10c0ded79dfc_icgraph">
+<area shape="rect" title=" " alt="" coords="1051,31,1255,57"/>
+<area shape="rect" href="../../d2/da5/classLidar.html#aee1780110b243794b03d4ef3c0c6d22d" title="Lire un rayon particulier. Cette méthode calcule la distance entre le Lidar (situé sur le robot) et l..." alt="" coords="912,31,1003,57"/>
+<area shape="rect" href="../../d2/da5/classLidar.html#ac02c43dce0f273690b5532e7da420d96" title="Lire tous les rayons. Cette méthode mesure les distances pour tous les rayons simulés par le Lidar,..." alt="" coords="756,31,864,57"/>
+<area shape="rect" href="../../d1/d7b/classSimulation.html#ac77cf141fd8d8fce9a6c8c14f2014cda" title="Afficher en 3D la vue du robot avec le raycasting. Cette méthode affiche une vue en 3D simulée basée ..." alt="" coords="489,5,708,32"/>
+<area shape="rect" href="../../d1/d7b/classSimulation.html#ae5c367f87c0b5dc9740bc6d00e44e72c" title="Démarrer la simulation. Cette méthode lance la simulation et gère la logique principale du déplacemen..." alt="" coords="108,31,229,57"/>
+<area shape="rect" href="../../d1/d7b/classSimulation.html#ad3c853511c7d02a90ecd006ef427bf23" title="Afficher les trois fenêtres Cette méthode affiche les trois vues principales de la simulation : l&#39;env..." alt="" coords="277,5,441,32"/>
+<area shape="rect" href="../../df/d0a/main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,31,60,57"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a26bab3a8cb7d435a3233c327ef9f173d" name="a26bab3a8cb7d435a3233c327ef9f173d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26bab3a8cb7d435a3233c327ef9f173d">&#9670;&nbsp;</a></span>getOrientationRobotStart()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Simulation::getOrientationRobotStart </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="../../d1/d7b/classSimulation_a26bab3a8cb7d435a3233c327ef9f173d_icgraph.png" border="0" usemap="#ad1/d7b/classSimulation_a26bab3a8cb7d435a3233c327ef9f173d_icgraph" alt=""/></div>
+<map name="ad1/d7b/classSimulation_a26bab3a8cb7d435a3233c327ef9f173d_icgraph" id="ad1/d7b/classSimulation_a26bab3a8cb7d435a3233c327ef9f173d_icgraph">
+<area shape="rect" title=" " alt="" coords="1051,23,1245,65"/>
+<area shape="rect" href="../../d2/da5/classLidar.html#aee1780110b243794b03d4ef3c0c6d22d" title="Lire un rayon particulier. Cette méthode calcule la distance entre le Lidar (situé sur le robot) et l..." alt="" coords="912,31,1003,57"/>
+<area shape="rect" href="../../d2/da5/classLidar.html#ac02c43dce0f273690b5532e7da420d96" title="Lire tous les rayons. Cette méthode mesure les distances pour tous les rayons simulés par le Lidar,..." alt="" coords="756,31,864,57"/>
+<area shape="rect" href="../../d1/d7b/classSimulation.html#ac77cf141fd8d8fce9a6c8c14f2014cda" title="Afficher en 3D la vue du robot avec le raycasting. Cette méthode affiche une vue en 3D simulée basée ..." alt="" coords="489,5,708,32"/>
+<area shape="rect" href="../../d1/d7b/classSimulation.html#ae5c367f87c0b5dc9740bc6d00e44e72c" title="Démarrer la simulation. Cette méthode lance la simulation et gère la logique principale du déplacemen..." alt="" coords="108,31,229,57"/>
+<area shape="rect" href="../../d1/d7b/classSimulation.html#ad3c853511c7d02a90ecd006ef427bf23" title="Afficher les trois fenêtres Cette méthode affiche les trois vues principales de la simulation : l&#39;env..." alt="" coords="277,5,441,32"/>
+<area shape="rect" href="../../df/d0a/main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,31,60,57"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a3e5185a60642660c0bae15823fa1d638" name="a3e5185a60642660c0bae15823fa1d638"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e5185a60642660c0bae15823fa1d638">&#9670;&nbsp;</a></span>getRobot()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../de/d78/classRobot.html">Robot</a> * Simulation::getRobot </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="../../d1/d7b/classSimulation_a3e5185a60642660c0bae15823fa1d638_icgraph.png" border="0" usemap="#ad1/d7b/classSimulation_a3e5185a60642660c0bae15823fa1d638_icgraph" alt=""/></div>
+<map name="ad1/d7b/classSimulation_a3e5185a60642660c0bae15823fa1d638_icgraph" id="ad1/d7b/classSimulation_a3e5185a60642660c0bae15823fa1d638_icgraph">
+<area shape="rect" title=" " alt="" coords="1051,31,1209,57"/>
+<area shape="rect" href="../../d2/da5/classLidar.html#aee1780110b243794b03d4ef3c0c6d22d" title="Lire un rayon particulier. Cette méthode calcule la distance entre le Lidar (situé sur le robot) et l..." alt="" coords="912,31,1003,57"/>
+<area shape="rect" href="../../d2/da5/classLidar.html#ac02c43dce0f273690b5532e7da420d96" title="Lire tous les rayons. Cette méthode mesure les distances pour tous les rayons simulés par le Lidar,..." alt="" coords="756,31,864,57"/>
+<area shape="rect" href="../../d1/d7b/classSimulation.html#ac77cf141fd8d8fce9a6c8c14f2014cda" title="Afficher en 3D la vue du robot avec le raycasting. Cette méthode affiche une vue en 3D simulée basée ..." alt="" coords="489,5,708,32"/>
+<area shape="rect" href="../../d1/d7b/classSimulation.html#ae5c367f87c0b5dc9740bc6d00e44e72c" title="Démarrer la simulation. Cette méthode lance la simulation et gère la logique principale du déplacemen..." alt="" coords="108,31,229,57"/>
+<area shape="rect" href="../../d1/d7b/classSimulation.html#ad3c853511c7d02a90ecd006ef427bf23" title="Afficher les trois fenêtres Cette méthode affiche les trois vues principales de la simulation : l&#39;env..." alt="" coords="277,5,441,32"/>
+<area shape="rect" href="../../df/d0a/main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,31,60,57"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a090858d3cad1c27d4cce4253c9c79edc" name="a090858d3cad1c27d4cce4253c9c79edc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a090858d3cad1c27d4cce4253c9c79edc">&#9670;&nbsp;</a></span>getXRobotStart()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Simulation::getXRobotStart </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="../../d1/d7b/classSimulation_a090858d3cad1c27d4cce4253c9c79edc_icgraph.png" border="0" usemap="#ad1/d7b/classSimulation_a090858d3cad1c27d4cce4253c9c79edc_icgraph" alt=""/></div>
+<map name="ad1/d7b/classSimulation_a090858d3cad1c27d4cce4253c9c79edc_icgraph" id="ad1/d7b/classSimulation_a090858d3cad1c27d4cce4253c9c79edc_icgraph">
+<area shape="rect" title=" " alt="" coords="1051,31,1249,57"/>
+<area shape="rect" href="../../d2/da5/classLidar.html#aee1780110b243794b03d4ef3c0c6d22d" title="Lire un rayon particulier. Cette méthode calcule la distance entre le Lidar (situé sur le robot) et l..." alt="" coords="912,31,1003,57"/>
+<area shape="rect" href="../../d2/da5/classLidar.html#ac02c43dce0f273690b5532e7da420d96" title="Lire tous les rayons. Cette méthode mesure les distances pour tous les rayons simulés par le Lidar,..." alt="" coords="756,31,864,57"/>
+<area shape="rect" href="../../d1/d7b/classSimulation.html#ac77cf141fd8d8fce9a6c8c14f2014cda" title="Afficher en 3D la vue du robot avec le raycasting. Cette méthode affiche une vue en 3D simulée basée ..." alt="" coords="489,5,708,32"/>
+<area shape="rect" href="../../d1/d7b/classSimulation.html#ae5c367f87c0b5dc9740bc6d00e44e72c" title="Démarrer la simulation. Cette méthode lance la simulation et gère la logique principale du déplacemen..." alt="" coords="108,31,229,57"/>
+<area shape="rect" href="../../d1/d7b/classSimulation.html#ad3c853511c7d02a90ecd006ef427bf23" title="Afficher les trois fenêtres Cette méthode affiche les trois vues principales de la simulation : l&#39;env..." alt="" coords="277,5,441,32"/>
+<area shape="rect" href="../../df/d0a/main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,31,60,57"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a668b1589efeb8de9e50683b81dde7181" name="a668b1589efeb8de9e50683b81dde7181"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a668b1589efeb8de9e50683b81dde7181">&#9670;&nbsp;</a></span>getYRobotStart()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Simulation::getYRobotStart </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="../../d1/d7b/classSimulation_a668b1589efeb8de9e50683b81dde7181_icgraph.png" border="0" usemap="#ad1/d7b/classSimulation_a668b1589efeb8de9e50683b81dde7181_icgraph" alt=""/></div>
+<map name="ad1/d7b/classSimulation_a668b1589efeb8de9e50683b81dde7181_icgraph" id="ad1/d7b/classSimulation_a668b1589efeb8de9e50683b81dde7181_icgraph">
+<area shape="rect" title=" " alt="" coords="1051,31,1249,57"/>
+<area shape="rect" href="../../d2/da5/classLidar.html#aee1780110b243794b03d4ef3c0c6d22d" title="Lire un rayon particulier. Cette méthode calcule la distance entre le Lidar (situé sur le robot) et l..." alt="" coords="912,31,1003,57"/>
+<area shape="rect" href="../../d2/da5/classLidar.html#ac02c43dce0f273690b5532e7da420d96" title="Lire tous les rayons. Cette méthode mesure les distances pour tous les rayons simulés par le Lidar,..." alt="" coords="756,31,864,57"/>
+<area shape="rect" href="../../d1/d7b/classSimulation.html#ac77cf141fd8d8fce9a6c8c14f2014cda" title="Afficher en 3D la vue du robot avec le raycasting. Cette méthode affiche une vue en 3D simulée basée ..." alt="" coords="489,5,708,32"/>
+<area shape="rect" href="../../d1/d7b/classSimulation.html#ae5c367f87c0b5dc9740bc6d00e44e72c" title="Démarrer la simulation. Cette méthode lance la simulation et gère la logique principale du déplacemen..." alt="" coords="108,31,229,57"/>
+<area shape="rect" href="../../d1/d7b/classSimulation.html#ad3c853511c7d02a90ecd006ef427bf23" title="Afficher les trois fenêtres Cette méthode affiche les trois vues principales de la simulation : l&#39;env..." alt="" coords="277,5,441,32"/>
+<area shape="rect" href="../../df/d0a/main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,31,60,57"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aaf25608aa65973b2940601a4326a89ab" name="aaf25608aa65973b2940601a4326a89ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf25608aa65973b2940601a4326a89ab">&#9670;&nbsp;</a></span>initializeRobotPose()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Simulation::initializeRobotPose </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initialiser la pose du robot. Cette méthode positionne le robot dans une cellule libre aléatoire de l'environnement. </p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="../../d1/d7b/classSimulation_aaf25608aa65973b2940601a4326a89ab_cgraph.png" border="0" usemap="#ad1/d7b/classSimulation_aaf25608aa65973b2940601a4326a89ab_cgraph" alt=""/></div>
+<map name="ad1/d7b/classSimulation_aaf25608aa65973b2940601a4326a89ab_cgraph" id="ad1/d7b/classSimulation_aaf25608aa65973b2940601a4326a89ab_cgraph">
+<area shape="rect" title="Initialiser la pose du robot. Cette méthode positionne le robot dans une cellule libre aléatoire de l..." alt="" coords="5,56,231,83"/>
+<area shape="rect" href="../../d0/d98/classEnvironment.html#ad17660db40711861f8416d3ea641cd4f" title=" " alt="" coords="279,5,456,32"/>
+<area shape="rect" href="../../d0/d98/classEnvironment.html#a42c8956b01016d2e283c3bec97cfd631" title=" " alt="" coords="281,56,453,83"/>
+<area shape="rect" href="../../d0/d98/classEnvironment.html#a053f882f4ecec6e9ade99fba3317001c" title=" " alt="" coords="281,107,453,133"/>
+</map>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="../../d1/d7b/classSimulation_aaf25608aa65973b2940601a4326a89ab_icgraph.png" border="0" usemap="#ad1/d7b/classSimulation_aaf25608aa65973b2940601a4326a89ab_icgraph" alt=""/></div>
+<map name="ad1/d7b/classSimulation_aaf25608aa65973b2940601a4326a89ab_icgraph" id="ad1/d7b/classSimulation_aaf25608aa65973b2940601a4326a89ab_icgraph">
+<area shape="rect" title="Initialiser la pose du robot. Cette méthode positionne le robot dans une cellule libre aléatoire de l..." alt="" coords="277,5,503,32"/>
+<area shape="rect" href="../../d1/d7b/classSimulation.html#ae5c367f87c0b5dc9740bc6d00e44e72c" title="Démarrer la simulation. Cette méthode lance la simulation et gère la logique principale du déplacemen..." alt="" coords="108,5,229,32"/>
+<area shape="rect" href="../../df/d0a/main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,5,60,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ae5c367f87c0b5dc9740bc6d00e44e72c" name="ae5c367f87c0b5dc9740bc6d00e44e72c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5c367f87c0b5dc9740bc6d00e44e72c">&#9670;&nbsp;</a></span>run()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Simulation::run </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Démarrer la simulation. Cette méthode lance la simulation et gère la logique principale du déplacement et de l'exploration du robot. </p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="../../d1/d7b/classSimulation_ae5c367f87c0b5dc9740bc6d00e44e72c_cgraph.png" border="0" usemap="#ad1/d7b/classSimulation_ae5c367f87c0b5dc9740bc6d00e44e72c_cgraph" alt=""/></div>
+<map name="ad1/d7b/classSimulation_ae5c367f87c0b5dc9740bc6d00e44e72c_cgraph" id="ad1/d7b/classSimulation_ae5c367f87c0b5dc9740bc6d00e44e72c_cgraph">
+<area shape="rect" title="Démarrer la simulation. Cette méthode lance la simulation et gère la logique principale du déplacemen..." alt="" coords="5,680,127,707"/>
+<area shape="rect" href="../../d7/db0/classMap.html#a2b67bbff83be82e6a021310c91053351" title="Trouver le chemin le plus court entre &quot;start&quot; et &quot;goal&quot;. Cette méthode implémente l&#39;algorithme A* pou..." alt="" coords="241,173,333,200"/>
+<area shape="rect" href="../../d1/d7b/classSimulation.html#ad3c853511c7d02a90ecd006ef427bf23" title="Afficher les trois fenêtres Cette méthode affiche les trois vues principales de la simulation : l&#39;env..." alt="" coords="205,477,369,504"/>
+<area shape="rect" href="../../d2/da5/classLidar.html#ac02c43dce0f273690b5532e7da420d96" title="Lire tous les rayons. Cette méthode mesure les distances pour tous les rayons simulés par le Lidar,..." alt="" coords="755,275,863,301"/>
+<area shape="rect" href="../../de/d78/classRobot.html#a4def336497f7e5f9dbedacf97d7f38ac" title=" " alt="" coords="1270,477,1369,504"/>
+<area shape="rect" href="../../de/d78/classRobot.html#ad1d5656d60a203e1024b6a112390f3cd" title=" " alt="" coords="1271,629,1368,656"/>
+<area shape="rect" href="../../d7/db0/classMap.html#a0f1b7e8279fdb7400cd42fdfbbe00656" title=" " alt="" coords="1224,731,1415,757"/>
+<area shape="rect" href="../../d7/db0/classMap.html#a513e996f503260c074d73bd2dc80a4c9" title=" " alt="" coords="1236,781,1403,808"/>
+<area shape="rect" href="../../de/d78/classRobot.html#ac2707bcb99c2c0b55f4ca98a7077fcc0" title="Exécuter l&#39;instruction (s&#39;orienter et avancer). Cette méthode guide le robot vers une position cible ..." alt="" coords="963,781,1151,808"/>
+<area shape="rect" href="../../d7/db0/classMap.html#a99c97bf7d9ecccf306fb0522edc10956" title="Déterminer la prochaine case à explorer. Cette méthode retourne les coordonnées de la cellule CellSta..." alt="" coords="196,833,379,874"/>
+<area shape="rect" href="../../d0/d98/classEnvironment.html#af3d20d558bd896efc3b2ac391f88ff9a" title="Générer des obstacles aléatoires. Cette méthode ajoute un nombre donné d&#39;obstacles aléatoires dans la..." alt="" coords="175,898,400,939"/>
+<area shape="rect" href="../../d1/d7b/classSimulation.html#aaf25608aa65973b2940601a4326a89ab" title="Initialiser la pose du robot. Cette méthode positionne le robot dans une cellule libre aléatoire de l..." alt="" coords="944,376,1169,403"/>
+<area shape="rect" href="../../de/d78/classRobot.html#a3e03b2c6f16ed7734dc5ecdfeed4e1d6" title=" " alt="" coords="227,964,347,991"/>
+<area shape="rect" href="../../de/d78/classRobot.html#ac33ccb369eba2e663236c452db1bb906" title=" " alt="" coords="229,1015,345,1041"/>
+<area shape="rect" href="../../de/d78/classRobot.html#ab5b096e55f0c35c0214c6045a324bf16" title=" " alt="" coords="212,1065,363,1092"/>
+<area shape="rect" href="../../de/d78/classRobot.html#ae7294f0cfbd00246e9690d108d89f717" title="Mettre à jour la carte. Cette méthode met à jour une carte locale du robot à l&#39;aide des mesures du ca..." alt="" coords="217,224,358,251"/>
+<area shape="rect" href="../../d1/d7b/classSimulation.html#ac77cf141fd8d8fce9a6c8c14f2014cda" title="Afficher en 3D la vue du robot avec le raycasting. Cette méthode affiche une vue en 3D simulée basée ..." alt="" coords="451,325,670,352"/>
+<area shape="rect" href="../../d0/d98/classEnvironment.html#a42c8956b01016d2e283c3bec97cfd631" title=" " alt="" coords="1233,427,1405,453"/>
+<area shape="rect" href="../../d1/d7b/classSimulation.html#a3803092b1a97815b336d59c64557f8ee" title="Afficher la simulation Cette méthode affiche l&#39;état d&#39;une grille donnée (environnement ou carte du ro..." alt="" coords="948,528,1165,555"/>
+<area shape="rect" href="../../d7/db0/classMap.html#a81ef3172e85784f1197a81a27e6d7621" title=" " alt="" coords="1247,680,1392,707"/>
+<area shape="rect" href="../../d2/da5/classLidar.html#a9abe033b12f8d002be75ec93839087bd" title=" " alt="" coords="735,224,882,251"/>
+<area shape="rect" href="../../d2/da5/classLidar.html#aee1780110b243794b03d4ef3c0c6d22d" title="Lire un rayon particulier. Cette méthode calcule la distance entre le Lidar (situé sur le robot) et l..." alt="" coords="1011,275,1102,301"/>
+<area shape="rect" href="../../d1/d7b/classSimulation.html#a8f0a6c41e5181df8f73c10c0ded79dfc" title=" " alt="" coords="1217,56,1421,83"/>
+<area shape="rect" href="../../d0/d98/classEnvironment.html#ad17660db40711861f8416d3ea641cd4f" title=" " alt="" coords="1231,376,1408,403"/>
+<area shape="rect" href="../../de/d78/classRobot.html#a8270811ceae9e31af9905169050ccdf9" title=" " alt="" coords="1238,325,1401,352"/>
+<area shape="rect" href="../../d1/d7b/classSimulation.html#a26bab3a8cb7d435a3233c327ef9f173d" title=" " alt="" coords="1222,107,1417,149"/>
+<area shape="rect" href="../../d1/d7b/classSimulation.html#a3e5185a60642660c0bae15823fa1d638" title=" " alt="" coords="1240,173,1399,200"/>
+<area shape="rect" href="../../d0/d98/classEnvironment.html#a053f882f4ecec6e9ade99fba3317001c" title=" " alt="" coords="1233,275,1405,301"/>
+<area shape="rect" href="../../d1/d7b/classSimulation.html#a090858d3cad1c27d4cce4253c9c79edc" title=" " alt="" coords="1220,224,1419,251"/>
+<area shape="rect" href="../../d1/d7b/classSimulation.html#a668b1589efeb8de9e50683b81dde7181" title=" " alt="" coords="1220,5,1419,32"/>
+<area shape="rect" href="../../d7/db0/classMap.html#a67113f1ffac80d9a20b15fa18a58edc2" title=" " alt="" coords="1258,579,1381,605"/>
+<area shape="rect" href="../../d7/db0/classMap.html#ab3181204ba96eb15b96ee1ced85e198e" title=" " alt="" coords="1261,528,1378,555"/>
+<area shape="rect" href="../../de/d78/classRobot.html#a14a466b67548b6aac5632527c8df584b" title="Avancer le robot. Cette méthode permet au robot de se déplacer en ligne droite selon son orientation ..." alt="" coords="1267,832,1372,859"/>
+<area shape="rect" href="../../de/d78/classRobot.html#a5a3acb414922e8336b5f960288a2d518" title="Tourner le robot. Cette méthode modifie l&#39;orientation du robot en ajoutant un angle donné." alt="" coords="1266,883,1373,909"/>
+<area shape="rect" href="../../d7/db0/classMap.html#a05e67979fc0f5e865ddd69b39a24eded" title="Tracer un chemin de cases libres terminé par un obstacle. Cette méthode simule un rayon émis depuis u..." alt="" coords="448,173,673,200"/>
+<area shape="rect" href="../../d7/db0/classMap.html#a2288247b5feba3e6742e23d096ab1837" title="Agrandir la carte. Cette méthode permet d&#39;agrandir la carte avec cellules à l&#39;état inconnu (CellState..." alt="" coords="721,173,896,200"/>
+</map>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="../../d1/d7b/classSimulation_ae5c367f87c0b5dc9740bc6d00e44e72c_icgraph.png" border="0" usemap="#ad1/d7b/classSimulation_ae5c367f87c0b5dc9740bc6d00e44e72c_icgraph" alt=""/></div>
+<map name="ad1/d7b/classSimulation_ae5c367f87c0b5dc9740bc6d00e44e72c_icgraph" id="ad1/d7b/classSimulation_ae5c367f87c0b5dc9740bc6d00e44e72c_icgraph">
+<area shape="rect" title="Démarrer la simulation. Cette méthode lance la simulation et gère la logique principale du déplacemen..." alt="" coords="108,5,229,32"/>
+<area shape="rect" href="../../df/d0a/main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,5,60,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<h2 class="groupheader">Documentation des données membres</h2>
+<a id="a969ccb12c3dc14aaa236a50eda71da04" name="a969ccb12c3dc14aaa236a50eda71da04"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a969ccb12c3dc14aaa236a50eda71da04">&#9670;&nbsp;</a></span>environment</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d0/d98/classEnvironment.html">Environment</a>* Simulation::environment</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6a51342ccba4a60b0342e4367b319065" name="a6a51342ccba4a60b0342e4367b319065"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a51342ccba4a60b0342e4367b319065">&#9670;&nbsp;</a></span>lidar</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d2/da5/classLidar.html">Lidar</a>* Simulation::lidar</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0bbb2970b19c9de1e4236a31f183fe54" name="a0bbb2970b19c9de1e4236a31f183fe54"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0bbb2970b19c9de1e4236a31f183fe54">&#9670;&nbsp;</a></span>map</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d7/db0/classMap.html">Map</a>* Simulation::map</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a456fdbbfe31787a18a2c50bb059684b8" name="a456fdbbfe31787a18a2c50bb059684b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a456fdbbfe31787a18a2c50bb059684b8">&#9670;&nbsp;</a></span>orientationRobotStart</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Simulation::orientationRobotStart</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a014a97fb572686e0ab2412f0ca405ccf" name="a014a97fb572686e0ab2412f0ca405ccf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a014a97fb572686e0ab2412f0ca405ccf">&#9670;&nbsp;</a></span>robot</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../de/d78/classRobot.html">Robot</a>* Simulation::robot</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a52eb4c8f0c73692215708c4175be8d64" name="a52eb4c8f0c73692215708c4175be8d64"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52eb4c8f0c73692215708c4175be8d64">&#9670;&nbsp;</a></span>timeStep</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Simulation::timeStep</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aaf321f94b7c42f57b879f813bffe2430" name="aaf321f94b7c42f57b879f813bffe2430"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf321f94b7c42f57b879f813bffe2430">&#9670;&nbsp;</a></span>xRobotStart</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Simulation::xRobotStart</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a124dede4b2be827698f8ed57aa51c6b5" name="a124dede4b2be827698f8ed57aa51c6b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a124dede4b2be827698f8ed57aa51c6b5">&#9670;&nbsp;</a></span>yRobotStart</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Simulation::yRobotStart</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>La documentation de cette classe a été générée à partir du fichier suivant :<ul>
+<li>include/<a class="el" href="../../d3/d27/simulation_8hpp_source.html">simulation.hpp</a></li>
+<li>src/<a class="el" href="../../d2/d93/simulation_8cpp.html">simulation.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4
+</small></address>
+</body>
+</html>
