@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.4"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>simulidar:  Fichier source de include/simulation.hpp</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">simulidar
+   </div>
+   <div id="projectbrief">Simulation d&#39;un robot cartographiant un environnement à l&#39;aide d&#39;un Lidar en C++</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.4 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "../../search",'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('../../',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="../../dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle"><div class="title">simulation.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="../../d3/d27/simulation_8hpp.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef SIMULATION_HPP</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define SIMULATION_HPP</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="../../de/d3b/environment_8hpp.html">environment.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="../../d2/de0/robot_8hpp.html">robot.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="../../d7/daf/lidar_8hpp.html">lidar.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;<a class="code" href="../../df/d7c/map_8hpp.html">map.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="../../d1/d7b/classSimulation.html">   10</a></span><span class="keyword">class </span><a class="code hl_class" href="../../d1/d7b/classSimulation.html">Simulation</a> {</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="../../d1/d7b/classSimulation.html#a969ccb12c3dc14aaa236a50eda71da04">   12</a></span>    <a class="code hl_class" href="../../d0/d98/classEnvironment.html">Environment</a>* <a class="code hl_variable" href="../../d1/d7b/classSimulation.html#a969ccb12c3dc14aaa236a50eda71da04">environment</a>;  <span class="comment">// Pointeur vers l&#39;environnement dans lequel évolue le robot</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="../../d1/d7b/classSimulation.html#a0bbb2970b19c9de1e4236a31f183fe54">   13</a></span>    <a class="code hl_class" href="../../d7/db0/classMap.html">Map</a>* <a class="code hl_variable" href="../../d1/d7b/classSimulation.html#a0bbb2970b19c9de1e4236a31f183fe54">map</a>;                  <span class="comment">// Pointeur vers la carte du robot</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="../../d1/d7b/classSimulation.html#a014a97fb572686e0ab2412f0ca405ccf">   14</a></span>    <a class="code hl_class" href="../../de/d78/classRobot.html">Robot</a>* <a class="code hl_variable" href="../../d1/d7b/classSimulation.html#a014a97fb572686e0ab2412f0ca405ccf">robot</a>;              <span class="comment">// Pointeur vers le robot simulé</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="../../d1/d7b/classSimulation.html#a6a51342ccba4a60b0342e4367b319065">   15</a></span>    <a class="code hl_class" href="../../d2/da5/classLidar.html">Lidar</a>* <a class="code hl_variable" href="../../d1/d7b/classSimulation.html#a6a51342ccba4a60b0342e4367b319065">lidar</a>;              <span class="comment">// Pointeur vers le lidar simulé</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="../../d1/d7b/classSimulation.html#a456fdbbfe31787a18a2c50bb059684b8">   16</a></span>    <span class="keywordtype">double</span> <a class="code hl_variable" href="../../d1/d7b/classSimulation.html#aaf321f94b7c42f57b879f813bffe2430">xRobotStart</a>, <a class="code hl_variable" href="../../d1/d7b/classSimulation.html#a124dede4b2be827698f8ed57aa51c6b5">yRobotStart</a>, <a class="code hl_variable" href="../../d1/d7b/classSimulation.html#a456fdbbfe31787a18a2c50bb059684b8">orientationRobotStart</a>;  <span class="comment">// Coordonnées absolues de départ du robot</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="../../d1/d7b/classSimulation.html#a52eb4c8f0c73692215708c4175be8d64">   17</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="../../d1/d7b/classSimulation.html#a52eb4c8f0c73692215708c4175be8d64">timeStep</a>;              <span class="comment">// Temps entre chaque état de simulation</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="comment">// Constructeur qui initialise l&#39;environnement et le robot</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <a class="code hl_function" href="../../d1/d7b/classSimulation.html#a5b224cc5b36bcc8eb29689aff223de41">Simulation</a>();</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="../../d1/d7b/classSimulation.html#ae5c367f87c0b5dc9740bc6d00e44e72c">run</a>();</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="../../d1/d7b/classSimulation.html#aaf25608aa65973b2940601a4326a89ab">initializeRobotPose</a>();</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="../../d1/d7b/classSimulation.html#a3803092b1a97815b336d59c64557f8ee">displaySimulation</a>(<span class="keywordtype">int</span> scaleFactor, <a class="code hl_typedef" href="../../d1/d04/namespaceTypes.html#a21aefbaf3fd02f1c045d5316c3abd0dc">Grid</a> plan) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="../../d1/d7b/classSimulation.html#ac77cf141fd8d8fce9a6c8c14f2014cda">displayRaycasting</a>(<a class="code hl_typedef" href="../../d1/d04/namespaceTypes.html#a21aefbaf3fd02f1c045d5316c3abd0dc">Grid</a> plan, <span class="keywordtype">int</span> WindowWidth, <span class="keywordtype">int</span> WindowHeight, <span class="keywordtype">int</span> wallheight, <span class="keywordtype">int</span> fov) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="../../d1/d7b/classSimulation.html#ad3c853511c7d02a90ecd006ef427bf23">displayAll</a>();</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="comment">// Getters</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <a class="code hl_class" href="../../d0/d98/classEnvironment.html">Environment</a>* <a class="code hl_function" href="../../d1/d7b/classSimulation.html#a8f0a6c41e5181df8f73c10c0ded79dfc">getEnvironment</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <a class="code hl_class" href="../../de/d78/classRobot.html">Robot</a>* <a class="code hl_function" href="../../d1/d7b/classSimulation.html#a3e5185a60642660c0bae15823fa1d638">getRobot</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keywordtype">double</span> <a class="code hl_function" href="../../d1/d7b/classSimulation.html#a090858d3cad1c27d4cce4253c9c79edc">getXRobotStart</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="keywordtype">double</span> <a class="code hl_function" href="../../d1/d7b/classSimulation.html#a668b1589efeb8de9e50683b81dde7181">getYRobotStart</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keywordtype">double</span> <a class="code hl_function" href="../../d1/d7b/classSimulation.html#a26bab3a8cb7d435a3233c327ef9f173d">getOrientationRobotStart</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <a class="code hl_function" href="../../d1/d7b/classSimulation.html#a80fad3f57dfaf195a36f7bc49bc88279">~Simulation</a>();</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>};</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="preprocessor">#endif </span><span class="comment">// SIMULATION_HPP</span></div>
+<div class="ttc" id="aclassEnvironment_html"><div class="ttname"><a href="../../d0/d98/classEnvironment.html">Environment</a></div><div class="ttdoc">Représente l'environnement dans lequel le robot évolue.</div><div class="ttdef"><b>Definition:</b> <a href="../../de/d3b/environment_8hpp_source.html#l00009">environment.hpp:10</a></div></div>
+<div class="ttc" id="aclassLidar_html"><div class="ttname"><a href="../../d2/da5/classLidar.html">Lidar</a></div><div class="ttdoc">Représente le Lidar simulé.</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/daf/lidar_8hpp_source.html#l00011">lidar.hpp:12</a></div></div>
+<div class="ttc" id="aclassMap_html"><div class="ttname"><a href="../../d7/db0/classMap.html">Map</a></div><div class="ttdoc">Représente la carte du robot.</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d7c/map_8hpp_source.html#l00010">map.hpp:11</a></div></div>
+<div class="ttc" id="aclassRobot_html"><div class="ttname"><a href="../../de/d78/classRobot.html">Robot</a></div><div class="ttdoc">Représente le robot.</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/de0/robot_8hpp_source.html#l00008">robot.hpp:9</a></div></div>
+<div class="ttc" id="aclassSimulation_html"><div class="ttname"><a href="../../d1/d7b/classSimulation.html">Simulation</a></div><div class="ttdoc">Chef d'orchestre de la simulation.</div><div class="ttdef"><b>Definition:</b> <a href="../../d3/d27/simulation_8hpp_source.html#l00010">simulation.hpp:10</a></div></div>
+<div class="ttc" id="aclassSimulation_html_a014a97fb572686e0ab2412f0ca405ccf"><div class="ttname"><a href="../../d1/d7b/classSimulation.html#a014a97fb572686e0ab2412f0ca405ccf">Simulation::robot</a></div><div class="ttdeci">Robot * robot</div><div class="ttdef"><b>Definition:</b> <a href="../../d3/d27/simulation_8hpp_source.html#l00014">simulation.hpp:14</a></div></div>
+<div class="ttc" id="aclassSimulation_html_a090858d3cad1c27d4cce4253c9c79edc"><div class="ttname"><a href="../../d1/d7b/classSimulation.html#a090858d3cad1c27d4cce4253c9c79edc">Simulation::getXRobotStart</a></div><div class="ttdeci">double getXRobotStart() const</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d93/simulation_8cpp_source.html#l00174">simulation.cpp:174</a></div></div>
+<div class="ttc" id="aclassSimulation_html_a0bbb2970b19c9de1e4236a31f183fe54"><div class="ttname"><a href="../../d1/d7b/classSimulation.html#a0bbb2970b19c9de1e4236a31f183fe54">Simulation::map</a></div><div class="ttdeci">Map * map</div><div class="ttdef"><b>Definition:</b> <a href="../../d3/d27/simulation_8hpp_source.html#l00013">simulation.hpp:13</a></div></div>
+<div class="ttc" id="aclassSimulation_html_a124dede4b2be827698f8ed57aa51c6b5"><div class="ttname"><a href="../../d1/d7b/classSimulation.html#a124dede4b2be827698f8ed57aa51c6b5">Simulation::yRobotStart</a></div><div class="ttdeci">double yRobotStart</div><div class="ttdef"><b>Definition:</b> <a href="../../d3/d27/simulation_8hpp_source.html#l00016">simulation.hpp:16</a></div></div>
+<div class="ttc" id="aclassSimulation_html_a26bab3a8cb7d435a3233c327ef9f173d"><div class="ttname"><a href="../../d1/d7b/classSimulation.html#a26bab3a8cb7d435a3233c327ef9f173d">Simulation::getOrientationRobotStart</a></div><div class="ttdeci">double getOrientationRobotStart() const</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d93/simulation_8cpp_source.html#l00180">simulation.cpp:180</a></div></div>
+<div class="ttc" id="aclassSimulation_html_a3803092b1a97815b336d59c64557f8ee"><div class="ttname"><a href="../../d1/d7b/classSimulation.html#a3803092b1a97815b336d59c64557f8ee">Simulation::displaySimulation</a></div><div class="ttdeci">void displaySimulation(int scaleFactor, Grid plan) const</div><div class="ttdoc">Afficher la simulation.</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d93/simulation_8cpp_source.html#l00092">simulation.cpp:92</a></div></div>
+<div class="ttc" id="aclassSimulation_html_a3e5185a60642660c0bae15823fa1d638"><div class="ttname"><a href="../../d1/d7b/classSimulation.html#a3e5185a60642660c0bae15823fa1d638">Simulation::getRobot</a></div><div class="ttdeci">Robot * getRobot() const</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d93/simulation_8cpp_source.html#l00171">simulation.cpp:171</a></div></div>
+<div class="ttc" id="aclassSimulation_html_a456fdbbfe31787a18a2c50bb059684b8"><div class="ttname"><a href="../../d1/d7b/classSimulation.html#a456fdbbfe31787a18a2c50bb059684b8">Simulation::orientationRobotStart</a></div><div class="ttdeci">double orientationRobotStart</div><div class="ttdef"><b>Definition:</b> <a href="../../d3/d27/simulation_8hpp_source.html#l00016">simulation.hpp:16</a></div></div>
+<div class="ttc" id="aclassSimulation_html_a52eb4c8f0c73692215708c4175be8d64"><div class="ttname"><a href="../../d1/d7b/classSimulation.html#a52eb4c8f0c73692215708c4175be8d64">Simulation::timeStep</a></div><div class="ttdeci">int timeStep</div><div class="ttdef"><b>Definition:</b> <a href="../../d3/d27/simulation_8hpp_source.html#l00017">simulation.hpp:17</a></div></div>
+<div class="ttc" id="aclassSimulation_html_a5b224cc5b36bcc8eb29689aff223de41"><div class="ttname"><a href="../../d1/d7b/classSimulation.html#a5b224cc5b36bcc8eb29689aff223de41">Simulation::Simulation</a></div><div class="ttdeci">Simulation()</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d93/simulation_8cpp_source.html#l00007">simulation.cpp:7</a></div></div>
+<div class="ttc" id="aclassSimulation_html_a668b1589efeb8de9e50683b81dde7181"><div class="ttname"><a href="../../d1/d7b/classSimulation.html#a668b1589efeb8de9e50683b81dde7181">Simulation::getYRobotStart</a></div><div class="ttdeci">double getYRobotStart() const</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d93/simulation_8cpp_source.html#l00177">simulation.cpp:177</a></div></div>
+<div class="ttc" id="aclassSimulation_html_a6a51342ccba4a60b0342e4367b319065"><div class="ttname"><a href="../../d1/d7b/classSimulation.html#a6a51342ccba4a60b0342e4367b319065">Simulation::lidar</a></div><div class="ttdeci">Lidar * lidar</div><div class="ttdef"><b>Definition:</b> <a href="../../d3/d27/simulation_8hpp_source.html#l00015">simulation.hpp:15</a></div></div>
+<div class="ttc" id="aclassSimulation_html_a80fad3f57dfaf195a36f7bc49bc88279"><div class="ttname"><a href="../../d1/d7b/classSimulation.html#a80fad3f57dfaf195a36f7bc49bc88279">Simulation::~Simulation</a></div><div class="ttdeci">~Simulation()</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d93/simulation_8cpp_source.html#l00184">simulation.cpp:184</a></div></div>
+<div class="ttc" id="aclassSimulation_html_a8f0a6c41e5181df8f73c10c0ded79dfc"><div class="ttname"><a href="../../d1/d7b/classSimulation.html#a8f0a6c41e5181df8f73c10c0ded79dfc">Simulation::getEnvironment</a></div><div class="ttdeci">Environment * getEnvironment() const</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d93/simulation_8cpp_source.html#l00168">simulation.cpp:168</a></div></div>
+<div class="ttc" id="aclassSimulation_html_a969ccb12c3dc14aaa236a50eda71da04"><div class="ttname"><a href="../../d1/d7b/classSimulation.html#a969ccb12c3dc14aaa236a50eda71da04">Simulation::environment</a></div><div class="ttdeci">Environment * environment</div><div class="ttdef"><b>Definition:</b> <a href="../../d3/d27/simulation_8hpp_source.html#l00012">simulation.hpp:12</a></div></div>
+<div class="ttc" id="aclassSimulation_html_aaf25608aa65973b2940601a4326a89ab"><div class="ttname"><a href="../../d1/d7b/classSimulation.html#aaf25608aa65973b2940601a4326a89ab">Simulation::initializeRobotPose</a></div><div class="ttdeci">void initializeRobotPose()</div><div class="ttdoc">Initialiser la pose du robot.</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d93/simulation_8cpp_source.html#l00058">simulation.cpp:58</a></div></div>
+<div class="ttc" id="aclassSimulation_html_aaf321f94b7c42f57b879f813bffe2430"><div class="ttname"><a href="../../d1/d7b/classSimulation.html#aaf321f94b7c42f57b879f813bffe2430">Simulation::xRobotStart</a></div><div class="ttdeci">double xRobotStart</div><div class="ttdef"><b>Definition:</b> <a href="../../d3/d27/simulation_8hpp_source.html#l00016">simulation.hpp:16</a></div></div>
+<div class="ttc" id="aclassSimulation_html_ac77cf141fd8d8fce9a6c8c14f2014cda"><div class="ttname"><a href="../../d1/d7b/classSimulation.html#ac77cf141fd8d8fce9a6c8c14f2014cda">Simulation::displayRaycasting</a></div><div class="ttdeci">void displayRaycasting(Grid plan, int WindowWidth, int WindowHeight, int wallheight, int fov) const</div><div class="ttdoc">Afficher en 3D la vue du robot avec le raycasting.</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d93/simulation_8cpp_source.html#l00146">simulation.cpp:146</a></div></div>
+<div class="ttc" id="aclassSimulation_html_ad3c853511c7d02a90ecd006ef427bf23"><div class="ttname"><a href="../../d1/d7b/classSimulation.html#ad3c853511c7d02a90ecd006ef427bf23">Simulation::displayAll</a></div><div class="ttdeci">void displayAll()</div><div class="ttdoc">Afficher les trois fenêtres.</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d93/simulation_8cpp_source.html#l00161">simulation.cpp:161</a></div></div>
+<div class="ttc" id="aclassSimulation_html_ae5c367f87c0b5dc9740bc6d00e44e72c"><div class="ttname"><a href="../../d1/d7b/classSimulation.html#ae5c367f87c0b5dc9740bc6d00e44e72c">Simulation::run</a></div><div class="ttdeci">void run()</div><div class="ttdoc">Démarrer la simulation.</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d93/simulation_8cpp_source.html#l00011">simulation.cpp:11</a></div></div>
+<div class="ttc" id="aenvironment_8hpp_html"><div class="ttname"><a href="../../de/d3b/environment_8hpp.html">environment.hpp</a></div></div>
+<div class="ttc" id="alidar_8hpp_html"><div class="ttname"><a href="../../d7/daf/lidar_8hpp.html">lidar.hpp</a></div></div>
+<div class="ttc" id="amap_8hpp_html"><div class="ttname"><a href="../../df/d7c/map_8hpp.html">map.hpp</a></div></div>
+<div class="ttc" id="anamespaceTypes_html_a21aefbaf3fd02f1c045d5316c3abd0dc"><div class="ttname"><a href="../../d1/d04/namespaceTypes.html#a21aefbaf3fd02f1c045d5316c3abd0dc">Types::Grid</a></div><div class="ttdeci">std::vector&lt; std::vector&lt; CellState &gt; &gt; Grid</div><div class="ttdef"><b>Definition:</b> <a href="../../dd/de3/types_8hpp_source.html#l00029">types.hpp:29</a></div></div>
+<div class="ttc" id="arobot_8hpp_html"><div class="ttname"><a href="../../d2/de0/robot_8hpp.html">robot.hpp</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4
+</small></address>
+</body>
+</html>
