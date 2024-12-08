@@ -97,26 +97,39 @@ Le Lidar simule un capteur de distance à 360 degrés qui permet au robot de dé
 #### Fonctionnement du Lidar
 
 1. **Position initiale et orientation** :  
-   Le capteur récupère la position absolue du robot dans l'environnement et son orientation actuelle. Chaque rayon est défini par un ID, ce qui détermine son angle relatif par rapport à l'orientation du robot.
+   - Le capteur récupère la position absolue du robot dans l'environnement (_rayStartX_, _rayStartY_) et son orientation actuelle (_orientation_).  
+   - Chaque rayon est défini par un ID (_rayID_), ce qui détermine son angle relatif par rapport à l'orientation du robot.
 
 2. **Calcul de l'angle du rayon** :  
-   L'angle d'un rayon est calculé en ajoutant l'angle d'orientation du robot à un décalage basé sur l'ID du rayon. Les rayons sont répartis uniformément sur un cercle complet.
+   L'angle d'un rayon est calculé par la formule :  
+   
+   _rayAngle = orientation + (rayID - rayCount / 2) * (pi / 180)_
+   
+   Cela répartit les rayons uniformément autour du robot sur 360°.
 
 3. **Définition de la direction** :  
-   La direction du rayon est définie par deux composantes calculées à partir des fonctions cosinus et sinus de l'angle du rayon.
-
+   Le rayon est représenté comme un vecteur directeur (_rayDirX_, _rayDirY_), calculé à partir de la fonction trigonométrique :  
+   
+   _rayDirX = cos(rayAngle)_, _rayDirY = sin(rayAngle)_
+   
 4. **Pas de progression** :  
-   Le rayon progresse dans la grille de l'environnement en calculant les distances à la prochaine ligne verticale ou horizontale de la grille.
-
+   Le rayon progresse à travers la grille de l'environnement en calculant les distances à la prochaine ligne verticale ou horizontale de la grille, en utilisant :  
+   
+   _rayUnitStepSizeX = sqrt(1 + (rayDirY / rayDirX)^2)_, _rayUnitStepSizeY = sqrt(1 + (rayDirX / rayDirY)^2)_
+   
 5. **Avancée du rayon avec DDA** :  
-   Le rayon avance dans la grille case par case. Pour chaque nouvelle case traversée, le programme vérifie si elle contient un obstacle.
+   - Le rayon avance dans la grille case par case, en alternant entre les lignes et colonnes selon les distances accumulées _rayLengthX_ et _rayLengthY_.  
+   - Pour chaque nouvelle case traversée, le programme vérifie si elle contient un obstacle. 
 
 6. **Détection d'obstacle ou dépassement de portée** :  
    Si une case contenant un obstacle est détectée, le Lidar retourne la distance accumulée. Si aucun obstacle n'est trouvé dans la portée maximale, la fonction retourne une valeur indiquant l'absence d'obstacle.
+6. **Détection d'obstacle ou dépassement de portée** :  
+   - Si une case contenant un obstacle `CellState::Wall` est détectée, le Lidar retourne la distance accumulée.  
+   - Si aucun obstacle n'est trouvé dans la portée maximale du Lidar _30 m_, la fonction retourne _-1_.
 
 ### Cartographie
 
-La mise à jour de la carte se fait à chaque balayage des rayons du LiDAR. Les cellules traversées par un rayon sont marquées comme libres, et la cellule où un obstacle est détecté est marquée comme un mur. Si le rayon dépasse les limites de la carte, celle-ci est étendue dynamiquement.
+La mise à jour de la carte se fait à chaque balayage des rayons du LiDAR. Avec la fonction `castRayAndMarkObstacle`, chaque cellule traversée par le rayon est marquée comme libre, et la cellule à la distance mesurée est marquée comme un mur. Si le rayon dépasse les limites actuelles de la carte, celle-ci est étendue dynamiquement.
 
 ### Choix de la destination
 
@@ -125,24 +138,65 @@ Le robot choisit sa prochaine cible en cherchant la cellule inconnue la plus pro
 ### Algorithme A*
 L'algorithme A* trouve le chemin optimal entre un point de départ et un objectif en utilisant une combinaison de coût réel et d'une estimation du coût restant (heuristique). L'heuristique utilisée ici est la distance de Manhattan, qui est la somme des distances absolues en x et en y entre le point actuel et l'objectif.
 
-1. Le coût réel est initialisé à zéro pour le point de départ et à l'infini pour tous les autres points.  
-2. Le coût total est la somme du coût réel et de la distance estimée.  
-3. Les voisins du point actuel sont explorés un par un, et leurs coûts sont mis à jour si une meilleure route est trouvée.  
-4. Lorsque l'objectif est atteint, le chemin est reconstruit en remontant la chaîne des parents depuis l'objectif jusqu'au départ.
+#### Fonctionnement de A*
+
+1. Initialisation
+- **Carte** : La carte est une grille contenant des états (`CellState::Wall` pour les murs et des cellules libres pour les déplacements).
+- **Coût _gScore_** : Coût réel pour atteindre une cellule depuis le point de départ.  
+  Initialement, toutes les cellules ont un coût infini, sauf le point de départ _gScore(start) = 0_.
+- **Coût fScore** : Somme du coût réel _gScore_ et d'une estimation heuristique _h(current, goal)_ pour atteindre l'objectif.  
+  Pour le départ :  
+  
+  _fScore(start) = h(start, goal) = |start.x - goal.x| + |start.y - goal.y|_
+  
+  (Distance de Manhattan, adaptée pour les mouvements sur une grille orthogonale.)
+- **File de priorité** : Les nœuds à explorer sont organisés dans une file de priorité (_openQueue_), triée selon _fScore_.
+
+2. Recherche du chemin
+L'algorithme suit un processus itératif :
+1. **Sélection du meilleur nœud** :  
+   Extraire de la file de priorité le nœud avec le coût _fScore_ le plus faible.
+2. **Vérification de l'objectif** :  
+   Si ce nœud est l'objectif, reconstruire le chemin en remontant les parents via _cameFrom_.
+3. **Exploration des voisins** :  
+   Pour chaque voisin orthogonal du nœud actuel :  
+   - Ignorer les voisins hors limites ou occupant un mur.
+   - Calculer un coût provisoire pour atteindre le voisin _gScore(current + 1)_.
+   - Si le voisin est atteint avec un coût inférieur à un chemin précédent :  
+     - Mettre à jour _gScore(neighbor)_ et _fScore(neighbor)_.
+     - Ajouter le voisin à la file de priorité.
+
+---
 
 ## Déplacement du robot
 
-La fonction `Robot::executeInstruction` guide le robot vers une cible en ajustant d'abord son orientation, puis en avançant en ligne droite. Si l'orientation actuelle diffère de celle requise pour atteindre la cible, le robot tourne. Une fois aligné, il avance à une vitesse constante. La fonction vérifie si le robot a atteint sa cible en comparant ses coordonnées actuelles à celles de la cible.
+La fonction `Robot::executeInstruction()` est dédiée au déplacement incrémental du robot vers une position cible spécifiée. Elle décompose le mouvement en deux étapes : ajustement de l'orientation et déplacement en ligne droite.
+
+- **Orientation** : La fonction calcule l'angle nécessaire pour que le robot pointe dans la direction de la cible. Si l'orientation actuelle diffère de l'orientation cible, le robot ajuste son angle de rotation en tenant compte de sa vitesse angulaire maximale.
+
+- **Avancement** : Une fois correctement orienté, le robot avance vers la cible à une vitesse constante. La distance parcourue est limitée par le produit de la vitesse de déplacement maximale et du pas de temps (`timeStep`).
+
+- **Condition d'accomplissement** : La fonction vérifie si le robot a atteint la position cible en comparant ses coordonnées actuelles avec celles de la cible. Si c'est le cas, elle retourne true. Sinon, elle continue d'ajuster orientation et position dans les appels suivants.
+
+Cette méthode est appelée en boucle pour guider le robot pas à pas vers la cible, en s'assurant que chaque mouvement est précis et limité par les capacités physiques du robot.
+
+---
 
 ## Orchestration des fonctions
 
-La fonction `Simulation::run` orchestre tout le processus d'exploration.  
+La méthode `Simulation::run()` orchestre l'ensemble du processus d'exploration de l'environnement par le robot. Elle combine la collecte de données, la mise à jour de la carte, le calcul des trajets et l'exécution des mouvements dans une boucle principale.
 
-1. **Lecture des capteurs** : Le robot lit les données du LiDAR pour détecter les obstacles.  
-2. **Mise à jour de la carte** : La carte interne est mise à jour avec les nouvelles données.  
-3. **Calcul de la cible et du chemin** : La prochaine cible est choisie, et un chemin est calculé vers cette cible avec l'algorithme A*.  
-4. **Déplacement** : Le robot exécute les étapes du chemin, mettant à jour sa carte au fur et à mesure.  
-5. **Fin de la simulation** : Si aucune cible n'est accessible, l'exploration est terminée.
+- **Lecture des capteurs** : À chaque itération, la simulation commence par lire les données des capteurs LiDAR du robot pour détecter les obstacles autour de lui.
+
+- **Mise à jour de la carte** : Ces données sont utilisées pour mettre à jour la carte interne de l'environnement, en ajoutant ou en modifiant les cellules pour refléter les zones découvertes ou occupées.
+
+- **Calcul de la cible et du chemin** : La simulation identifie le point inexploré le plus proche en utilisant `findNearestInterestPoint()`. Elle utilise ensuite l’algorithme A* pour calculer le chemin optimal reliant la position actuelle du robot à ce point cible.
+
+- **Déplacement du robot** : Si un chemin est trouvé, la simulation décompose le trajet en instructions unitaires que le robot exécute pas à pas avec `executeInstruction()`. Pendant ces déplacements, la carte est mise à jour visuellement pour refléter les progrès.
+
+- **Condition de fin** : Si aucun point inexploré n'est accessible, l'exploration est considérée comme terminée, affiche un message, et met fin à l'exécution.
+
+Cette fonction constitue le cœur de la simulation, en assurant une exploration systématique de l'environnement jusqu'à ce que toutes les zones soient découvertes ou qu'il soit impossible d'atteindre de nouvelles cibles.
 
 ## Résultats
 
