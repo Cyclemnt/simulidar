@@ -17,18 +17,22 @@ private:
     int timeStep;              // Temps entre chaque état de simulation
 
 public:
-    // Constructeur qui initialise l'environnement et le robot
+    /// \brief Ce constructeur initialise les principaux éléments de la simulation : le point de départ et l'orientation du robot, ainsi que le pas de temps utilisé pour le déroulement de la simulation.
     Simulation();
 
     /// \brief Démarrer la simulation.
+    /// Cette méthode lance la simulation et gère la logique principale du déplacement et de l'exploration du robot.
     void run();
-    /// \brief Initialiser la pose du robot
+    /// \brief Initialiser la pose du robot.
+    /// Cette méthode positionne le robot dans une cellule libre aléatoire de l'environnement.
     void initializeRobotPose();
     /// \brief Afficher la simulation
+    /// Cette méthode affiche l'état d'une grille donnée (environnement ou carte du robot) avec une échelle définie.
     /// \param scaleFactor Facteur d'agrandissement de la matrice à afficher (px).
     /// \param plan Carte à afficher.
     void displaySimulation(int scaleFactor, Grid plan) const;
-    /// \brief Afficher en 3D la vue du robot avec le raycasting 
+    /// \brief Afficher en 3D la vue du robot avec le raycasting.
+    /// Cette méthode affiche une vue en 3D simulée basée sur les relevés du Lidar.
     /// \param plan Carte à afficher.
     /// \param WindowWidth Largeur de fenêtre.
     /// \param WindowHeight Hauteur de fenêtre.
@@ -36,6 +40,7 @@ public:
     /// \param fov Champ de vision (°).
     void displayRaycasting(Grid plan, int WindowWidth, int WindowHeight, int wallheight, int fov) const;
     /// \brief Afficher les trois fenêtres
+    /// Cette méthode affiche les trois vues principales de la simulation : l'environnement complet, la carte locale du robot et La vue simulée en 3D via le raycasting.
     void displayAll();
 
     // Getters

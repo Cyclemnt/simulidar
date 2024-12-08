@@ -15,19 +15,23 @@ private:
     std::pair<int, int> targetPos; // Position cible sur la carte du robot
     double timeStep;    // Temps entre chaque état de simulation
 public:
-    // Constructeur par défaut
+    /// \brief Ce constructeur par défaut initialise un objet Robot à (0.0, 0.0)
     Robot();
 
     /// \brief Avancer le robot.
+    /// Cette méthode permet au robot de se déplacer en ligne droite selon son orientation actuelle.
     /// \param distance Distance du déplacement.
     void move(double distance);
     /// \brief Tourner le robot.
+    /// Cette méthode modifie l'orientation du robot en ajoutant un angle donné.
     /// \param angle Angle de la rotation.
     void rotate(double angle);
     /// \brief Mettre à jour la carte.
+    /// Cette méthode met à jour une carte locale du robot à l'aide des mesures du capteur Lidar.
     /// \param lidarMeasures Tableau des mesures Lidar.
     void updateMap(std::vector<double> lidarMeasures);
     /// \brief Exécuter l'instruction (s'orienter et avancer).
+    /// Cette méthode guide le robot vers une position cible donnée en ajustant son orientation puis en avançant.
     /// \param targetPos_ Position de la case adjacente suivante.
     /// \return Instruction terminée.
     bool executeInstruction(std::pair<int, int> targetPos_);

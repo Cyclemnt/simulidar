@@ -16,14 +16,17 @@ private:
     Simulation* simulation;    // Pointeur vers Simulation
 public:
     /// \brief Constructeur avec paramètres.
+    /// Ce constructeur initialise un capteur Lidar, qui permet de mesurer des distances en simulant des rayons dans l'environnement.
     /// \param simulation_ Pointeur vers la simulation.
     Lidar(Simulation* simulation_);
 
     /// \brief Lire un rayon particulier.
+    /// Cette méthode calcule la distance entre le Lidar (situé sur le robot) et le premier obstacle rencontré dans la direction d'un rayon spécifique.
     /// \param rayID ID du rayon.
     /// \return La distance mesurée.
     double read(int rayID) const;
     /// \brief Lire tous les rayons.
+    /// Cette méthode mesure les distances pour tous les rayons simulés par le Lidar, en parcourant un éventail d'angles autour de sa position.
     /// \return Un tableau des distances mesurées.
     std::vector<double> readAll() const;
 
