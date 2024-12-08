@@ -7,6 +7,7 @@
 // Forward declaration
 class Simulation;
 
+/// \brief Représente le Lidar simulé.
 class Lidar
 {
 private:
@@ -14,11 +15,16 @@ private:
     const int rayCount = LIDAR_RAY_COUNT;  // Nombre de rayons
     Simulation* simulation;    // Pointeur vers Simulation
 public:
-    // Constructeur qui initialise le Lidar
+    /// \brief Constructeur avec paramètres.
+    /// \param simulation_ Pointeur vers la simulation.
     Lidar(Simulation* simulation_);
-    // Méthode pour lire un rayon particulier
+
+    /// \brief Lire un rayon particulier.
+    /// \param rayID ID du rayon.
+    /// \return La distance mesurée.
     double read(int rayID) const;
-    // Méthode pour lire tous les rayon
+    /// \brief Lire tous les rayons.
+    /// \return Un tableau des distances mesurées.
     std::vector<double> readAll() const;
 
     // Getters

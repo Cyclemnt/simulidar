@@ -1,7 +1,6 @@
 # Ignorer les dossiers de build
 build/
-cmake-build-debug/
-out/
+docs/
 
 # Ignorer les binaires et objets
 *.o
@@ -11,3 +10,6 @@ out/
 # Ignorer les fichiers temporaires
 *.tmp
 *.log
+
+# Ignorer Doxyfile
+Doxyfile

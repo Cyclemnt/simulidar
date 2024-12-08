@@ -5,6 +5,7 @@
 
 using Types::Grid;
 
+/// \brief Représente l'environnement dans lequel le robot évolue.
 class Environment
 {
 private:
@@ -12,12 +13,16 @@ private:
     int height;  // Largeur de l'environnement
     Grid room;   // Occupancy grid
 public:
-    // Constructeur avec paramètres
+    /// \brief Constructeur avec paramètres.
+    /// \param length_ Largeur d'environnement.
+    /// \param width_ Hauteur d'environnement.
     Environment(int length_, int width_);
 
-    // Générer des obstacles aléatoires
+    /// \brief Générer des obstacles aléatoires.
+    /// \param number Nombre d'obstacles.
+    /// \param maxSize Dimension maximale d'obstacle.
     void generateRandomObstacles(int number, int maxSize);
-    // Fonction pour afficher la grille dans le terminal
+    /// \brief Affiche l'environnement dans le terminal.
     void printRoom() const;
 
     // Getters

@@ -1,3 +1,5 @@
+* \mainpage
+
 # Simulation de Navigation Robotique avec LiDAR
 
 Ce projet implémente une simulation robotique utilisant un **robot mobile équipé d'un LiDAR** pour explorer un environnement inconnu. Il utilise OpenCV pour visualiser l'environnement et la carte du robot en temps réel.
@@ -123,8 +125,6 @@ Le Lidar simule un capteur de distance à 360 degrés qui permet au robot de dé
    - Le rayon avance dans la grille case par case, en alternant entre les lignes et colonnes selon les distances accumulées _rayLengthX_ et _rayLengthY_.  
    - Pour chaque nouvelle case traversée, le programme vérifie si elle contient un obstacle. 
 
-6. **Détection d'obstacle ou dépassement de portée** :  
-   Si une case contenant un obstacle est détectée, le Lidar retourne la distance accumulée. Si aucun obstacle n'est trouvé dans la portée maximale, la fonction retourne une valeur indiquant l'absence d'obstacle.
 6. **Détection d'obstacle ou dépassement de portée** :  
    - Si une case contenant un obstacle `CellState::Wall` est détectée, le Lidar retourne la distance accumulée.  
    - Si aucun obstacle n'est trouvé dans la portée maximale du Lidar _30 m_, la fonction retourne _-1_.

@@ -6,6 +6,7 @@
 #include "lidar.hpp"
 #include "map.hpp"
 
+/// \brief Chef d'orchestre de la simulation.
 class Simulation {
 private:
     Environment* environment;  // Pointeur vers l'environnement dans lequel évolue le robot
@@ -19,15 +20,22 @@ public:
     // Constructeur qui initialise l'environnement et le robot
     Simulation();
 
-    // Méthode pour démarrer la simulation
+    /// \brief Démarrer la simulation.
     void run();
-    // Méthode pour initialiser la pose du robot
+    /// \brief Initialiser la pose du robot
     void initializeRobotPose();
-    // Méthode pour afficher la simulation
+    /// \brief Afficher la simulation
+    /// \param scaleFactor Facteur d'agrandissement de la matrice à afficher (px).
+    /// \param plan Carte à afficher.
     void displaySimulation(int scaleFactor, Grid plan) const;
-    //Méthode pour afficher en 3D la vue du robot avec le raycasting 
-    void displayRaycasting(Grid plan, int WindowWidth, int WindowHeight, int wallheight,int fov) const;
-    // Méthode pour afficher les trois fenêtres
+    /// \brief Afficher en 3D la vue du robot avec le raycasting 
+    /// \param plan Carte à afficher.
+    /// \param WindowWidth Largeur de fenêtre.
+    /// \param WindowHeight Hauteur de fenêtre.
+    /// \param wallheight Hauteur des murs.
+    /// \param fov Champ de vision (°).
+    void displayRaycasting(Grid plan, int WindowWidth, int WindowHeight, int wallheight, int fov) const;
+    /// \brief Afficher les trois fenêtres
     void displayAll();
 
     // Getters

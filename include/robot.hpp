@@ -4,6 +4,7 @@
 #include "map.hpp"
 #include "lidar.hpp"
 
+/// \brief Représente le robot.
 class Robot
 {
 private:
@@ -17,13 +18,18 @@ public:
     // Constructeur par défaut
     Robot();
 
-    // Fonction pour faire avancer le robot
+    /// \brief Avancer le robot.
+    /// \param distance Distance du déplacement.
     void move(double distance);
-    // Fonction pour faire tourner le robot
+    /// \brief Tourner le robot.
+    /// \param angle Angle de la rotation.
     void rotate(double angle);
-    // Fonction pour mettre à jour sa carte
+    /// \brief Mettre à jour la carte.
+    /// \param lidarMeasures Tableau des mesures Lidar.
     void updateMap(std::vector<double> lidarMeasures);
-    // Méthode pour exécuter l'instruction (s'orienter et avancer)
+    /// \brief Exécuter l'instruction (s'orienter et avancer).
+    /// \param targetPos_ Position de la case adjacente suivante.
+    /// \return Instruction terminée.
     bool executeInstruction(std::pair<int, int> targetPos_);
 
     // Setters

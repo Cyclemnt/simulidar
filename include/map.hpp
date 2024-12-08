@@ -6,6 +6,7 @@
 using Types::Grid;
 using Types::Direction;
 
+/// \brief Représente la carte du robot.
 class Map
 {
 private:
@@ -15,15 +16,27 @@ public:
     // Constructeur qui initialise le carte du robot
     Map();
 
-    // Méthode pour agrandir la carte
+    /// \brief Agrandir la carte.
+    /// \param amount Quantité d'agrandissement.
+    /// \param dir Direction de l'agrandissement.
     void adjustMapBounds(int amount, Direction dir);
-    // Méthode pour tracer un chemin de cases libres terminé par un obstacle
+    /// \brief Tracer un chemin de cases libres terminé par un obstacle.
+    /// \param startX Coordonnée x du départ.
+    /// \param startY Coordonnée y du départ.
+    /// \param rayAngle Angle du rayon.
+    /// \param distance Distance mesurée.
     void castRayAndMarkObstacle(double startX, double startY, double rayAngle, double distance);
-    // Méthode pour déterminer la prochaine case à explorer 
+    /// \brief Déterminer la prochaine case à explorer.
+    /// \param startX Coordonnée x du départ.
+    /// \param startY Coordonnée y du départ.
+    /// \return La position de la case à explorer.
     std::pair<int, int> findNearestInterestPoint(double startX, double startY) const;
-    // Algorithme A* pour trouver le chemin le plus court entre "start" et "goal"
+    /// \brief Trouver le chemin le plus court entre "start" et "goal".
+    /// \param start Position de départ.
+    /// \param goal Position du but.
+    /// \return Le chemin jusqu'au but.
     std::vector<std::pair<int, int>> aStar(std::pair<int, int> start, std::pair<int, int> goal) const;
-    // Méthode pour afficher la carte dans le terminal
+    /// \brief Affiche la carte dans le terminal.
     void printMap() const;
     
     //Getter
