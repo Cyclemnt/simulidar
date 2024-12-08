@@ -1,5 +1,3 @@
-* \mainpage
-
 # Simulation de Navigation Robotique avec LiDAR
 
 Ce projet implémente une simulation robotique utilisant un **robot mobile équipé d'un LiDAR** pour explorer un environnement inconnu. Il utilise OpenCV pour visualiser l'environnement et la carte du robot en temps réel.
@@ -16,6 +14,10 @@ Le but est de simuler un robot mobile explorant un environnement inconnu en util
 <p align="center">
   <img src="images/simulidar_uml.svg" alt="Diagramme UML"/>
 </p>
+
+## Documentation
+La documentation complète est hébergée sur GitHub Pages :
+[Accéder à la documentation](https://cyclemnt.github.io/simulidar/)
 
 ## Fonctionnalités
 - **Environnement généré aléatoirement** avec des obstacles de tailles variées.
