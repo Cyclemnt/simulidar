@@ -1,0 +1,211 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.4"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>simulidar:  Fichier source de src/robot.cpp</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">simulidar
+   </div>
+   <div id="projectbrief">Simulation d&#39;un robot cartographiant un environnement à l&#39;aide d&#39;un Lidar en C++</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.4 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "../../search",'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('../../',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle"><div class="title">robot.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="../../df/d52/robot_8cpp.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#include &quot;../include/robot.hpp&quot;</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#include &lt;cmath&gt;</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;algorithm&gt;</span> <span class="comment">// Pour std::clamp()</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno"><a class="line" href="../../de/d78/classRobot.html#a4fc7c70ae20623f05e06f2ecb388b6c4">    5</a></span><a class="code hl_function" href="../../de/d78/classRobot.html#a4fc7c70ae20623f05e06f2ecb388b6c4">Robot::Robot</a>()</div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span>    : lidar(nullptr), map(nullptr), x(0.0), y(0.0), orientation(0.0), targetPos({0, 0}) {}</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">// Fonction pour faire avancer le robot</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="../../de/d78/classRobot.html#a14a466b67548b6aac5632527c8df584b">    9</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="../../de/d78/classRobot.html#a14a466b67548b6aac5632527c8df584b">Robot::move</a>(<span class="keywordtype">double</span> distance) {</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    <a class="code hl_variable" href="../../de/d78/classRobot.html#af2009cbf349ef2784c509bb1a8d22b41">x</a> += distance * std::cos(<a class="code hl_variable" href="../../de/d78/classRobot.html#ac990995e036f39141e5b2eec2fa50de9">orientation</a>);</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    <a class="code hl_variable" href="../../de/d78/classRobot.html#a2fd13adaac3b4237ed098d1a83e419f6">y</a> += distance * std::sin(<a class="code hl_variable" href="../../de/d78/classRobot.html#ac990995e036f39141e5b2eec2fa50de9">orientation</a>);</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    <span class="comment">// Pour contrer les potentielles erreurs de représentation binaire des virgules flottantes</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <span class="keywordflow">if</span> (fabs(floor(<a class="code hl_variable" href="../../de/d78/classRobot.html#af2009cbf349ef2784c509bb1a8d22b41">x</a> + 0.5) - <a class="code hl_variable" href="../../de/d78/classRobot.html#af2009cbf349ef2784c509bb1a8d22b41">x</a>) &lt; 1e-14) <a class="code hl_variable" href="../../de/d78/classRobot.html#af2009cbf349ef2784c509bb1a8d22b41">x</a> = floor(<a class="code hl_variable" href="../../de/d78/classRobot.html#af2009cbf349ef2784c509bb1a8d22b41">x</a> + 0.5); <span class="comment">// Arrondir la position du robot</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <span class="keywordflow">if</span> (fabs(floor(<a class="code hl_variable" href="../../de/d78/classRobot.html#a2fd13adaac3b4237ed098d1a83e419f6">y</a> + 0.5) - <a class="code hl_variable" href="../../de/d78/classRobot.html#a2fd13adaac3b4237ed098d1a83e419f6">y</a>) &lt; 1e-14) <a class="code hl_variable" href="../../de/d78/classRobot.html#a2fd13adaac3b4237ed098d1a83e419f6">y</a> = floor(<a class="code hl_variable" href="../../de/d78/classRobot.html#a2fd13adaac3b4237ed098d1a83e419f6">y</a> + 0.5); <span class="comment">// Arrondir la position du robot</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>}</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">// Fonction pour faire tourner le robot</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="../../de/d78/classRobot.html#a5a3acb414922e8336b5f960288a2d518">   18</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="../../de/d78/classRobot.html#a5a3acb414922e8336b5f960288a2d518">Robot::rotate</a>(<span class="keywordtype">double</span> angle) {</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <a class="code hl_variable" href="../../de/d78/classRobot.html#ac990995e036f39141e5b2eec2fa50de9">orientation</a> += angle;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../de/d78/classRobot.html#ac990995e036f39141e5b2eec2fa50de9">orientation</a> &gt; 2 * M_PI) <a class="code hl_variable" href="../../de/d78/classRobot.html#ac990995e036f39141e5b2eec2fa50de9">orientation</a> -= 2 * M_PI;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../de/d78/classRobot.html#ac990995e036f39141e5b2eec2fa50de9">orientation</a> &lt; -2 * M_PI) <a class="code hl_variable" href="../../de/d78/classRobot.html#ac990995e036f39141e5b2eec2fa50de9">orientation</a> += 2 * M_PI;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>}</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">// Fonction pour mettre à jour la carte du robot</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="../../de/d78/classRobot.html#ae7294f0cfbd00246e9690d108d89f717">   25</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="../../de/d78/classRobot.html#ae7294f0cfbd00246e9690d108d89f717">Robot::updateMap</a>(std::vector&lt;double&gt; lidarMeasurements) {</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code hl_variable" href="../../de/d78/classRobot.html#a6ab3e33966cb2d6b4dca7d2be495f6d9">lidar</a>-&gt;<a class="code hl_function" href="../../d2/da5/classLidar.html#a9abe033b12f8d002be75ec93839087bd">getRayCount</a>(); i++) {</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        <span class="keywordtype">double</span> distance = lidarMeasurements[i];</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        <span class="comment">// Calculer l&#39;angle du rayon relatif à l&#39;orientation du robot</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        <span class="keywordtype">double</span> rayAngle = <a class="code hl_variable" href="../../de/d78/classRobot.html#ac990995e036f39141e5b2eec2fa50de9">orientation</a> + (i - <a class="code hl_variable" href="../../de/d78/classRobot.html#a6ab3e33966cb2d6b4dca7d2be495f6d9">lidar</a>-&gt;<a class="code hl_function" href="../../d2/da5/classLidar.html#a9abe033b12f8d002be75ec93839087bd">getRayCount</a>() / 2) * (M_PI / 180.0);</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        <span class="comment">// NE PAS PRENDRE LES DIAGONALES ------------+</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>        <span class="comment">// car l&#39;erreur de la représentation binaire |</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        <span class="comment">// des virgules flottantes est plus impactante</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        <span class="keywordflow">if</span> (fabs(fmod(fabs(rayAngle), M_PI_2) - M_PI_4) &lt; (0.034)) <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        <span class="comment">// ------------------------------------------+</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        <span class="comment">// Ray casting dans la grille pour adapter l&#39;état des cases</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        <a class="code hl_variable" href="../../de/d78/classRobot.html#a11bf5e7052b7f0c11027b1b6e7093da3">map</a>-&gt;<a class="code hl_function" href="../../d7/db0/classMap.html#a05e67979fc0f5e865ddd69b39a24eded">castRayAndMarkObstacle</a>(<a class="code hl_variable" href="../../de/d78/classRobot.html#af2009cbf349ef2784c509bb1a8d22b41">x</a>, <a class="code hl_variable" href="../../de/d78/classRobot.html#a2fd13adaac3b4237ed098d1a83e419f6">y</a>, rayAngle, distance);</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    }</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>}</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">// Méthode pour suivre la liste d&#39;instructions</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="../../de/d78/classRobot.html#ac2707bcb99c2c0b55f4ca98a7077fcc0">   41</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="../../de/d78/classRobot.html#ac2707bcb99c2c0b55f4ca98a7077fcc0">Robot::executeInstruction</a>(std::pair&lt;int, int&gt; targetPos_) {</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../de/d78/classRobot.html#a7fc53a20875abbc92162a65c3f4fbbbc">targetPos</a> != targetPos_) <a class="code hl_variable" href="../../de/d78/classRobot.html#a7fc53a20875abbc92162a65c3f4fbbbc">targetPos</a> = targetPos_;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="comment">// Case actuelle du robot</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keywordtype">int</span> mapX = floor(<a class="code hl_variable" href="../../de/d78/classRobot.html#af2009cbf349ef2784c509bb1a8d22b41">x</a> + 0.5) + <a class="code hl_variable" href="../../de/d78/classRobot.html#a11bf5e7052b7f0c11027b1b6e7093da3">map</a>-&gt;<a class="code hl_function" href="../../d7/db0/classMap.html#a513e996f503260c074d73bd2dc80a4c9">getLeftExtension</a>();</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="keywordtype">int</span> mapY = floor(<a class="code hl_variable" href="../../de/d78/classRobot.html#a2fd13adaac3b4237ed098d1a83e419f6">y</a> + 0.5) + <a class="code hl_variable" href="../../de/d78/classRobot.html#a11bf5e7052b7f0c11027b1b6e7093da3">map</a>-&gt;<a class="code hl_function" href="../../d7/db0/classMap.html#a0f1b7e8279fdb7400cd42fdfbbe00656">getBottomExtension</a>();</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="comment">// Position actuelle du robot sur sa carte</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keywordtype">double</span> robotX = <a class="code hl_variable" href="../../de/d78/classRobot.html#af2009cbf349ef2784c509bb1a8d22b41">x</a> + <a class="code hl_variable" href="../../de/d78/classRobot.html#a11bf5e7052b7f0c11027b1b6e7093da3">map</a>-&gt;<a class="code hl_function" href="../../d7/db0/classMap.html#a513e996f503260c074d73bd2dc80a4c9">getLeftExtension</a>();</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keywordtype">double</span> robotY = <a class="code hl_variable" href="../../de/d78/classRobot.html#a2fd13adaac3b4237ed098d1a83e419f6">y</a> + <a class="code hl_variable" href="../../de/d78/classRobot.html#a11bf5e7052b7f0c11027b1b6e7093da3">map</a>-&gt;<a class="code hl_function" href="../../d7/db0/classMap.html#a0f1b7e8279fdb7400cd42fdfbbe00656">getBottomExtension</a>();</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="comment">// Chemin à parcourir</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <span class="keywordtype">int</span> dx = <a class="code hl_variable" href="../../de/d78/classRobot.html#a7fc53a20875abbc92162a65c3f4fbbbc">targetPos</a>.first - mapX;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="keywordtype">int</span> dy = <a class="code hl_variable" href="../../de/d78/classRobot.html#a7fc53a20875abbc92162a65c3f4fbbbc">targetPos</a>.second - mapY;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keywordtype">bool</span> achievedTarget = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="comment">// Détermine l&#39;orientation cible en fonction de dx et dy</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="keywordtype">double</span> targetOrientation = <a class="code hl_variable" href="../../de/d78/classRobot.html#ac990995e036f39141e5b2eec2fa50de9">orientation</a>;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="keywordflow">if</span> (dx &gt; 0) targetOrientation = 0;                   <span class="comment">// Droite</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (dx &lt; 0) targetOrientation = M_PI;           <span class="comment">// Gauche</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (dy &gt; 0) targetOrientation = M_PI / 2.0;     <span class="comment">// Haut</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (dy &lt; 0) targetOrientation = 3 * M_PI / 2.0; <span class="comment">// Bas</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <span class="keywordtype">double</span> angleDiff = targetOrientation - <a class="code hl_variable" href="../../de/d78/classRobot.html#ac990995e036f39141e5b2eec2fa50de9">orientation</a>;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    <span class="comment">// Ajuste la différence d&#39;angle pour être dans [-π, π]</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="keywordflow">if</span> (angleDiff &gt; M_PI) angleDiff -= 2 * M_PI;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="keywordflow">if</span> (angleDiff &lt; -M_PI) angleDiff += 2 * M_PI;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    </div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <span class="keywordflow">if</span> (angleDiff == 0) { <span class="comment">// Si l&#39;orientation est bonne, avancer</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        <span class="keywordtype">double</span> distance = fabs(<a class="code hl_variable" href="../../de/d78/classRobot.html#a7fc53a20875abbc92162a65c3f4fbbbc">targetPos</a>.first - robotX) + fabs(<a class="code hl_variable" href="../../de/d78/classRobot.html#a7fc53a20875abbc92162a65c3f4fbbbc">targetPos</a>.second - robotY);</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        <a class="code hl_function" href="../../de/d78/classRobot.html#a14a466b67548b6aac5632527c8df584b">move</a>(std::min(distance, <a class="code hl_define" href="../../dd/de3/types_8hpp.html#aac3553b3932cbfeeac4526ce7ca0336b">SPEED</a> * <a class="code hl_variable" href="../../de/d78/classRobot.html#a7fb3cae9c37446c4aff57605006900b7">timeStep</a>));</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    } <span class="keywordflow">else</span> { <span class="comment">// Sinon, tourner</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        <a class="code hl_function" href="../../de/d78/classRobot.html#a5a3acb414922e8336b5f960288a2d518">rotate</a>(std::clamp(angleDiff, -<a class="code hl_define" href="../../dd/de3/types_8hpp.html#a5cb1fa7ba08e757e42bdb3d948aebaab">ANG_V</a> * <a class="code hl_variable" href="../../de/d78/classRobot.html#a7fb3cae9c37446c4aff57605006900b7">timeStep</a>, <a class="code hl_define" href="../../dd/de3/types_8hpp.html#a5cb1fa7ba08e757e42bdb3d948aebaab">ANG_V</a> * <a class="code hl_variable" href="../../de/d78/classRobot.html#a7fb3cae9c37446c4aff57605006900b7">timeStep</a>));</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    }</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    <span class="comment">// Recalcul de la position sur la carte</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    robotX = <a class="code hl_variable" href="../../de/d78/classRobot.html#af2009cbf349ef2784c509bb1a8d22b41">x</a> + <a class="code hl_variable" href="../../de/d78/classRobot.html#a11bf5e7052b7f0c11027b1b6e7093da3">map</a>-&gt;<a class="code hl_function" href="../../d7/db0/classMap.html#a513e996f503260c074d73bd2dc80a4c9">getLeftExtension</a>();</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    robotY = <a class="code hl_variable" href="../../de/d78/classRobot.html#a2fd13adaac3b4237ed098d1a83e419f6">y</a> + <a class="code hl_variable" href="../../de/d78/classRobot.html#a11bf5e7052b7f0c11027b1b6e7093da3">map</a>-&gt;<a class="code hl_function" href="../../d7/db0/classMap.html#a0f1b7e8279fdb7400cd42fdfbbe00656">getBottomExtension</a>();</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    <span class="comment">// Si correspondance avec l&#39;objectif, alors fin</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../de/d78/classRobot.html#a7fc53a20875abbc92162a65c3f4fbbbc">targetPos</a>.first == robotX &amp;&amp; <a class="code hl_variable" href="../../de/d78/classRobot.html#a7fc53a20875abbc92162a65c3f4fbbbc">targetPos</a>.second == robotY) achievedTarget = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    </div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <span class="keywordflow">return</span> achievedTarget;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>}</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="comment">// Setters</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno"><a class="line" href="../../de/d78/classRobot.html#a3e03b2c6f16ed7734dc5ecdfeed4e1d6">   84</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="../../de/d78/classRobot.html#a3e03b2c6f16ed7734dc5ecdfeed4e1d6">Robot::setLidar</a>(<a class="code hl_class" href="../../d2/da5/classLidar.html">Lidar</a>* lidar_) {</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    <a class="code hl_variable" href="../../de/d78/classRobot.html#a6ab3e33966cb2d6b4dca7d2be495f6d9">lidar</a> = lidar_;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>}</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno"><a class="line" href="../../de/d78/classRobot.html#ac33ccb369eba2e663236c452db1bb906">   87</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="../../de/d78/classRobot.html#ac33ccb369eba2e663236c452db1bb906">Robot::setMap</a>(<a class="code hl_class" href="../../d7/db0/classMap.html">Map</a>* map_) {</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    <a class="code hl_variable" href="../../de/d78/classRobot.html#a11bf5e7052b7f0c11027b1b6e7093da3">map</a> = map_;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>}</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno"><a class="line" href="../../de/d78/classRobot.html#ab5b096e55f0c35c0214c6045a324bf16">   90</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="../../de/d78/classRobot.html#ab5b096e55f0c35c0214c6045a324bf16">Robot::setTimeStep</a>(<span class="keywordtype">int</span> timeStep_) {</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    <a class="code hl_variable" href="../../de/d78/classRobot.html#a7fb3cae9c37446c4aff57605006900b7">timeStep</a> = timeStep_ / 1000.0;</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>}</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="comment">// Getters</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno"><a class="line" href="../../de/d78/classRobot.html#a4def336497f7e5f9dbedacf97d7f38ac">   95</a></span><span class="keywordtype">double</span> <a class="code hl_function" href="../../de/d78/classRobot.html#a4def336497f7e5f9dbedacf97d7f38ac">Robot::getX</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    <span class="keywordflow">return</span> <a class="code hl_variable" href="../../de/d78/classRobot.html#af2009cbf349ef2784c509bb1a8d22b41">x</a>;</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>}</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno"><a class="line" href="../../de/d78/classRobot.html#ad1d5656d60a203e1024b6a112390f3cd">   98</a></span><span class="keywordtype">double</span> <a class="code hl_function" href="../../de/d78/classRobot.html#ad1d5656d60a203e1024b6a112390f3cd">Robot::getY</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    <span class="keywordflow">return</span> <a class="code hl_variable" href="../../de/d78/classRobot.html#a2fd13adaac3b4237ed098d1a83e419f6">y</a>;</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>}</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno"><a class="line" href="../../de/d78/classRobot.html#a8270811ceae9e31af9905169050ccdf9">  101</a></span><span class="keywordtype">double</span> <a class="code hl_function" href="../../de/d78/classRobot.html#a8270811ceae9e31af9905169050ccdf9">Robot::getOrientation</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    <span class="keywordflow">return</span> <a class="code hl_variable" href="../../de/d78/classRobot.html#ac990995e036f39141e5b2eec2fa50de9">orientation</a>;</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>}</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno"><a class="line" href="../../de/d78/classRobot.html#a924320124b09c2f2ac1621aa210d5f38">  105</a></span><a class="code hl_function" href="../../de/d78/classRobot.html#a924320124b09c2f2ac1621aa210d5f38">Robot::~Robot</a>() {}</div>
+<div class="ttc" id="aclassLidar_html"><div class="ttname"><a href="../../d2/da5/classLidar.html">Lidar</a></div><div class="ttdoc">Représente le Lidar simulé.</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/daf/lidar_8hpp_source.html#l00011">lidar.hpp:12</a></div></div>
+<div class="ttc" id="aclassLidar_html_a9abe033b12f8d002be75ec93839087bd"><div class="ttname"><a href="../../d2/da5/classLidar.html#a9abe033b12f8d002be75ec93839087bd">Lidar::getRayCount</a></div><div class="ttdeci">int getRayCount() const</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/d48/lidar_8cpp_source.html#l00112">lidar.cpp:112</a></div></div>
+<div class="ttc" id="aclassMap_html"><div class="ttname"><a href="../../d7/db0/classMap.html">Map</a></div><div class="ttdoc">Représente la carte du robot.</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d7c/map_8hpp_source.html#l00010">map.hpp:11</a></div></div>
+<div class="ttc" id="aclassMap_html_a05e67979fc0f5e865ddd69b39a24eded"><div class="ttname"><a href="../../d7/db0/classMap.html#a05e67979fc0f5e865ddd69b39a24eded">Map::castRayAndMarkObstacle</a></div><div class="ttdeci">void castRayAndMarkObstacle(double startX, double startY, double rayAngle, double distance)</div><div class="ttdoc">Tracer un chemin de cases libres terminé par un obstacle.</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/dd3/map_8cpp_source.html#l00043">map.cpp:43</a></div></div>
+<div class="ttc" id="aclassMap_html_a0f1b7e8279fdb7400cd42fdfbbe00656"><div class="ttname"><a href="../../d7/db0/classMap.html#a0f1b7e8279fdb7400cd42fdfbbe00656">Map::getBottomExtension</a></div><div class="ttdeci">int getBottomExtension() const</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/dd3/map_8cpp_source.html#l00294">map.cpp:294</a></div></div>
+<div class="ttc" id="aclassMap_html_a513e996f503260c074d73bd2dc80a4c9"><div class="ttname"><a href="../../d7/db0/classMap.html#a513e996f503260c074d73bd2dc80a4c9">Map::getLeftExtension</a></div><div class="ttdeci">int getLeftExtension() const</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/dd3/map_8cpp_source.html#l00291">map.cpp:291</a></div></div>
+<div class="ttc" id="aclassRobot_html_a11bf5e7052b7f0c11027b1b6e7093da3"><div class="ttname"><a href="../../de/d78/classRobot.html#a11bf5e7052b7f0c11027b1b6e7093da3">Robot::map</a></div><div class="ttdeci">Map * map</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/de0/robot_8hpp_source.html#l00011">robot.hpp:11</a></div></div>
+<div class="ttc" id="aclassRobot_html_a14a466b67548b6aac5632527c8df584b"><div class="ttname"><a href="../../de/d78/classRobot.html#a14a466b67548b6aac5632527c8df584b">Robot::move</a></div><div class="ttdeci">void move(double distance)</div><div class="ttdoc">Avancer le robot.</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d52/robot_8cpp_source.html#l00009">robot.cpp:9</a></div></div>
+<div class="ttc" id="aclassRobot_html_a2fd13adaac3b4237ed098d1a83e419f6"><div class="ttname"><a href="../../de/d78/classRobot.html#a2fd13adaac3b4237ed098d1a83e419f6">Robot::y</a></div><div class="ttdeci">double y</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/de0/robot_8hpp_source.html#l00013">robot.hpp:13</a></div></div>
+<div class="ttc" id="aclassRobot_html_a3e03b2c6f16ed7734dc5ecdfeed4e1d6"><div class="ttname"><a href="../../de/d78/classRobot.html#a3e03b2c6f16ed7734dc5ecdfeed4e1d6">Robot::setLidar</a></div><div class="ttdeci">void setLidar(Lidar *lidar_)</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d52/robot_8cpp_source.html#l00084">robot.cpp:84</a></div></div>
+<div class="ttc" id="aclassRobot_html_a4def336497f7e5f9dbedacf97d7f38ac"><div class="ttname"><a href="../../de/d78/classRobot.html#a4def336497f7e5f9dbedacf97d7f38ac">Robot::getX</a></div><div class="ttdeci">double getX() const</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d52/robot_8cpp_source.html#l00095">robot.cpp:95</a></div></div>
+<div class="ttc" id="aclassRobot_html_a4fc7c70ae20623f05e06f2ecb388b6c4"><div class="ttname"><a href="../../de/d78/classRobot.html#a4fc7c70ae20623f05e06f2ecb388b6c4">Robot::Robot</a></div><div class="ttdeci">Robot()</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d52/robot_8cpp_source.html#l00005">robot.cpp:5</a></div></div>
+<div class="ttc" id="aclassRobot_html_a5a3acb414922e8336b5f960288a2d518"><div class="ttname"><a href="../../de/d78/classRobot.html#a5a3acb414922e8336b5f960288a2d518">Robot::rotate</a></div><div class="ttdeci">void rotate(double angle)</div><div class="ttdoc">Tourner le robot.</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d52/robot_8cpp_source.html#l00018">robot.cpp:18</a></div></div>
+<div class="ttc" id="aclassRobot_html_a6ab3e33966cb2d6b4dca7d2be495f6d9"><div class="ttname"><a href="../../de/d78/classRobot.html#a6ab3e33966cb2d6b4dca7d2be495f6d9">Robot::lidar</a></div><div class="ttdeci">Lidar * lidar</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/de0/robot_8hpp_source.html#l00012">robot.hpp:12</a></div></div>
+<div class="ttc" id="aclassRobot_html_a7fb3cae9c37446c4aff57605006900b7"><div class="ttname"><a href="../../de/d78/classRobot.html#a7fb3cae9c37446c4aff57605006900b7">Robot::timeStep</a></div><div class="ttdeci">double timeStep</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/de0/robot_8hpp_source.html#l00016">robot.hpp:16</a></div></div>
+<div class="ttc" id="aclassRobot_html_a7fc53a20875abbc92162a65c3f4fbbbc"><div class="ttname"><a href="../../de/d78/classRobot.html#a7fc53a20875abbc92162a65c3f4fbbbc">Robot::targetPos</a></div><div class="ttdeci">std::pair&lt; int, int &gt; targetPos</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/de0/robot_8hpp_source.html#l00015">robot.hpp:15</a></div></div>
+<div class="ttc" id="aclassRobot_html_a8270811ceae9e31af9905169050ccdf9"><div class="ttname"><a href="../../de/d78/classRobot.html#a8270811ceae9e31af9905169050ccdf9">Robot::getOrientation</a></div><div class="ttdeci">double getOrientation() const</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d52/robot_8cpp_source.html#l00101">robot.cpp:101</a></div></div>
+<div class="ttc" id="aclassRobot_html_a924320124b09c2f2ac1621aa210d5f38"><div class="ttname"><a href="../../de/d78/classRobot.html#a924320124b09c2f2ac1621aa210d5f38">Robot::~Robot</a></div><div class="ttdeci">~Robot()</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d52/robot_8cpp_source.html#l00105">robot.cpp:105</a></div></div>
+<div class="ttc" id="aclassRobot_html_ab5b096e55f0c35c0214c6045a324bf16"><div class="ttname"><a href="../../de/d78/classRobot.html#ab5b096e55f0c35c0214c6045a324bf16">Robot::setTimeStep</a></div><div class="ttdeci">void setTimeStep(int timeStemp_)</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d52/robot_8cpp_source.html#l00090">robot.cpp:90</a></div></div>
+<div class="ttc" id="aclassRobot_html_ac2707bcb99c2c0b55f4ca98a7077fcc0"><div class="ttname"><a href="../../de/d78/classRobot.html#ac2707bcb99c2c0b55f4ca98a7077fcc0">Robot::executeInstruction</a></div><div class="ttdeci">bool executeInstruction(std::pair&lt; int, int &gt; targetPos_)</div><div class="ttdoc">Exécuter l'instruction (s'orienter et avancer).</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d52/robot_8cpp_source.html#l00041">robot.cpp:41</a></div></div>
+<div class="ttc" id="aclassRobot_html_ac33ccb369eba2e663236c452db1bb906"><div class="ttname"><a href="../../de/d78/classRobot.html#ac33ccb369eba2e663236c452db1bb906">Robot::setMap</a></div><div class="ttdeci">void setMap(Map *map_)</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d52/robot_8cpp_source.html#l00087">robot.cpp:87</a></div></div>
+<div class="ttc" id="aclassRobot_html_ac990995e036f39141e5b2eec2fa50de9"><div class="ttname"><a href="../../de/d78/classRobot.html#ac990995e036f39141e5b2eec2fa50de9">Robot::orientation</a></div><div class="ttdeci">double orientation</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/de0/robot_8hpp_source.html#l00014">robot.hpp:14</a></div></div>
+<div class="ttc" id="aclassRobot_html_ad1d5656d60a203e1024b6a112390f3cd"><div class="ttname"><a href="../../de/d78/classRobot.html#ad1d5656d60a203e1024b6a112390f3cd">Robot::getY</a></div><div class="ttdeci">double getY() const</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d52/robot_8cpp_source.html#l00098">robot.cpp:98</a></div></div>
+<div class="ttc" id="aclassRobot_html_ae7294f0cfbd00246e9690d108d89f717"><div class="ttname"><a href="../../de/d78/classRobot.html#ae7294f0cfbd00246e9690d108d89f717">Robot::updateMap</a></div><div class="ttdeci">void updateMap(std::vector&lt; double &gt; lidarMeasures)</div><div class="ttdoc">Mettre à jour la carte.</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d52/robot_8cpp_source.html#l00025">robot.cpp:25</a></div></div>
+<div class="ttc" id="aclassRobot_html_af2009cbf349ef2784c509bb1a8d22b41"><div class="ttname"><a href="../../de/d78/classRobot.html#af2009cbf349ef2784c509bb1a8d22b41">Robot::x</a></div><div class="ttdeci">double x</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/de0/robot_8hpp_source.html#l00013">robot.hpp:13</a></div></div>
+<div class="ttc" id="atypes_8hpp_html_a5cb1fa7ba08e757e42bdb3d948aebaab"><div class="ttname"><a href="../../dd/de3/types_8hpp.html#a5cb1fa7ba08e757e42bdb3d948aebaab">ANG_V</a></div><div class="ttdeci">#define ANG_V</div><div class="ttdef"><b>Definition:</b> <a href="../../dd/de3/types_8hpp_source.html#l00018">types.hpp:18</a></div></div>
+<div class="ttc" id="atypes_8hpp_html_aac3553b3932cbfeeac4526ce7ca0336b"><div class="ttname"><a href="../../dd/de3/types_8hpp.html#aac3553b3932cbfeeac4526ce7ca0336b">SPEED</a></div><div class="ttdeci">#define SPEED</div><div class="ttdef"><b>Definition:</b> <a href="../../dd/de3/types_8hpp_source.html#l00019">types.hpp:19</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4
+</small></address>
+</body>
+</html>

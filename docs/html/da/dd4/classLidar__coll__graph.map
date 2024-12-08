@@ -1,0 +1,8 @@
+<map id="Lidar" name="Lidar">
+<area shape="rect" id="node1" title="Représente le Lidar simulé." alt="" coords="61,197,192,347"/>
+<area shape="rect" id="node2" href="$d1/d7b/classSimulation.html" title="Chef d&#39;orchestre de la simulation." alt="" coords="208,987,419,1269"/>
+<area shape="rect" id="node6" href="$de/d78/classRobot.html" title="Représente le robot." alt="" coords="230,627,397,924"/>
+<area shape="rect" id="node3" href="$d0/d98/classEnvironment.html" title="Représente l&#39;environnement dans lequel le robot évolue." alt="" coords="465,423,687,603"/>
+<area shape="rect" id="node4" title=" " alt="" coords="478,5,527,83"/>
+<area shape="rect" id="node5" href="$d7/db0/classMap.html" title="Représente la carte du robot." alt="" coords="323,145,538,399"/>
+</map>
