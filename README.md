@@ -23,7 +23,9 @@ Le but est de simuler un robot mobile explorant un environnement inconnu en util
     - Algorithme [A*](https://en.wikipedia.org/wiki/A*_search_algorithm) pour la recherche de chemin.
 - **Visualisation en temps réel** :
   - Vue 2D de l'environnement et de la carte du robot.
-  - Vue 3D simplifiée utilisant le raycasting pour simuler la perception du robot.
+  - Vue 3D simplifiée utilisant le raycasting pour simuler la perception du robot.  
+
+***Nous nous engageons à ce que le robot n'ait aucun accès direct ou indirect aux informations de l'environnement, à l'exception des données obtenues via le capteur Lidar. Ainsi, toutes les décisions du robot sont basées uniquement sur les informations fournies par ce capteur.*** 
 
 ## Dépendances
 - **[OpenCV](https://opencv.org/)** : Pour les affichages graphiques.
