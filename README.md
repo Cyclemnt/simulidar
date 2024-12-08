@@ -150,9 +150,9 @@ La fonction `Simulation::run` orchestre tout le processus d'exploration.
 Les résultats incluent deux types de visualisations pour mieux comprendre le comportement du robot :  
 1. **Vue 2D de l’environnement et de la carte du robot** :  
 <p align="center">
-  <img src="images/environment_view.png" alt="Vue de l'environnement"/>
+  <img src="images/environment_view.png" alt="Vue de l'environnement"/><img src="images/robotmap_view.png" alt="Carte du robot"/>
 </p>
-   Cette vue montre la position du robot, les obstacles et les zones explorées.  
+   Cette vue montre la position du robot, les obstacles et sa carte de départ, qui est vide.  
 
 2. **Vue 3D simulée (Raycasting)** :  
 <p align="center">
