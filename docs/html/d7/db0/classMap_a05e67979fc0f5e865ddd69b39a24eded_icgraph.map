@@ -1,6 +1,0 @@
-<map id="Map::castRayAndMarkObstacle" name="Map::castRayAndMarkObstacle">
-<area shape="rect" id="node1" title="Tracer un chemin de cases libres terminé par un obstacle. Cette méthode simule un rayon émis depuis u..." alt="" coords="467,5,692,32"/>
-<area shape="rect" id="node2" href="$de/d78/classRobot.html#ae7294f0cfbd00246e9690d108d89f717" title="Mettre à jour la carte. Cette méthode met à jour une carte locale du robot à l&#39;aide des mesures du ca..." alt="" coords="277,5,419,32"/>
-<area shape="rect" id="node3" href="$d1/d7b/classSimulation.html#ae5c367f87c0b5dc9740bc6d00e44e72c" title="Démarrer la simulation. Cette méthode lance la simulation et gère la logique principale du déplacemen..." alt="" coords="108,5,229,32"/>
-<area shape="rect" id="node4" href="$df/d0a/main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,5,60,32"/>
-</map>

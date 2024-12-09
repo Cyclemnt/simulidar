@@ -1,4 +1,0 @@
-<map id="Map::castRayAndMarkObstacle" name="Map::castRayAndMarkObstacle">
-<area shape="rect" id="node1" title="Tracer un chemin de cases libres terminé par un obstacle. Cette méthode simule un rayon émis depuis u..." alt="" coords="5,5,231,32"/>
-<area shape="rect" id="node2" href="$d7/db0/classMap.html#a2288247b5feba3e6742e23d096ab1837" title="Agrandir la carte. Cette méthode permet d&#39;agrandir la carte avec cellules à l&#39;état inconnu (CellState..." alt="" coords="279,5,453,32"/>
-</map>

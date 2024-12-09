@@ -1,4 +1,4 @@
 <map id="Map" name="Map">
-<area shape="rect" id="node1" title="Représente la carte du robot." alt="" coords="5,145,220,399"/>
+<area shape="rect" id="node1" title="Représente la carte du robot. Modélise la carte locale construite par le robot à partir des données d..." alt="" coords="5,145,220,399"/>
 <area shape="rect" id="node2" title=" " alt="" coords="88,5,137,83"/>
 </map>

@@ -1,26 +1,26 @@
 <map id="Simulation::run" name="Simulation::run">
-<area shape="rect" id="node1" title="Démarrer la simulation." alt="" coords="5,680,127,707"/>
-<area shape="rect" id="node2" href="$d7/db0/classMap.html#a2b67bbff83be82e6a021310c91053351" title="Trouver le chemin le plus court entre &quot;start&quot; et &quot;goal&quot;." alt="" coords="241,173,333,200"/>
-<area shape="rect" id="node3" href="$d1/d7b/classSimulation.html#ad3c853511c7d02a90ecd006ef427bf23" title="Afficher les trois fenêtres." alt="" coords="205,477,369,504"/>
-<area shape="rect" id="node6" href="$d2/da5/classLidar.html#ac02c43dce0f273690b5532e7da420d96" title="Lire tous les rayons." alt="" coords="755,275,863,301"/>
+<area shape="rect" id="node1" title="Démarrer la simulation. Cette méthode lance la simulation et gère la logique principale du déplacemen..." alt="" coords="5,680,127,707"/>
+<area shape="rect" id="node2" href="$d7/db0/classMap.html#a2b67bbff83be82e6a021310c91053351" title="Trouver le chemin le plus court entre &quot;start&quot; et &quot;goal&quot;. Cette méthode implémente l&#39;algorithme A* pou..." alt="" coords="241,173,333,200"/>
+<area shape="rect" id="node3" href="$d1/d7b/classSimulation.html#ad3c853511c7d02a90ecd006ef427bf23" title="Afficher les trois fenêtres Cette méthode affiche les trois vues principales de la simulation : l&#39;env..." alt="" coords="205,477,369,504"/>
+<area shape="rect" id="node6" href="$d2/da5/classLidar.html#ac02c43dce0f273690b5532e7da420d96" title="Lire tous les rayons. Cette méthode mesure les distances pour tous les rayons simulés par le Lidar,..." alt="" coords="755,275,863,301"/>
 <area shape="rect" id="node15" href="$de/d78/classRobot.html#a4def336497f7e5f9dbedacf97d7f38ac" title=" " alt="" coords="1270,477,1369,504"/>
 <area shape="rect" id="node17" href="$de/d78/classRobot.html#ad1d5656d60a203e1024b6a112390f3cd" title=" " alt="" coords="1271,629,1368,656"/>
 <area shape="rect" id="node20" href="$d7/db0/classMap.html#a0f1b7e8279fdb7400cd42fdfbbe00656" title=" " alt="" coords="1224,731,1415,757"/>
 <area shape="rect" id="node22" href="$d7/db0/classMap.html#a513e996f503260c074d73bd2dc80a4c9" title=" " alt="" coords="1236,781,1403,808"/>
-<area shape="rect" id="node25" href="$de/d78/classRobot.html#ac2707bcb99c2c0b55f4ca98a7077fcc0" title="Exécuter l&#39;instruction (s&#39;orienter et avancer)." alt="" coords="963,781,1151,808"/>
-<area shape="rect" id="node28" href="$d7/db0/classMap.html#a99c97bf7d9ecccf306fb0522edc10956" title="Déterminer la prochaine case à explorer." alt="" coords="196,833,379,874"/>
-<area shape="rect" id="node29" href="$d0/d98/classEnvironment.html#af3d20d558bd896efc3b2ac391f88ff9a" title="Générer des obstacles aléatoires." alt="" coords="175,898,400,939"/>
-<area shape="rect" id="node30" href="$d1/d7b/classSimulation.html#aaf25608aa65973b2940601a4326a89ab" title="Initialiser la pose du robot." alt="" coords="944,376,1169,403"/>
+<area shape="rect" id="node25" href="$de/d78/classRobot.html#ac2707bcb99c2c0b55f4ca98a7077fcc0" title="Exécuter l&#39;instruction (s&#39;orienter et avancer). Cette méthode guide le robot vers une position cible ..." alt="" coords="963,781,1151,808"/>
+<area shape="rect" id="node28" href="$d7/db0/classMap.html#a99c97bf7d9ecccf306fb0522edc10956" title="Déterminer la prochaine case à explorer. Cette méthode retourne les coordonnées de la cellule CellSta..." alt="" coords="196,833,379,874"/>
+<area shape="rect" id="node29" href="$d0/d98/classEnvironment.html#af3d20d558bd896efc3b2ac391f88ff9a" title="Générer des obstacles aléatoires. Cette méthode ajoute un nombre donné d&#39;obstacles aléatoires dans la..." alt="" coords="175,898,400,939"/>
+<area shape="rect" id="node30" href="$d1/d7b/classSimulation.html#aaf25608aa65973b2940601a4326a89ab" title="Initialiser la pose du robot. Cette méthode positionne le robot dans une cellule libre aléatoire de l..." alt="" coords="944,376,1169,403"/>
 <area shape="rect" id="node31" href="$de/d78/classRobot.html#a3e03b2c6f16ed7734dc5ecdfeed4e1d6" title=" " alt="" coords="227,964,347,991"/>
 <area shape="rect" id="node32" href="$de/d78/classRobot.html#ac33ccb369eba2e663236c452db1bb906" title=" " alt="" coords="229,1015,345,1041"/>
 <area shape="rect" id="node33" href="$de/d78/classRobot.html#ab5b096e55f0c35c0214c6045a324bf16" title=" " alt="" coords="212,1065,363,1092"/>
-<area shape="rect" id="node34" href="$de/d78/classRobot.html#ae7294f0cfbd00246e9690d108d89f717" title="Mettre à jour la carte." alt="" coords="217,224,358,251"/>
-<area shape="rect" id="node4" href="$d1/d7b/classSimulation.html#ac77cf141fd8d8fce9a6c8c14f2014cda" title="Afficher en 3D la vue du robot avec le raycasting." alt="" coords="451,325,670,352"/>
+<area shape="rect" id="node34" href="$de/d78/classRobot.html#ae7294f0cfbd00246e9690d108d89f717" title="Mettre à jour la carte. Cette méthode met à jour une carte locale du robot à l&#39;aide des mesures du ca..." alt="" coords="217,224,358,251"/>
+<area shape="rect" id="node4" href="$d1/d7b/classSimulation.html#ac77cf141fd8d8fce9a6c8c14f2014cda" title="Afficher en 3D la vue du robot avec le raycasting. Cette méthode affiche une vue en 3D simulée basée ..." alt="" coords="451,325,670,352"/>
 <area shape="rect" id="node13" href="$d0/d98/classEnvironment.html#a42c8956b01016d2e283c3bec97cfd631" title=" " alt="" coords="1233,427,1405,453"/>
-<area shape="rect" id="node19" href="$d1/d7b/classSimulation.html#a3803092b1a97815b336d59c64557f8ee" title="Afficher la simulation." alt="" coords="948,528,1165,555"/>
+<area shape="rect" id="node19" href="$d1/d7b/classSimulation.html#a3803092b1a97815b336d59c64557f8ee" title="Afficher la simulation Cette méthode affiche l&#39;état d&#39;une grille donnée (environnement ou carte du ro..." alt="" coords="948,528,1165,555"/>
 <area shape="rect" id="node23" href="$d7/db0/classMap.html#a81ef3172e85784f1197a81a27e6d7621" title=" " alt="" coords="1247,680,1392,707"/>
 <area shape="rect" id="node5" href="$d2/da5/classLidar.html#a9abe033b12f8d002be75ec93839087bd" title=" " alt="" coords="735,224,882,251"/>
-<area shape="rect" id="node7" href="$d2/da5/classLidar.html#aee1780110b243794b03d4ef3c0c6d22d" title="Lire un rayon particulier." alt="" coords="1011,275,1102,301"/>
+<area shape="rect" id="node7" href="$d2/da5/classLidar.html#aee1780110b243794b03d4ef3c0c6d22d" title="Lire un rayon particulier. Cette méthode calcule la distance entre le Lidar (situé sur le robot) et l..." alt="" coords="1011,275,1102,301"/>
 <area shape="rect" id="node8" href="$d1/d7b/classSimulation.html#a8f0a6c41e5181df8f73c10c0ded79dfc" title=" " alt="" coords="1217,56,1421,83"/>
 <area shape="rect" id="node9" href="$d0/d98/classEnvironment.html#ad17660db40711861f8416d3ea641cd4f" title=" " alt="" coords="1231,376,1408,403"/>
 <area shape="rect" id="node10" href="$de/d78/classRobot.html#a8270811ceae9e31af9905169050ccdf9" title=" " alt="" coords="1238,325,1401,352"/>
@@ -31,8 +31,8 @@
 <area shape="rect" id="node18" href="$d1/d7b/classSimulation.html#a668b1589efeb8de9e50683b81dde7181" title=" " alt="" coords="1220,5,1419,32"/>
 <area shape="rect" id="node21" href="$d7/db0/classMap.html#a67113f1ffac80d9a20b15fa18a58edc2" title=" " alt="" coords="1258,579,1381,605"/>
 <area shape="rect" id="node24" href="$d7/db0/classMap.html#ab3181204ba96eb15b96ee1ced85e198e" title=" " alt="" coords="1261,528,1378,555"/>
-<area shape="rect" id="node26" href="$de/d78/classRobot.html#a14a466b67548b6aac5632527c8df584b" title="Avancer le robot." alt="" coords="1267,832,1372,859"/>
-<area shape="rect" id="node27" href="$de/d78/classRobot.html#a5a3acb414922e8336b5f960288a2d518" title="Tourner le robot." alt="" coords="1266,883,1373,909"/>
-<area shape="rect" id="node35" href="$d7/db0/classMap.html#a05e67979fc0f5e865ddd69b39a24eded" title="Tracer un chemin de cases libres terminé par un obstacle." alt="" coords="448,173,673,200"/>
-<area shape="rect" id="node36" href="$d7/db0/classMap.html#a2288247b5feba3e6742e23d096ab1837" title="Agrandir la carte." alt="" coords="721,173,896,200"/>
+<area shape="rect" id="node26" href="$de/d78/classRobot.html#a14a466b67548b6aac5632527c8df584b" title="Avancer le robot. Cette méthode permet au robot de se déplacer en ligne droite selon son orientation ..." alt="" coords="1267,832,1372,859"/>
+<area shape="rect" id="node27" href="$de/d78/classRobot.html#a5a3acb414922e8336b5f960288a2d518" title="Tourner le robot. Cette méthode modifie l&#39;orientation du robot en ajoutant un angle donné." alt="" coords="1266,883,1373,909"/>
+<area shape="rect" id="node35" href="$d7/db0/classMap.html#a05e67979fc0f5e865ddd69b39a24eded" title="Tracer un chemin de cases libres terminé par un obstacle. Cette méthode simule un rayon émis depuis u..." alt="" coords="448,173,673,200"/>
+<area shape="rect" id="node36" href="$d7/db0/classMap.html#a2288247b5feba3e6742e23d096ab1837" title="Agrandir la carte. Cette méthode permet d&#39;agrandir la carte avec cellules à l&#39;état inconnu (CellState..." alt="" coords="721,173,896,200"/>
 </map>

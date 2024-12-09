@@ -1,5 +1,5 @@
 <map id="Simulation::displaySimulation" name="Simulation::displaySimulation">
-<area shape="rect" id="node1" title="Afficher la simulation." alt="" coords="5,259,223,285"/>
+<area shape="rect" id="node1" title="Afficher la simulation Cette méthode affiche l&#39;état d&#39;une grille donnée (environnement ou carte du ro..." alt="" coords="5,259,223,285"/>
 <area shape="rect" id="node2" href="$d7/db0/classMap.html#a0f1b7e8279fdb7400cd42fdfbbe00656" title=" " alt="" coords="271,5,461,32"/>
 <area shape="rect" id="node3" href="$d0/d98/classEnvironment.html#ad17660db40711861f8416d3ea641cd4f" title=" " alt="" coords="277,56,455,83"/>
 <area shape="rect" id="node4" href="$d7/db0/classMap.html#a67113f1ffac80d9a20b15fa18a58edc2" title=" " alt="" coords="305,107,427,133"/>

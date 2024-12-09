@@ -1,4 +1,4 @@
 <map id="Environment" name="Environment">
-<area shape="rect" id="node1" title="Représente l&#39;environnement dans lequel le robot évolue." alt="" coords="5,145,228,325"/>
+<area shape="rect" id="node1" title="Représente l&#39;environnement dans lequel le robot évolue. Représente l&#39;environnement global de la simul..." alt="" coords="5,145,228,325"/>
 <area shape="rect" id="node2" title=" " alt="" coords="92,5,141,83"/>
 </map>

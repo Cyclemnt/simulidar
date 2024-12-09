@@ -1,6 +1,0 @@
-<map id="Simulation::displayRaycasting" name="Simulation::displayRaycasting">
-<area shape="rect" id="node1" title="Afficher en 3D la vue du robot avec le raycasting. Cette méthode affiche une vue en 3D simulée basée ..." alt="" coords="489,5,708,32"/>
-<area shape="rect" id="node2" href="$d1/d7b/classSimulation.html#ad3c853511c7d02a90ecd006ef427bf23" title="Afficher les trois fenêtres Cette méthode affiche les trois vues principales de la simulation : l&#39;env..." alt="" coords="277,5,441,32"/>
-<area shape="rect" id="node3" href="$d1/d7b/classSimulation.html#ae5c367f87c0b5dc9740bc6d00e44e72c" title="Démarrer la simulation. Cette méthode lance la simulation et gère la logique principale du déplacemen..." alt="" coords="108,5,229,32"/>
-<area shape="rect" id="node4" href="$df/d0a/main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,5,60,32"/>
-</map>

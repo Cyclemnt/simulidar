@@ -1,8 +1,8 @@
 <map id="Simulation::displayRaycasting" name="Simulation::displayRaycasting">
-<area shape="rect" id="node1" title="Afficher en 3D la vue du robot avec le raycasting." alt="" coords="5,249,224,276"/>
+<area shape="rect" id="node1" title="Afficher en 3D la vue du robot avec le raycasting. Cette méthode affiche une vue en 3D simulée basée ..." alt="" coords="5,249,224,276"/>
 <area shape="rect" id="node2" href="$d2/da5/classLidar.html#a9abe033b12f8d002be75ec93839087bd" title=" " alt="" coords="272,224,419,251"/>
-<area shape="rect" id="node3" href="$d2/da5/classLidar.html#ac02c43dce0f273690b5532e7da420d96" title="Lire tous les rayons." alt="" coords="291,275,399,301"/>
-<area shape="rect" id="node4" href="$d2/da5/classLidar.html#aee1780110b243794b03d4ef3c0c6d22d" title="Lire un rayon particulier." alt="" coords="467,275,557,301"/>
+<area shape="rect" id="node3" href="$d2/da5/classLidar.html#ac02c43dce0f273690b5532e7da420d96" title="Lire tous les rayons. Cette méthode mesure les distances pour tous les rayons simulés par le Lidar,..." alt="" coords="291,275,399,301"/>
+<area shape="rect" id="node4" href="$d2/da5/classLidar.html#aee1780110b243794b03d4ef3c0c6d22d" title="Lire un rayon particulier. Cette méthode calcule la distance entre le Lidar (situé sur le robot) et l..." alt="" coords="467,275,557,301"/>
 <area shape="rect" id="node5" href="$d1/d7b/classSimulation.html#a8f0a6c41e5181df8f73c10c0ded79dfc" title=" " alt="" coords="605,5,809,32"/>
 <area shape="rect" id="node6" href="$d0/d98/classEnvironment.html#ad17660db40711861f8416d3ea641cd4f" title=" " alt="" coords="619,56,796,83"/>
 <area shape="rect" id="node7" href="$de/d78/classRobot.html#a8270811ceae9e31af9905169050ccdf9" title=" " alt="" coords="626,107,789,133"/>

@@ -1,6 +1,0 @@
-<map id="Simulation::initializeRobotPose" name="Simulation::initializeRobotPose">
-<area shape="rect" id="node1" title="Initialiser la pose du robot. Cette méthode positionne le robot dans une cellule libre aléatoire de l..." alt="" coords="5,56,231,83"/>
-<area shape="rect" id="node2" href="$d0/d98/classEnvironment.html#ad17660db40711861f8416d3ea641cd4f" title=" " alt="" coords="279,5,456,32"/>
-<area shape="rect" id="node3" href="$d0/d98/classEnvironment.html#a42c8956b01016d2e283c3bec97cfd631" title=" " alt="" coords="281,56,453,83"/>
-<area shape="rect" id="node4" href="$d0/d98/classEnvironment.html#a053f882f4ecec6e9ade99fba3317001c" title=" " alt="" coords="281,107,453,133"/>
-</map>

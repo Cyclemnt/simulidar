@@ -1,5 +1,5 @@
 <map id="Lidar::read" name="Lidar::read">
-<area shape="rect" id="node1" title="Lire un rayon particulier." alt="" coords="5,275,96,301"/>
+<area shape="rect" id="node1" title="Lire un rayon particulier. Cette méthode calcule la distance entre le Lidar (situé sur le robot) et l..." alt="" coords="5,275,96,301"/>
 <area shape="rect" id="node2" href="$d1/d7b/classSimulation.html#a8f0a6c41e5181df8f73c10c0ded79dfc" title=" " alt="" coords="144,5,348,32"/>
 <area shape="rect" id="node3" href="$d0/d98/classEnvironment.html#ad17660db40711861f8416d3ea641cd4f" title=" " alt="" coords="157,56,335,83"/>
 <area shape="rect" id="node4" href="$de/d78/classRobot.html#a8270811ceae9e31af9905169050ccdf9" title=" " alt="" coords="165,107,327,133"/>
